@@ -1,1 +1,1 @@
-// export 'homeView.dart';
+export 'startView.dart';
