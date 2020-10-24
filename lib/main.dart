@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -44,7 +43,7 @@ class HomeView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         titleSpacing: 70,
         title: const Text(
-          'Wizard',
+          'UI_HOUSE',
           style: TextStyle(
               color: Colors.black,
               fontSize: 35,
@@ -134,99 +133,6 @@ class HomeView extends StatelessWidget {
                     runSpacing: 10.0,
                     children: const [
                       Text('data'),
-                      // CustomChoiceChip(
-                      //   label: 'Future',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'OneZero',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Technology',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Elemental',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Health',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Science',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'GEN',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Business',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Marker',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Work',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Culture',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'ZORA',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Tenderly',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Food',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Heated',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Programming',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Design',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'LGBTQIA',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Neuroscience',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Level',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Cryptocurrency',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Startups',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Self',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Human Parts',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Relationships',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Politics',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Forge',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Data Science',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Productivity',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Artificial Intelligence',
-                      // ),
-                      // CustomChoiceChip(
-                      //   label: 'Election 2020',
-                      // ),
                     ],
                   ),
                 ),
@@ -466,20 +372,9 @@ class HomeView extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                // IntroPageFlatButton(
-                                //   title: 'Getting Started',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Subscribe',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Have an account? Sign in',
-                                //   onPressed: () {},
-                                // ),
-
-                                Text('Hello'), Text('Hello'), Text('Hello'),
+                                Text('Hello'),
+                                Text('Hello'),
+                                Text('Hello'),
                               ],
                             ),
                             Row(
@@ -487,38 +382,6 @@ class HomeView extends StatelessWidget {
                                 Text('Hello'),
                                 Text('Hello'),
                                 Text('Hello'),
-                                // IntroPageFlatButton(
-                                //   title: 'About Wizard',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Write',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Gift',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Help',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Press Contacts',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Careers',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Privacy',
-                                //   onPressed: () {},
-                                // ),
-                                // IntroPageFlatButton(
-                                //   title: 'Terms',
-                                //   onPressed: () {},
-                                // ),
                               ],
                             ),
                             const Padding(
