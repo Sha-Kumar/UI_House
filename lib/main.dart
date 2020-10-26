@@ -1,7 +1,4 @@
-import 'package:UI_House/controllers/authController.dart';
 import 'package:UI_House/routes.dart' as router;
-import 'package:UI_House/services/firebaseServices.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
