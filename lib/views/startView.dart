@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:UI_House/services/services.dart';
 import 'package:UI_House/controllers/controllers.dart';
 
-class StartView extends StatelessWidget {
+class StartView extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
@@ -381,15 +381,15 @@ class StartView extends StatelessWidget {
   }
 }
 
-class AuthWidget extends StatelessWidget {
+class AuthWidget extends GetView<AuthController> {
   final service = FirebaseService();
-  final controller = AuthController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final bool isSignUp;
   AuthWidget({
     Key key,
     this.isSignUp = true,
   }) : super(key: key);
+  // final controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
