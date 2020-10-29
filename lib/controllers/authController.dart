@@ -5,11 +5,13 @@ class AuthController extends GetxController {
   static AuthController controller = Get.find();
   TextEditingController email;
   TextEditingController pass;
+  TextEditingController name;
 
   @override
   void onClose() {
     email.dispose();
     pass.dispose();
+    name.dispose();
     super.onClose();
   }
 
@@ -17,6 +19,7 @@ class AuthController extends GetxController {
   void onInit() {
     email = TextEditingController();
     pass = TextEditingController();
+    name = TextEditingController();
     super.onInit();
   }
 }
