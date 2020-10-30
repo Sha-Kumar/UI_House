@@ -14,102 +14,135 @@ class SigninView extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 28.0),
-      child: Center(
-        child: SizedBox(
-          width: 500,
-          child: Material(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Text(
-                    'Welcome Back',
-                    style: const TextStyle(
-                        fontFamily: "Times New Roman",
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 20),
-                    child: TextFormField(
-                      controller: controller.email,
-                      decoration: InputDecoration(
-                        labelText: "Enter Email",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 28.0),
+        child: Center(
+          child: SizedBox(
+            width: 500,
+            child: Material(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const Spacer(),
+                    Text(
+                      'Login With Email',
+                      style: const TextStyle(
+                          fontFamily: "Times New Roman",
+                          fontSize: 28,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 20),
+                      child: TextFormField(
+                        controller: controller.email,
+                        decoration: InputDecoration(
+                          labelText: "Enter Email",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(21.0),
+                          ),
+                          prefixIcon: Material(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            child: Icon(
+                              Icons.email,
+                              color: Colors.lime,
+                            ),
+                          ),
+                          //fillColor: Colors.green
                         ),
-                        //fillColor: Colors.green
+                        validator: (val) {
+                          if (val.isEmpty) {
+                            return "Email cannot be empty";
+                          } else {
+                            return null;
+                          }
+                        },
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
                       ),
-                      validator: (val) {
-                        if (val.isEmpty) {
-                          return "Email cannot be empty";
-                        } else {
-                          return null;
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50, vertical: 10),
+                      child: TextFormField(
+                        obscureText: controller.isPassVisible.value,
+                        controller: controller.pass,
+                        decoration: InputDecoration(
+                          labelText: "Enter Password",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(21.0),
+                          ),
+                          prefixIcon: const Material(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            child: Icon(
+                              Icons.lock,
+                              color: Colors.lime,
+                            ),
+                          ),
+                          suffixIcon: Material(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(30)),
+                            child: Obx(
+                              () => IconButton(
+                                color: Colors.lime,
+                                icon: Icon(
+                                  controller.isPassVisible.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                ),
+                                onPressed: () {
+                                  controller.isPassVisible.toggle();
+                                },
+                              ),
+                            ),
+                          ),
+                          //fillColor: Colors.green
+                        ),
+                        validator: (val) {
+                          if (val.isEmpty) {
+                            return "password cannot be empty";
+                          } else {
+                            return null;
+                          }
+                        },
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    RaisedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          if (await service.signInWithEmailAndPassword(
+                              controller.email.text, controller.pass.text))
+                            controller.isSigned.value = true;
+                          if (Get.isDialogOpen) {
+                            controller.email.clear();
+                            controller.pass.clear();
+                            Get.back();
+                          }
                         }
                       },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
+                      color: Colors.blueAccent,
+                      child: Text(
+                        'Sign In',
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 10),
-                    child: TextFormField(
-                      controller: controller.pass,
-                      decoration: InputDecoration(
-                        labelText: "Enter Password",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        if (val.isEmpty) {
-                          return "password cannot be empty";
-                        } else {
-                          return null;
-                        }
-                      },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  RaisedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        await service.signInWithEmailAndPassword(
-                                controller.email.text, controller.pass.text)
-                            ? controller.isSigned.value = true
-                            : Get.snackbar('2222', 'msg');
-                        if (Get.isDialogOpen) {
-                          controller.email.clear();
-                          controller.pass.clear();
-                          Get.back();
-                        }
-                      }
-                    },
-                    color: const Color(0xff4ba97d),
-                    child: Text(
-                      'Sign In',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Spacer(),
-                  const SizedBox.shrink(),
-                  const Spacer(),
-                ],
+                    const Spacer(),
+                    const SizedBox.shrink(),
+                    const Spacer(),
+                  ],
+                ),
               ),
             ),
           ),

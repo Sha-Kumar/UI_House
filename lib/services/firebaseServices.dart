@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:UI_House/models/models.dart';
@@ -43,11 +44,48 @@ class FirebaseService {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        Get.snackbar(
+          'WEAK PASSWORD',
+          'The Password provided is too Weak !!!',
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        Get.snackbar(
+          'EMAIL-ID ALREADY IN USE',
+          'The Account already exists for that Email.',
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
+      } else {
+        Get.snackbar(
+          'ERROR',
+          'Something Went Wrong. Try again Later !!!',
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
       }
     } catch (e) {
       print(e);
+      Get.snackbar(
+          'ERROR',
+          e.message.toString(),
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
     }
     return false;
   }
@@ -61,8 +99,36 @@ class FirebaseService {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        Get.snackbar(
+          'USER NOT FOUND',
+          'No User found for that Email.',
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        Get.snackbar(
+          'WRONG PASSWORD',
+          'Wrong Password provided for that User.',
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
+      } else {
+        Get.snackbar(
+          e.message.toString(),
+          'Something Went Wrong. Try again !!!',
+          colorText: Colors.white,
+          backgroundColor: Colors.black87,
+          duration: Duration(
+            seconds: 2,
+          ),
+        );
       }
     }
     return false;
@@ -75,9 +141,11 @@ class FirebaseService {
       // await Get.offNamedUntil(loginRoute, (route) => false);
     } catch (e) {
       Get.snackbar(
-        'snack-5',
-        'logout problem',
-        duration: const Duration(milliseconds: 5),
+        'PROBLEM IN LOGOUT',
+        'Not able to logout, try again later !!!',
+        duration: const Duration(
+          seconds: 2,
+        ),
         snackPosition: SnackPosition.TOP,
       );
     }

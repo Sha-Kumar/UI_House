@@ -8,6 +8,7 @@ class AuthController extends GetxController {
   TextEditingController name;
 
   final isSigned = false.obs;
+  final isPassVisible = true.obs;
 
   @override
   void onClose() {

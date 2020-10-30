@@ -6,9 +6,11 @@ class AuthBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<AuthController>(
       () {
-        return Get.put(AuthController());
+        return Get.put(
+          AuthController(),
+          permanent: true,
+        );
       },
-      fenix: true,
     );
   }
 }
