@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:UI_House/services/services.dart';
 import 'package:UI_House/controllers/controllers.dart';
+import 'package:UI_House/views/views.dart';
 
 class StartView extends GetView<AuthController> {
   @override
@@ -51,24 +52,39 @@ class StartView extends GetView<AuthController> {
             onPressed: () {},
             child: const Text('Upload'),
           ),
-          FlatButton(
-            onPressed: () {
-              Get.dialog(
-                AuthWidget2(
-                  isSignUp: false,
-                ),
-              );
-            },
-            child: const Text('Sign In'),
-          ),
+          StreamBuilder<User>(
+              stream: FirebaseService().authChange,
+              builder: (context, snapshot) {
+                return FlatButton(
+                  child: Text(
+                    controller.isSigned.value ? 'SignOut' : 'SignIn',
+                  ),
+                  onPressed: () async {
+                    controller.isSigned.value
+                        ? await FirebaseService().signOut()
+                        : Get.dialog(
+                            SigninView(),
+                          );
+                    if (controller.isSigned.value)
+                      controller.isSigned.value = false;
+                  },
+                );
+              }),
           Padding(
             padding: const EdgeInsets.fromLTRB(25, 10, 35, 10),
             child: RaisedButton(
               padding: const EdgeInsets.all(10.0),
               onPressed: () {
-                Get.dialog(
-                  AuthWidget(),
-                );
+                controller.isSigned.value
+                    ? Get.snackbar(
+                        'snacksign',
+                        'Signout from the account first, Then sign-up with new account...',
+                        duration: const Duration(milliseconds: 5),
+                        snackPosition: SnackPosition.BOTTOM,
+                      )
+                    : Get.dialog(
+                        AuthWidget(),
+                      );
               },
               color: Colors.deepPurpleAccent,
               child: const Text(
@@ -87,6 +103,7 @@ class StartView extends GetView<AuthController> {
               return Center(
                 child: RaisedButton(
                   onPressed: () async {
+                    controller.isSigned.value = false;
                     await FirebaseService().signOut();
                   },
                   child: const Text('sign out'),
@@ -156,287 +173,6 @@ class StartView extends GetView<AuthController> {
               ],
             );
           }),
-    );
-  }
-}
-
-class AuthWidget extends GetView<AuthController> {
-  final service = FirebaseService();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final bool isSignUp;
-  AuthWidget({
-    Key key,
-    this.isSignUp = true,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 28.0),
-      child: Center(
-        child: SizedBox(
-          width: 500,
-          child: Material(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Text(
-                    isSignUp ? 'Sign up with email' : 'Welcome Back',
-                    style: const TextStyle(
-                        fontFamily: "Times New Roman",
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 20),
-                    child: TextFormField(
-                      controller: controller.email,
-                      decoration: InputDecoration(
-                        labelText: "Enter Email",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        if (val.isEmpty ) {
-                          return "Email cannot be empty";
-                        } else {
-                          return null;
-                        }
-                      },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 20),
-                    child: TextFormField(
-                      controller: controller.name,
-                      decoration: InputDecoration(
-                        labelText: "Enter User-Name",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        if (val.isEmpty ) {
-                          return "Name cannot be empty";
-                        } else {
-                          return null;
-                        }
-                      },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 10),
-                    child: TextFormField(
-                      controller: controller.pass,
-                      decoration: InputDecoration(
-                        labelText: "Enter Password",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        if (val.isEmpty) {
-                          return "password cannot be empty";
-                        } else {
-                          return null;
-                        }
-                      },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  RaisedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        isSignUp
-                            ? await service.createUserWithEmailAndPassword(
-                                controller.email.text, controller.pass.text)
-                            : await service.signInWithEmailAndPassword(
-                                controller.email.text, controller.pass.text);
-                        if (Get.isDialogOpen) Get.back();
-                      }
-                    },
-                    color: const Color(0xff4ba97d),
-                    child: Text(
-                      isSignUp ? 'Sign Up' : 'Sign In',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Spacer(),
-                  if (isSignUp)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 90),
-                      child: Text(
-                        "Click “Sign Up” to agree to UI-House's Terms of Service and acknowledge that UI-House's Privacy Policy applies to you.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: "Helvetica Neue",
-                          fontSize: 13,
-                          color: Color(0xffb9b9b9),
-                        ),
-                      ),
-                    )
-                  else
-                    const SizedBox.shrink(),
-                  const Spacer(),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-class AuthWidget2 extends GetView<AuthController> {
-  final service = FirebaseService();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final bool isSignUp;
-  AuthWidget2({
-    Key key,
-    this.isSignUp = true,
-  }) : super(key: key);
-  // final controller = Get.find();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 28.0),
-      child: Center(
-        child: SizedBox(
-          width: 500,
-          child: Material(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Text(
-                    isSignUp ? 'Sign up with email' : 'Welcome Back',
-                    style: const TextStyle(
-                        fontFamily: "Times New Roman",
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 20),
-                    child: TextFormField(
-                      controller: controller.email,
-                      decoration: InputDecoration(
-                        labelText: "Enter Email",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        if (val.isEmpty ) {
-                          return "Email cannot be empty";
-                        } else {
-                          return null;
-                        }
-                      },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 10),
-                    child: TextFormField(
-                      controller: controller.pass,
-                      decoration: InputDecoration(
-                        labelText: "Enter Password",
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        //fillColor: Colors.green
-                      ),
-                      validator: (val) {
-                        if (val.isEmpty) {
-                          return "password cannot be empty";
-                        } else {
-                          return null;
-                        }
-                      },
-                      style: const TextStyle(
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  RaisedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        isSignUp
-                            ? await service.createUserWithEmailAndPassword(
-                                controller.email.text, controller.pass.text)
-                            : await service.signInWithEmailAndPassword(
-                                controller.email.text, controller.pass.text);
-                        if (Get.isDialogOpen) Get.back();
-                      }
-                    },
-                    color: const Color(0xff4ba97d),
-                    child: Text(
-                      isSignUp ? 'Sign Up' : 'Sign In',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  const Spacer(),
-                  if (isSignUp)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 90),
-                      child: Text(
-                        "Click “Sign Up” to agree to UI-House's Terms of Service and acknowledge that UI-House's Privacy Policy applies to you.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: "Helvetica Neue",
-                          fontSize: 13,
-                          color: Color(0xffb9b9b9),
-                        ),
-                      ),
-                    )
-                  else
-                    const SizedBox.shrink(),
-                  const Spacer(),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

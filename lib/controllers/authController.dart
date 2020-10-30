@@ -7,6 +7,8 @@ class AuthController extends GetxController {
   TextEditingController pass;
   TextEditingController name;
 
+  final isSigned = false.obs;
+
   @override
   void onClose() {
     email.dispose();

@@ -13,18 +13,18 @@ class FirebaseService {
   Stream<User> get authChange => _auth.authStateChanges();
 
 //Add the user to DB
-  Future<void> _addUserToDB(UserCredential userCredential, String username) async {
+  Future<void> _addUserToDB(
+      UserCredential userCredential, String username) async {
     final CollectionReference userCollection = _firestore.collection('users');
     final user = UserModel(
-      uid: userCredential.user.uid,
-      email: userCredential.user.email,
-      name : username
-    );
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        name: username);
     await userCollection.doc(userCredential.user.uid).set(user.toJson());
     // await _getUserFromDB(userCredential.user.uid);
   }
 
-  Future<void> _getUserFromDB(String uid) async {
+  Future<void> getUserFromDB(String uid) async {
     final CollectionReference userCollection = _firestore.collection('users');
     final user = UserModel.fromJson(
       (await userCollection.doc(uid).get()).data(),
@@ -32,11 +32,14 @@ class FirebaseService {
     await LocalService.instance.save(user);
   }
 
-  Future<void> createUserWithEmailAndPassword(String email, String pass) async {
+  Future<bool> createUserWithEmailAndPassword(
+      String email, String pass, String name) async {
     try {
       final UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: pass);
+      _addUserToDB(userCredential, name);
       print(userCredential);
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -46,13 +49,15 @@ class FirebaseService {
     } catch (e) {
       print(e);
     }
+    return false;
   }
 
-  Future<void> signInWithEmailAndPassword(String email, String pass) async {
+  Future<bool> signInWithEmailAndPassword(String email, String pass) async {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
       print(userCredential);
+      return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -60,6 +65,7 @@ class FirebaseService {
         print('Wrong password provided for that user.');
       }
     }
+    return false;
   }
 
   Future<void> signOut() async {
