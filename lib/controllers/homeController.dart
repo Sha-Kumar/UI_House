@@ -11,6 +11,8 @@ class HomeController extends GetxController {
   ScrollController controller;
   final RxList photos = [].obs;
   final isLoading = false.obs;
+  final firstView = true.obs;
+  int max = 0;
   bool reset = true;
 
   @override
@@ -24,6 +26,9 @@ class HomeController extends GetxController {
           if (controller.position.pixels ==
               controller.position.maxScrollExtent) {
             print('no');
+            if (max >= 5 && firstView.value) {
+              return;
+            }
             fetch();
           }
         },
@@ -43,14 +48,15 @@ class HomeController extends GetxController {
   Future<void> fetch() async {
     // print('fetch');
     isLoading.value = true;
-    final PhotoModel kural = await HomeService.instance.fetch(
+    final PhotoModel photo = await HomeService.instance.fetch(
       reset: reset,
       type: Type.loadPhotos,
       collectionReference: photosCollection,
     ) as PhotoModel;
     reset = false;
-    if (kural != null) {
-      photos.addAll(kural.photos);
+    if (photo != null) {
+      photos.addAll(photo.photos);
+      max = photo.photos.length;
     } else {
       // print('went wrong');
     }

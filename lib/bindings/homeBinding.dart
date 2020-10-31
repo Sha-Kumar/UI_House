@@ -1,13 +1,13 @@
 import 'package:UI_House/controllers/controllers.dart';
 import 'package:get/get.dart';
 
-class AuthBinding extends Bindings {
+class HomeBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthController>(
+    Get.lazyPut<HomeController>(
       () {
         return Get.put(
-          AuthController(),
+          HomeController(),
           permanent: true,
         );
       },
