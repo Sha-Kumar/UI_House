@@ -6,7 +6,7 @@ class HomeService {
   HomeService._private();
   static final instance = HomeService._private();
   DocumentSnapshot last;
-  int limit = 20;
+  int limit = 2;
   bool moreAvail = true;
 
   Future<Object> fetch(
