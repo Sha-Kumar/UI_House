@@ -19,13 +19,13 @@ class StartView extends GetView<AuthController> {
         //     height: 1.0,
         //     decoration: BoxDecoration(
         //       color: Colors.black,
-        //       boxShadow: <BoxShadow>[
-        //         BoxShadow(
-        //           color: Colors.black54,
-        //           blurRadius: 15.0,
-        //           offset: Offset(0, 1),
-        //         ),
-        //       ],
+        // boxShadow: <BoxShadow>[
+        //   BoxShadow(
+        //     color: Colors.black54,
+        //     blurRadius: 15.0,
+        //     offset: Offset(0, 1),
+        //   ),
+        // ],
         //       // boxShadow:
         //     ),
         //   ),
@@ -77,10 +77,11 @@ class StartView extends GetView<AuthController> {
               onPressed: () {
                 controller.isSigned.value
                     ? Get.snackbar(
-                        'snacksign',
+                        'sign1',
                         'Signout from the account first, Then sign-up with new account...',
-                        duration: const Duration(milliseconds: 5),
-                        snackPosition: SnackPosition.BOTTOM,
+                        duration: const Duration(milliseconds: 25),
+                        snackPosition: SnackPosition.TOP,
+                        colorText: Colors.blueAccent,
                       )
                     : Get.dialog(
                         AuthWidget(),
