@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -12,11 +13,12 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>UI_House</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
@@ -28,9 +30,9 @@
       });
     }
   </script>
-  
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
- <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
@@ -42,25 +44,14 @@
   <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
 
-
-<script>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAUI1s7zU5B0vT8G0-Z1SGqvyeC-5D1f94",
-    authDomain: "dribbler-21c70.firebaseapp.com",
-    databaseURL: "https://dribbler-21c70.firebaseio.com",
-    projectId: "dribbler-21c70",
-    storageBucket: "dribbler-21c70.appspot.com",
-    messagingSenderId: "33746940411",
-    appId: "1:33746940411:web:2792ab624b5c47b4011b5e",
-    measurementId: "G-SNFQ41VYZ7"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
-<script src="main.dart.js" type="application/javascript"></script>
+  <script src="./firebase-config.js"></script>
+  <script type="module">
+    // Initialize Firebase
+    import { firebaseConfig } from './firebase-config.js';
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
 </body>
+
 </html>
