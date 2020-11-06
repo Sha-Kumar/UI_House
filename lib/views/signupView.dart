@@ -99,7 +99,9 @@ class AuthWidget extends GetView<AuthController> {
                           if (val.isEmpty) {
                             return "Name cannot be empty";
                           } else {
-                            return null;
+                            return GetUtils.isEmail(val)
+                                ? null
+                                : "don't you have patience to enter proper email";
                           }
                         },
                         style: const TextStyle(
@@ -155,7 +157,9 @@ class AuthWidget extends GetView<AuthController> {
                           if (val.isEmpty) {
                             return "password cannot be empty";
                           } else {
-                            return null;
+                            return GetUtils.isLengthGreaterOrEqual(val, 8)
+                                ? null
+                                : "can't you enter a proper password";
                           }
                         },
                         style: const TextStyle(
@@ -170,10 +174,10 @@ class AuthWidget extends GetView<AuthController> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           if (await service.createUserWithEmailAndPassword(
-                              controller.email.text,
-                              controller.pass.text,
-                              controller.name.text))
-                            controller.isSigned.value = true;
+                            controller.email.text,
+                            controller.pass.text,
+                            controller.name.text,
+                          )) controller.isSigned.value = true;
 
                           if (Get.isDialogOpen) {
                             controller.email.clear();

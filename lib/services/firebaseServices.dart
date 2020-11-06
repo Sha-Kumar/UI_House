@@ -18,9 +18,10 @@ class FirebaseService {
       UserCredential userCredential, String username) async {
     final CollectionReference userCollection = _firestore.collection('users');
     final user = UserModel(
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        name: username);
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      name: username,
+    );
     await userCollection.doc(userCredential.user.uid).set(user.toJson());
     // await _getUserFromDB(userCredential.user.uid);
   }
@@ -78,14 +79,14 @@ class FirebaseService {
     } catch (e) {
       print(e);
       Get.snackbar(
-          'ERROR',
-          e.message.toString(),
-          colorText: Colors.white,
-          backgroundColor: Colors.black87,
-          duration: Duration(
-            seconds: 2,
-          ),
-        );
+        'ERROR',
+        e.message.toString(),
+        colorText: Colors.white,
+        backgroundColor: Colors.black87,
+        duration: Duration(
+          seconds: 2,
+        ),
+      );
     }
     return false;
   }

@@ -1,3 +1,4 @@
+import 'package:UI_House/widgets/introFlagButton.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -9,10 +10,13 @@ import 'package:UI_House/views/views.dart';
 class StartView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       appBar: AppBar(
-        elevation: 15.0,
+        elevation: 18.0,
         // bottom: PreferredSize(
         //   child: Container(
         //     // color: Colors.black,
@@ -74,6 +78,11 @@ class StartView extends GetView<AuthController> {
             padding: const EdgeInsets.fromLTRB(25, 10, 35, 10),
             child: RaisedButton(
               padding: const EdgeInsets.all(10.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+              ),
               onPressed: () {
                 controller.isSigned.value
                     ? Get.snackbar(
@@ -87,7 +96,7 @@ class StartView extends GetView<AuthController> {
                         AuthWidget(),
                       );
               },
-              color: Colors.deepPurpleAccent,
+              color: Colors.pinkAccent,
               child: const Text(
                 'Get Started',
                 style:
@@ -97,83 +106,276 @@ class StartView extends GetView<AuthController> {
           ),
         ],
       ),
-      body: StreamBuilder<User>(
-          stream: FirebaseService().authChange,
-          builder: (context, snapshot) {
-            if (snapshot.data != null) {
-              return Center(
-                child: RaisedButton(
-                  onPressed: () async {
-                    controller.isSigned.value = false;
-                    await FirebaseService().signOut();
-                  },
-                  child: const Text('sign out'),
-                ),
-              );
-            }
-            return ListView(
+      body: ListView(
+        children: [
+          const SizedBox(
+            height: 25,
+          ),
+          Container(
+            height: screenHeight * (375 / 754.4),
+            width: screenWidth,
+            alignment: Alignment.center,
+            color: Colors.red,
+            child: Text('Hello'),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          Container(
+            color: Colors.grey,
+            width: double.infinity,
+            height: screenHeight * (270 / 754.4),
+            child: Row(
               children: [
-                const SizedBox(
-                  height: 35,
-                ),
-                Container(
-                  color: Colors.black,
-                  width: double.infinity,
-                  height: 270,
-                  child: Row(
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 18.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              color: const Color(0xffe6e6e6),
-                              margin: const EdgeInsets.only(left: 20.0),
-                              padding: const EdgeInsets.all(7.0),
-                              child: const Text(
-                                "W",
-                                style: TextStyle(
-                                    fontFamily: "Times New Roman",
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text('Hello'),
-                                Text('Hello'),
-                                Text('Hello'),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text('Hello'),
-                                Text('Hello'),
-                                Text('Hello'),
-                              ],
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Text(
-                                "© 2020 A wizard Corporation",
-                                style: TextStyle(
-                                  color: Color(0xff707070),
-                                  fontFamily: "Lucida Sans",
-                                  fontSize: 15,
-                                ),
-                              ),
-                            )
-                          ],
+                      Container(
+                        color: Colors.pinkAccent,
+                        margin: const EdgeInsets.only(
+                          left: 18.0,
+                        ),
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text(
+                          "UI-HOUSE",
+                          style: TextStyle(
+                            fontFamily: "Times New Roman",
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
+                      Row(
+                        children: [
+                          IntroPageFlatButton(
+                            title: 'Home',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Getting Started',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Subscribe',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Have an account? Sign in',
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          IntroPageFlatButton(
+                            title: 'About',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Upload',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Get-It',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Help & Feedback',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Contacts',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Careers',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Privacy',
+                            onPressed: () {},
+                          ),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          IntroPageFlatButton(
+                            title: 'Terms',
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Container(
+                          height: 1.0,
+                          width: screenWidth-60,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          left: 20.0,
+                        ),
+                        child: Text(
+                          "© 2020 A UI-House Corporation",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Lucida Sans",
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                )
+                ),
               ],
-            );
-          }),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
+
+// Container(
+//   child: Text('hello1'),
+// ),
+// Container(
+//   child: Text('hello2'),
+// ),
+// Container(
+//   child: Text('hello3'),
+// ),
+// Container(
+//   child: Text('hello4'),
+// ),
+// SizedBox(
+//   height: 50,
+// ),
+// Text('Yes'),
+// Row(
+//   children: [
+//     Padding(
+//       padding: const EdgeInsets.only(left: 18.0),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: [
+//           Container(
+//             color: Colors.pinkAccent,
+//             margin: const EdgeInsets.only(left: 20.0),
+//             padding: const EdgeInsets.all(7.0),
+//             child: const Text(
+//               "UI-House",
+//               style: TextStyle(
+//                 fontFamily: "Times New Roman",
+//                 fontSize: 23,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ),
+//           Container(
+//             margin: const EdgeInsets.only(left: 20.0),
+//             padding: const EdgeInsets.all(7.0),
+//             width: 200,
+//             child: const Text(
+//               "UI-House is the useful by community for creatives to share, grow, and to explore.",
+//               style: TextStyle(
+//                 fontFamily: "Times New Roman",
+//                 fontSize: 15,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//               textDirection: TextDirection.ltr,
+//               overflow: TextOverflow.clip,
+//               maxLines: 4,
+//             ),
+//           ),
+//           Row(
+//             children: [
+//               Container(
+//                 margin: const EdgeInsets.only(left: 20.0),
+//                 padding: const EdgeInsets.all(7.0),
+//                 child: const Text(
+//                   "UI-House",
+//                   style: TextStyle(
+//                       fontFamily: "Times New Roman",
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.pinkAccent),
+//                 ),
+//               ),
+//               Container(
+//                 margin: const EdgeInsets.only(left: 20.0),
+//                 padding: const EdgeInsets.all(7.0),
+//                 child: const Text(
+//                   "UI-House",
+//                   style: TextStyle(
+//                       fontFamily: "Times New Roman",
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.pinkAccent),
+//                 ),
+//               ),
+//               Container(
+//                 margin: const EdgeInsets.only(left: 20.0),
+//                 padding: const EdgeInsets.all(7.0),
+//                 child: const Text(
+//                   "UI-House",
+//                   style: TextStyle(
+//                       fontFamily: "Times New Roman",
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.pinkAccent),
+//                 ),
+//               ),
+//             ],
+//           ),
+//           const Padding(
+//             padding: EdgeInsets.only(left: 20.0),
+//             child: Text(
+//               "© 2020 A UI-House Corporation",
+//               style: TextStyle(
+//                 color: Colors.black,
+//                 fontFamily: "Lucida Sans",
+//                 fontSize: 15,
+//               ),
+//             ),
+//           )
+//         ],
+//       ),
+//     ),
+//   ],
+// ),

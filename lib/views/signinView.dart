@@ -58,7 +58,9 @@ class SigninView extends GetView<AuthController> {
                           if (val.isEmpty) {
                             return "Email cannot be empty";
                           } else {
-                            return null;
+                            return GetUtils.isEmail(val)
+                                ? null
+                                : "don't you have patience to enter proper email";
                           }
                         },
                         style: const TextStyle(
@@ -108,7 +110,9 @@ class SigninView extends GetView<AuthController> {
                           if (val.isEmpty) {
                             return "password cannot be empty";
                           } else {
-                            return null;
+                            return GetUtils.isLengthGreaterOrEqual(val, 8)
+                                ? null
+                                : "can't you enter a proper password";
                           }
                         },
                         style: const TextStyle(
