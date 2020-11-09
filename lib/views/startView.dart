@@ -86,9 +86,11 @@ class StartView extends GetView<AuthController> {
               onPressed: () {
                 controller.isSigned.value
                     ? Get.snackbar(
-                        'sign1',
+                        'SignOut - First',
                         'Signout from the account first, Then sign-up with new account...',
-                        duration: const Duration(milliseconds: 25),
+                        duration: const Duration(
+                          seconds: 2,
+                        ),
                         snackPosition: SnackPosition.TOP,
                         colorText: Colors.blueAccent,
                       )
@@ -112,11 +114,109 @@ class StartView extends GetView<AuthController> {
             height: 25,
           ),
           Container(
-            height: screenHeight * (375 / 754.4),
+            height: screenHeight * (550 / 754.4),
             width: screenWidth,
             alignment: Alignment.center,
-            color: Colors.red,
-            child: Text('Hello'),
+            color: Color.fromRGBO(0, 0, 1, 0.02),
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Container(
+                    width: screenWidth / 2 - 10,
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.all((screenHeight * 75) / 550),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Discover the world’s top",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 41,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Lucida Sans",
+                            ),
+                          ),
+                          Text(
+                            "designers & creatives.",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 41,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Lucida Sans",
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "UI-House is the leading destination to find and showcase creative work and home to that of world's best design professionals.",
+                            style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Lucida Sans",
+                            ),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            
+                            child: RaisedButton(
+                              padding: const EdgeInsets.all(2.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
+                              ),
+                              onPressed: () {
+                                controller.isSigned.value
+                                    ? Get.snackbar(
+                                        'SignOut - First',
+                                        'Signout from the account first, Then sign-up with new account...',
+                                        duration: const Duration(
+                                          seconds: 2,
+                                        ),
+                                        snackPosition: SnackPosition.TOP,
+                                        colorText: Colors.blueAccent,
+                                      )
+                                    : Get.dialog(
+                                        AuthWidget(),
+                                      );
+                              },
+                              color: Colors.pinkAccent,
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "Lucida Sans",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: screenWidth / 2 - 10,
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Image(
+                        image: AssetImage('projectphoto.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           const SizedBox(
             height: 25,
@@ -136,7 +236,19 @@ class StartView extends GetView<AuthController> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        color: Colors.pinkAccent,
+                        // color: Colors.pinkAccent,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          color: Colors.pinkAccent,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.redAccent,
+                              blurRadius: 7.5,
+                              spreadRadius: 0.05,
+                              offset: Offset(0, 3),
+                            )
+                          ],
+                        ),
                         margin: const EdgeInsets.only(
                           left: 18.0,
                         ),
@@ -241,7 +353,7 @@ class StartView extends GetView<AuthController> {
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: Container(
                           height: 1.0,
-                          width: screenWidth-60,
+                          width: screenWidth - 60,
                           color: Colors.white,
                         ),
                       ),
@@ -269,113 +381,3 @@ class StartView extends GetView<AuthController> {
     );
   }
 }
-
-// Container(
-//   child: Text('hello1'),
-// ),
-// Container(
-//   child: Text('hello2'),
-// ),
-// Container(
-//   child: Text('hello3'),
-// ),
-// Container(
-//   child: Text('hello4'),
-// ),
-// SizedBox(
-//   height: 50,
-// ),
-// Text('Yes'),
-// Row(
-//   children: [
-//     Padding(
-//       padding: const EdgeInsets.only(left: 18.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: [
-//           Container(
-//             color: Colors.pinkAccent,
-//             margin: const EdgeInsets.only(left: 20.0),
-//             padding: const EdgeInsets.all(7.0),
-//             child: const Text(
-//               "UI-House",
-//               style: TextStyle(
-//                 fontFamily: "Times New Roman",
-//                 fontSize: 23,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//           ),
-//           Container(
-//             margin: const EdgeInsets.only(left: 20.0),
-//             padding: const EdgeInsets.all(7.0),
-//             width: 200,
-//             child: const Text(
-//               "UI-House is the useful by community for creatives to share, grow, and to explore.",
-//               style: TextStyle(
-//                 fontFamily: "Times New Roman",
-//                 fontSize: 15,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//               textDirection: TextDirection.ltr,
-//               overflow: TextOverflow.clip,
-//               maxLines: 4,
-//             ),
-//           ),
-//           Row(
-//             children: [
-//               Container(
-//                 margin: const EdgeInsets.only(left: 20.0),
-//                 padding: const EdgeInsets.all(7.0),
-//                 child: const Text(
-//                   "UI-House",
-//                   style: TextStyle(
-//                       fontFamily: "Times New Roman",
-//                       fontSize: 18,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.pinkAccent),
-//                 ),
-//               ),
-//               Container(
-//                 margin: const EdgeInsets.only(left: 20.0),
-//                 padding: const EdgeInsets.all(7.0),
-//                 child: const Text(
-//                   "UI-House",
-//                   style: TextStyle(
-//                       fontFamily: "Times New Roman",
-//                       fontSize: 18,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.pinkAccent),
-//                 ),
-//               ),
-//               Container(
-//                 margin: const EdgeInsets.only(left: 20.0),
-//                 padding: const EdgeInsets.all(7.0),
-//                 child: const Text(
-//                   "UI-House",
-//                   style: TextStyle(
-//                       fontFamily: "Times New Roman",
-//                       fontSize: 18,
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.pinkAccent),
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const Padding(
-//             padding: EdgeInsets.only(left: 20.0),
-//             child: Text(
-//               "© 2020 A UI-House Corporation",
-//               style: TextStyle(
-//                 color: Colors.black,
-//                 fontFamily: "Lucida Sans",
-//                 fontSize: 15,
-//               ),
-//             ),
-//           )
-//         ],
-//       ),
-//     ),
-//   ],
-// ),
