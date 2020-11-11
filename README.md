@@ -1,6 +1,10 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Sha-Kumar/UI_House)
 ![issues-raw](https://img.shields.io/github/issues-raw/Sha-Kumar/UI_House)
 ![license](https://img.shields.io/github/license/Sha-Kumar/UI_House)
+![last-commit](https://img.shields.io/github/last-commit/Sha-Kumar/UI_House)
+
+
+# Still in development
 
 
 # UI_House
@@ -9,17 +13,40 @@ UI_House is a web app which gives you a list of UI designs used for application 
 To get the designs and to upload designs sign-up using a email and get the requirements.
 It consists of Web or Android User interface designs which is used to make less the work of a developer.
 
-Installation
+
+## Getting Started
+
+### Dependencies
+
+- flutter SDK with web enabled
+- Android Studio
+- VS Code/Sublime Text(Any Editor) 
+
+### Installing
 
 ```
 flutter pub get
 ```
 
-Usage 
+### Usage 
 
 ```
 flutter run
 ```
+
+
+## Help
+
+Any advise for common problems or issues.
+```
+
+```
+
+
+## Version History
+
+- 1.0.0
+
 
 ## Feedback
 
