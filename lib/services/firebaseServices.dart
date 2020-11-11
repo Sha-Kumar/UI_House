@@ -23,7 +23,7 @@ class FirebaseService {
       name: username,
     );
     await userCollection.doc(userCredential.user.uid).set(user.toJson());
-    // await _getUserFromDB(userCredential.user.uid);
+    await getUserFromDB(userCredential.user.uid);
   }
 
   Future<void> getUserFromDB(String uid) async {
@@ -40,7 +40,7 @@ class FirebaseService {
       final UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: pass);
       _addUserToDB(userCredential, name);
-      print(userCredential);
+      // print(userCredential);
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -53,6 +53,7 @@ class FirebaseService {
           duration: Duration(
             seconds: 2,
           ),
+          snackPosition: SnackPosition.TOP,
         );
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
@@ -64,6 +65,7 @@ class FirebaseService {
           duration: Duration(
             seconds: 2,
           ),
+          snackPosition: SnackPosition.TOP,
         );
       } else {
         Get.snackbar(
@@ -74,6 +76,7 @@ class FirebaseService {
           duration: Duration(
             seconds: 2,
           ),
+          snackPosition: SnackPosition.TOP,
         );
       }
     } catch (e) {
@@ -86,6 +89,7 @@ class FirebaseService {
         duration: Duration(
           seconds: 2,
         ),
+        snackPosition: SnackPosition.TOP,
       );
     }
     return false;
@@ -108,6 +112,7 @@ class FirebaseService {
           duration: Duration(
             seconds: 2,
           ),
+          snackPosition: SnackPosition.TOP,
         );
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
@@ -119,6 +124,7 @@ class FirebaseService {
           duration: Duration(
             seconds: 2,
           ),
+          snackPosition: SnackPosition.TOP,
         );
       } else {
         Get.snackbar(
@@ -129,6 +135,7 @@ class FirebaseService {
           duration: Duration(
             seconds: 2,
           ),
+          snackPosition: SnackPosition.TOP,
         );
       }
     }
@@ -147,6 +154,8 @@ class FirebaseService {
         duration: const Duration(
           seconds: 2,
         ),
+        colorText: Colors.white,
+        backgroundColor: Colors.black87,
         snackPosition: SnackPosition.TOP,
       );
     }

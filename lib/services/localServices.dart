@@ -12,17 +12,18 @@ class LocalService {
 
   Future<void> save(UserModel user) async {
     await _box.write('user', user.toJson());
-    print(_box.read('user'));
-    print(getUser());
+    // print(_box.read('user'));
+    // print(getUser());
+    // return getUser();
   }
 
   UserModel getUser() {
     final Map<String, dynamic> user = _box.read('user');
-    print('${user}null');
+    // print('${user}');
     if (user != null) {
-      print(user);
+      // print(user);
       return UserModel.fromJson(user);
     }
-    return null;
+     return null;
   }
 }

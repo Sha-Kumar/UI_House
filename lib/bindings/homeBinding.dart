@@ -6,6 +6,7 @@ class HomeBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<HomeController>(
       () {
+        Get.put(AuthController());
         return Get.put(
           HomeController(),
           permanent: true,

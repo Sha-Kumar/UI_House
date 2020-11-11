@@ -93,6 +93,7 @@ class StartView extends GetView<AuthController> {
                         ),
                         snackPosition: SnackPosition.TOP,
                         colorText: Colors.blueAccent,
+                        backgroundColor: Colors.black87,
                       )
                     : Get.dialog(
                         AuthWidget(),
@@ -110,9 +111,6 @@ class StartView extends GetView<AuthController> {
       ),
       body: ListView(
         children: [
-          const SizedBox(
-            height: 25,
-          ),
           Container(
             height: screenHeight * (550 / 754.4),
             width: screenWidth,
@@ -130,18 +128,8 @@ class StartView extends GetView<AuthController> {
                       child: Column(
                         children: [
                           Text(
-                            "Discover the world’s top",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 41,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Lucida Sans",
-                            ),
-                          ),
-                          Text(
-                            "designers & creatives.",
-                            textAlign: TextAlign.start,
+                            "Discover the world’s top designers & creatives.",
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 41,
@@ -153,7 +141,8 @@ class StartView extends GetView<AuthController> {
                             height: 20,
                           ),
                           Text(
-                            "UI-House is the leading destination to find and showcase creative work and home to that of world's best design professionals.",
+                            "UI-House is the leading destination to find & showcase creative work and home to that of world's best design professionals.",
+                            textAlign: TextAlign.justify,
                             style: TextStyle(
                               color: Colors.blueGrey,
                               fontSize: 23,
@@ -162,13 +151,22 @@ class StartView extends GetView<AuthController> {
                             ),
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 20,
+                          ),
+                          Text(
+                            "To get started in the world of designs and creative work opt me,",
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 21,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Lucida Sans",
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
-                            
                             child: RaisedButton(
-                              padding: const EdgeInsets.all(2.0),
+                              padding: const EdgeInsets.all(18.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(7),
@@ -184,6 +182,7 @@ class StartView extends GetView<AuthController> {
                                         ),
                                         snackPosition: SnackPosition.TOP,
                                         colorText: Colors.blueAccent,
+                                        backgroundColor: Colors.black87,
                                       )
                                     : Get.dialog(
                                         AuthWidget(),
@@ -218,11 +217,16 @@ class StartView extends GetView<AuthController> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 25,
+          Container(
+            height: 0.5,
+            width: double.infinity,
+            color: Colors.blueAccent,
+          ),
+          SizedBox(
+            height: 20,
           ),
           Container(
-            color: Colors.grey,
+            color: Color(0x00000000),
             width: double.infinity,
             height: screenHeight * (270 / 754.4),
             child: Row(
@@ -354,7 +358,7 @@ class StartView extends GetView<AuthController> {
                         child: Container(
                           height: 1.0,
                           width: screenWidth - 60,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       const Padding(

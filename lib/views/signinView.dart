@@ -1,3 +1,4 @@
+import 'package:UI_House/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -134,6 +135,8 @@ class SigninView extends GetView<AuthController> {
                             controller.pass.clear();
                             Get.back();
                           }
+                          if(controller.isSigned.value)
+                          Get.toNamed(homeroute);
                         }
                       },
                       color: Colors.blueAccent,

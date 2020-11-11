@@ -11,4 +11,9 @@ final routes = [
     page: () => StartView(),
     binding: AuthBinding(),
   ),
+  GetPage(
+    name: homeroute,
+    page: () => HomeView(),
+    binding: HomeBinding(),
+  ),
 ];

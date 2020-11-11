@@ -62,7 +62,9 @@ class AuthWidget extends GetView<AuthController> {
                           if (val.isEmpty) {
                             return "Email cannot be empty";
                           } else {
-                            return null;
+                            return GetUtils.isEmail(val)
+                                ? null
+                                : "don't you have patience to enter proper email";
                           }
                         },
                         style: const TextStyle(
@@ -99,9 +101,7 @@ class AuthWidget extends GetView<AuthController> {
                           if (val.isEmpty) {
                             return "Name cannot be empty";
                           } else {
-                            return GetUtils.isEmail(val)
-                                ? null
-                                : "don't you have patience to enter proper email";
+                            return null;
                           }
                         },
                         style: const TextStyle(

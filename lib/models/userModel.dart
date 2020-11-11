@@ -11,7 +11,7 @@ class UserModel {
   String name;
   String email;
   String uid;
-  List<String> postphotos;
+  List<dynamic> postphotos;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         name: json["name"] == null ? null : json["name"] as String,
@@ -19,12 +19,13 @@ class UserModel {
         uid: json["uid"] == null ? null : json["uid"] as String,
         postphotos: json["postphotos"] == null
             ? null
-            : json["postphotos"] as List<String>,
+            : json["postphotos"] as List<dynamic>,
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "email": email,
         "uid": uid,
+        "postphotos": <dynamic>[],
       };
 }
