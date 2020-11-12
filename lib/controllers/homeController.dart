@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   static HomeController get to => Get.find();
 
-  ScrollController controller;
+  ScrollController homecontroller;
   final RxList photos = [].obs;
   final isLoading = false.obs;
   final firstView = true.obs;
@@ -20,11 +20,11 @@ class HomeController extends GetxController {
     reset = true;
     isLoading.value = true;
     print('in controller');
-    controller = ScrollController()
+    homecontroller = ScrollController()
       ..addListener(
         () {
-          if (controller.position.pixels ==
-              controller.position.maxScrollExtent) {
+          if (homecontroller.position.pixels ==
+              homecontroller.position.maxScrollExtent) {
             print('no');
             if (max >= 5 && firstView.value) {
               return;
@@ -40,7 +40,7 @@ class HomeController extends GetxController {
   @override
   FutureOr onClose() {
     photos.clear();
-    controller.dispose();
+    homecontroller.dispose();
     super.onClose();
     // return super.onClose();
   }

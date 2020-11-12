@@ -93,8 +93,9 @@ class StartView extends GetView<AuthController> {
       ),
       body: Obx(
         () => controller.isSigned.value
-            ? Container(
-                child: Text('Hello'),
+            ? HomeWidget(
+                screenWidth: screenWidth,
+                screenHeight: screenHeight,
               )
             : StartWidget(
                 screenWidth: screenWidth,

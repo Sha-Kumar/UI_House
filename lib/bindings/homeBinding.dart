@@ -4,9 +4,16 @@ import 'package:get/get.dart';
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<AuthController>(
+      () {
+        return Get.put(
+          AuthController(),
+          permanent: true,
+        );
+      },
+    );
     Get.lazyPut<HomeController>(
       () {
-        Get.put(AuthController());
         return Get.put(
           HomeController(),
           permanent: true,
