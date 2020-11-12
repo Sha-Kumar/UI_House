@@ -3,7 +3,7 @@ import 'package:UI_House/views/views.dart';
 import 'package:get/route_manager.dart';
 
 const String startroute = '/';
-const String homeroute = '/home';
+// const String homeroute = '/home';
 
 final routes = [
   GetPage(
@@ -11,9 +11,9 @@ final routes = [
     page: () => StartView(),
     binding: AuthBinding(),
   ),
-  GetPage(
-    name: homeroute,
-    page: () => HomeView(),
-    binding: HomeBinding(),
-  ),
+  // GetPage(
+  //   name: homeroute,
+  //   page: () => HomeView(),
+  //   binding: HomeBinding(),
+  // ),
 ];

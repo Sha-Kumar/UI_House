@@ -1,4 +1,4 @@
-import 'package:UI_House/routes.dart';
+// import 'package:UI_House/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +11,6 @@ class SigninView extends GetView<AuthController> {
   SigninView({
     Key key,
   }) : super(key: key);
-  // final controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +134,8 @@ class SigninView extends GetView<AuthController> {
                             controller.pass.clear();
                             Get.back();
                           }
-                          if(controller.isSigned.value)
-                          Get.toNamed(homeroute);
+                          // if(controller.isSigned.value)
+                          // Get.toNamed(homeroute);
                         }
                       },
                       color: Colors.blueAccent,
