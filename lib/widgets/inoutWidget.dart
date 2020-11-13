@@ -16,6 +16,10 @@ class InOutWidget extends GetView<AuthController> {
         return FlatButton(
           child: Text(
             controller.isSigned.value ? 'SignOut' : 'SignIn',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           onPressed: () async {
             controller.isSigned.value

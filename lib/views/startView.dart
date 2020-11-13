@@ -127,6 +127,7 @@ class StartView extends GetView<AuthController> {
                 'Get Started',
                 style: TextStyle(
                   color: Colors.white,
+                  fontWeight: FontWeight.normal,
                   fontFamily: "Lucida Sans",
                 ),
               ),

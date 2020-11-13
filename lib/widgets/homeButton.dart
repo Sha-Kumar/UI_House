@@ -12,7 +12,12 @@ class HomeButton extends GetView<AuthController> {
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: () {},
-      child: Text(description.toString()),
+      child: Text(
+        description.toString(),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

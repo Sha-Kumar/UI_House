@@ -167,22 +167,36 @@ class HomeWidget extends GetView<HomeController> {
           ),
           Container(
             width: screenWidth,
-            height: screenHeight * (700 / 754.4),
+            height: screenHeight * 2.5,
             color: Colors.white,
-            child: Column(
-              children: [
-                Row(
-                  children: [],
-                ),
-                //                 Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     Image.asset('images/pic1.jpg'),
-                //     Image.asset('images/pic2.jpg'),
-                //     Image.asset('images/pic3.jpg'),
-                //   ],
-                // );
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text('Hello'),
+                      Text('hhh'),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Container(
+                      height: 1.0,
+                      width: double.infinity,
+                      color: Colors.black,
+                    ),
+                  ),
+                  //                 Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     Image.asset('images/pic1.jpg'),
+                  //     Image.asset('images/pic2.jpg'),
+                  //     Image.asset('images/pic3.jpg'),
+                  //   ],
+                  // );
+                ],
+              ),
             ),
           ),
           Container(
