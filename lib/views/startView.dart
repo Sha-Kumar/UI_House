@@ -14,6 +14,49 @@ class StartView extends GetView<AuthController> {
 
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          top: 20,
+          bottom: 20,
+          right: 20,
+        ),
+        child: SizedBox(
+          height: 70,
+          width: 70,
+          child: FloatingActionButton(
+            tooltip: 'Upload a New Design',
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            onPressed: () {
+              controller.isSigned.value ? print('Hello') : print('Nooro');
+            },
+            child: Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.red,
+                  width: 4,
+                ),
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  begin: const Alignment(0.7, -0.5),
+                  end: const Alignment(0.6, 0.5),
+                  colors: [
+                    Color(0xFF53a78c),
+                    Color(0xFF70d88b),
+                  ],
+                ),
+              ),
+              child: Icon(
+                Icons.add,
+                size: 50,
+                color: Colors.pinkAccent,
+              ),
+            ),
+          ),
+        ),
+      ),
       appBar: AppBar(
         elevation: 18.0,
         // bottom: PreferredSize(
@@ -92,7 +135,7 @@ class StartView extends GetView<AuthController> {
         ],
       ),
       body: Obx(
-        () => controller.isSigned.value
+        () => !controller.isSigned.value
             ? HomeWidget(
                 screenWidth: screenWidth,
                 screenHeight: screenHeight,

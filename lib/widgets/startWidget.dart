@@ -124,7 +124,7 @@ class StartWidget extends GetView<AuthController> {
             ),
           ),
           Container(
-            height: 0.5,
+            height: 1.0,
             width: double.infinity,
             color: Colors.blueAccent,
           ),
