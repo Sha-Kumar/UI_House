@@ -22,9 +22,14 @@ environment:
 
 dependencies:
   get: 
+  mime_type: 0.3.2
+  flutter_dropzone: 1.0.9
+  image_picker_web: 
+  path: ^1.7.0
   firebase_auth: 
   firebase_core: 
   cloud_firestore:
+  file_picker: 2.0.12
   get_storage:
   flutter:
     sdk: flutter
