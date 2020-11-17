@@ -29,7 +29,7 @@ dependencies:
   firebase_auth: 
   firebase_core: 
   cloud_firestore:
-  file_picker: 2.0.12
+  # file_picker: 2.0.12
   get_storage:
   flutter:
     sdk: flutter

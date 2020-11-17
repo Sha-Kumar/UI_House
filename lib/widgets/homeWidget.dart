@@ -102,7 +102,16 @@ class HomeWidget extends GetView<HomeController> {
                                         Radius.circular(7),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      final UploadController uploadcontroller =
+                                          Get.find();
+
+                                      print(uploadcontroller.uploadFile(
+                                        await uploadcontroller.imagePicker(),
+                                        'ref',
+                                        'abc.pdf',
+                                      ));
+                                    },
                                     color: Colors.pinkAccent,
                                     child: const Text(
                                       'Upload',

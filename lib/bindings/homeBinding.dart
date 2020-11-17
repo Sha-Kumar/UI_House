@@ -20,5 +20,13 @@ class HomeBinding extends Bindings {
         );
       },
     );
+    Get.lazyPut<UploadController>(
+      () {
+        return Get.put(
+          UploadController(),
+          // permanent: false,
+        );
+      },
+    );
   }
 }
