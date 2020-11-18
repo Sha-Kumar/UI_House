@@ -24,7 +24,7 @@ class HomeBinding extends Bindings {
       () {
         return Get.put(
           UploadController(),
-          // permanent: false,
+          permanent: true,
         );
       },
     );

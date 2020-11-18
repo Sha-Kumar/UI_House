@@ -1,6 +1,6 @@
 import 'package:UI_House/controllers/controllers.dart';
 import 'package:UI_House/views/views.dart';
-import 'package:UI_House/widgets/bottomBar.dart';
+import 'package:UI_House/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
