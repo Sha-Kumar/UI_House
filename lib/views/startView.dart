@@ -27,8 +27,13 @@ class StartView extends GetView<AuthController> {
             tooltip: 'Upload a New Design',
             backgroundColor: Colors.transparent,
             elevation: 0,
-            onPressed: () {
-              controller.isSigned.value ? print('Hello') : print('Nooro');
+            onPressed: () async {
+              if (controller.isSigned.value) {
+                UploadController up = UploadController();
+                up.uploadImage();
+              }
+              // print(await up.uploadImage().toString());
+              // controller.isSigned.value ? print('Hello') : print('Nooro');
             },
             child: Container(
               height: 70,
@@ -136,7 +141,7 @@ class StartView extends GetView<AuthController> {
         ],
       ),
       body: Obx(
-        () => !controller.isSigned.value
+        () => controller.isSigned.value
             ? HomeWidget(
                 screenWidth: screenWidth,
                 screenHeight: screenHeight,

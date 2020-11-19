@@ -17,9 +17,7 @@ class UserModel {
         name: json["name"] == null ? null : json["name"] as String,
         email: json["email"] == null ? null : json["email"] as String,
         uid: json["uid"] == null ? null : json["uid"] as String,
-        postphotos: json["postphotos"] == null
-            ? null
-            : json["postphotos"] as List<dynamic>,
+        postphotos: json["postphotos"] as List<dynamic>,
       );
 
   Map<String, dynamic> toJson() => {

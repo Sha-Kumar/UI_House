@@ -19,9 +19,7 @@ class LocalService {
 
   UserModel getUser() {
     final Map<String, dynamic> user = _box.read('user');
-    // print('${user}');
     if (user != null) {
-      // print(user);
       return UserModel.fromJson(user);
     }
      return null;

@@ -1,5 +1,5 @@
 import 'package:UI_House/controllers/controllers.dart';
-import 'package:UI_House/widgets/bottomBar.dart';
+import 'package:UI_House/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -102,15 +102,8 @@ class HomeWidget extends GetView<HomeController> {
                                         Radius.circular(7),
                                       ),
                                     ),
-                                    onPressed: () async {
-                                      final UploadController uploadcontroller =
-                                          Get.find();
-
-                                      print(uploadcontroller.uploadFile(
-                                        await uploadcontroller.imagePicker(),
-                                        'ref',
-                                        'abc.pdf',
-                                      ));
+                                    onPressed: () => {
+                                      
                                     },
                                     color: Colors.pinkAccent,
                                     child: const Text(
