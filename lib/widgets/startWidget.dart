@@ -21,9 +21,9 @@ class StartWidget extends GetView<AuthController> {
             height: screenHeight * (550 / 754.4),
             width: screenWidth,
             alignment: Alignment.center,
-            color: Color.fromRGBO(0, 0, 1, 0.02),
+            color: const Color.fromRGBO(0, 0, 1, 0.02),
             child: Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 children: [
                   Container(
@@ -33,7 +33,7 @@ class StartWidget extends GetView<AuthController> {
                       padding: EdgeInsets.all((screenHeight * 75) / 550),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Discover the world’s top designers & creatives.",
                             textAlign: TextAlign.justify,
                             style: TextStyle(
@@ -43,10 +43,10 @@ class StartWidget extends GetView<AuthController> {
                               fontFamily: "Lucida Sans",
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             "UI-House is the leading destination to find & showcase creative work and home to that of world's best design professionals.",
                             textAlign: TextAlign.justify,
                             style: TextStyle(
@@ -56,10 +56,10 @@ class StartWidget extends GetView<AuthController> {
                               fontFamily: "Lucida Sans",
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Text(
+                          const Text(
                             "To get started in the world of designs and creative work opt me,",
                             textAlign: TextAlign.justify,
                             style: TextStyle(
@@ -73,7 +73,7 @@ class StartWidget extends GetView<AuthController> {
                             padding: const EdgeInsets.all(10.0),
                             child: RaisedButton(
                               padding: const EdgeInsets.all(18.0),
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(7),
                                 ),
@@ -111,8 +111,8 @@ class StartWidget extends GetView<AuthController> {
                   Container(
                     width: screenWidth / 2 - 10,
                     alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
                       child: Image(
                         image: AssetImage('projectphoto.jpeg'),
                         fit: BoxFit.cover,
@@ -128,7 +128,7 @@ class StartWidget extends GetView<AuthController> {
             width: double.infinity,
             color: Colors.blueAccent,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           BottomBar(

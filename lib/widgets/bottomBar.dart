@@ -13,7 +13,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0x00000000),
+      color: const Color(0x00000000),
       width: double.infinity,
       height: screenHeight * (270 / 754.4),
       child: Row(
@@ -28,7 +28,7 @@ class BottomBar extends StatelessWidget {
               children: [
                 Container(
                   // color: Colors.pinkAccent,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     color: Colors.pinkAccent,
                     boxShadow: [
@@ -60,21 +60,21 @@ class BottomBar extends StatelessWidget {
                       title: 'Home',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     IntroPageFlatButton(
                       title: 'Getting Started',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     IntroPageFlatButton(
                       title: 'Subscribe',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                     ),
                     IntroPageFlatButton(
@@ -89,49 +89,49 @@ class BottomBar extends StatelessWidget {
                       title: 'About',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Upload',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Get-It',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Help & Feedback',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Contacts',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Careers',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Privacy',
                       onPressed: () {},
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
@@ -141,7 +141,7 @@ class BottomBar extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Container(
                     height: 1.0,
                     width: screenWidth - 60,

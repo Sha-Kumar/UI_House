@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:UI_House/services/firebaseServices.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';

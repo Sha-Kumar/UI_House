@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,11 +9,35 @@ import 'package:UI_House/services/services.dart';
 // import '../routes.dart';
 
 class FirebaseService {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  User get currentUser => _auth.currentUser;
+  UserModel userModel;
+  UserModel get currentUser => userModel;
+  set currentUser(UserModel userModel) => this.userModel = userModel;
   Stream<User> get authChange => _auth.authStateChanges();
+
+  Future<void> uploadImage(Uint8List data, String name) async {
+    // final UserModel userval = LocalService.instance.getUser();
+    // if (currentUser == null) {
+    //   print('Error not signedup');
+    // } else {
+    final String userid = 'kkk';
+    final String usernameval = currentUser.name;
+
+    // final CollectionReference postCollection = _firestore.collection('posts');
+    final post = Photo(
+      uid: userid,
+      likedUsers: [],
+      username: usernameval,
+      likes: 0,
+      photo: data,
+      timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
+    );
+    print(post);
+    // await postCollection.doc().set(post.toJson());
+    // }
+  }
 
 //Add the user to DB
   Future<void> _addUserToDB(
@@ -23,15 +49,14 @@ class FirebaseService {
       name: username,
     );
     await userCollection.doc(userCredential.user.uid).set(user.toJson());
-    await getUserFromDB(userCredential.user.uid);
-  }
 
-  Future<void> getUserFromDB(String uid) async {
-    final CollectionReference userCollection = _firestore.collection('users');
-    final user = UserModel.fromJson(
-      (await userCollection.doc(uid).get()).data(),
-    );
-    await LocalService.instance.save(user);
+    // Map<String, dynamic> dataval =
+    //     (await userCollection.doc(userCredential.user.uid).get()).data();
+
+    // dataval.putIfAbsent('uid', () => userCredential.user.uid);
+    // // uid = userCredential.user.uid;
+    // currentUser = UserModel.fromJson(dataval);
+    // await getUserFromDB(userCredential.user.uid);
   }
 
   Future<bool> createUserWithEmailAndPassword(
@@ -40,6 +65,7 @@ class FirebaseService {
       final UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: pass);
       _addUserToDB(userCredential, name);
+
       // print(userCredential);
       return true;
     } on FirebaseAuthException catch (e) {
@@ -50,7 +76,7 @@ class FirebaseService {
           'The Password provided is too Weak !!!',
           colorText: Colors.white,
           backgroundColor: Colors.black87,
-          duration: Duration(
+          duration: const Duration(
             seconds: 2,
           ),
           snackPosition: SnackPosition.TOP,
@@ -62,7 +88,7 @@ class FirebaseService {
           'The Account already exists for that Email.',
           colorText: Colors.white,
           backgroundColor: Colors.black87,
-          duration: Duration(
+          duration: const Duration(
             seconds: 2,
           ),
           snackPosition: SnackPosition.TOP,
@@ -73,7 +99,7 @@ class FirebaseService {
           'Something Went Wrong. Try again Later !!!',
           colorText: Colors.white,
           backgroundColor: Colors.black87,
-          duration: Duration(
+          duration: const Duration(
             seconds: 2,
           ),
           snackPosition: SnackPosition.TOP,
@@ -86,7 +112,7 @@ class FirebaseService {
         e.message.toString(),
         colorText: Colors.white,
         backgroundColor: Colors.black87,
-        duration: Duration(
+        duration: const Duration(
           seconds: 2,
         ),
         snackPosition: SnackPosition.TOP,
@@ -99,7 +125,21 @@ class FirebaseService {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
-      print(userCredential);
+
+      //   Map<String, dynamic> dataval =
+      // (await _firestore.collection('users').doc(userCredential.user.uid).get()).data();
+
+      // dataval.putIfAbsent('uid', () => userCredential.user.uid);
+      // // uid = userCredential.user.uid;
+      // currentUser = UserModel.fromJson(dataval);
+      //   // currentUser = UserModel.fromJson(
+      //   //   (await _firestore
+      //   //           .collection('users')
+      //   //           .doc(userCredential.user.uid)
+      //   //           .get())
+      //   //       .data(),
+      //   // );
+      //   print(currentUser.toJson());
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -109,7 +149,7 @@ class FirebaseService {
           'No User found for that Email.',
           colorText: Colors.white,
           backgroundColor: Colors.black87,
-          duration: Duration(
+          duration: const Duration(
             seconds: 2,
           ),
           snackPosition: SnackPosition.TOP,
@@ -121,7 +161,7 @@ class FirebaseService {
           'Wrong Password provided for that User.',
           colorText: Colors.white,
           backgroundColor: Colors.black87,
-          duration: Duration(
+          duration: const Duration(
             seconds: 2,
           ),
           snackPosition: SnackPosition.TOP,
@@ -132,7 +172,7 @@ class FirebaseService {
           'Something Went Wrong. Try again !!!',
           colorText: Colors.white,
           backgroundColor: Colors.black87,
-          duration: Duration(
+          duration: const Duration(
             seconds: 2,
           ),
           snackPosition: SnackPosition.TOP,
@@ -161,3 +201,12 @@ class FirebaseService {
     }
   }
 }
+
+// Future<void> getUserFromDB(String uid) async {
+//   final CollectionReference userCollection = _firestore.collection('users');
+//   final user = UserModel.fromJson(
+//     (await userCollection.doc(uid).get()).data(),
+//   );
+
+//   // await LocalService.instance.save(user);
+// }

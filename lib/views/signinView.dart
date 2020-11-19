@@ -26,9 +26,9 @@ class SigninView extends GetView<AuthController> {
                 child: Column(
                   children: [
                     const Spacer(),
-                    Text(
+                    const Text(
                       'Login With Email',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontFamily: "Times New Roman",
                           fontSize: 28,
                           fontWeight: FontWeight.w400),
@@ -45,7 +45,7 @@ class SigninView extends GetView<AuthController> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(21.0),
                           ),
-                          prefixIcon: Material(
+                          prefixIcon: const Material(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             child: Icon(
                               Icons.email,
@@ -127,8 +127,9 @@ class SigninView extends GetView<AuthController> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           if (await service.signInWithEmailAndPassword(
-                              controller.email.text, controller.pass.text))
+                              controller.email.text, controller.pass.text)) {
                             controller.isSigned.value = true;
+                          }
                           if (Get.isDialogOpen) {
                             controller.email.clear();
                             controller.pass.clear();
@@ -139,9 +140,9 @@ class SigninView extends GetView<AuthController> {
                         }
                       },
                       color: Colors.blueAccent,
-                      child: Text(
+                      child: const Text(
                         'Sign In',
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     const Spacer(),

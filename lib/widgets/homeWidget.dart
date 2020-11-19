@@ -23,8 +23,8 @@ class HomeWidget extends GetView<HomeController> {
               children: [
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
+                    const Padding(
+                      padding: EdgeInsets.only(
                         top: 65,
                         right: 25,
                         bottom: 25,
@@ -69,17 +69,17 @@ class HomeWidget extends GetView<HomeController> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             Container(
                               height: 1.0,
                               color: Colors.black,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
-                            Text(
+                            const Text(
                               'Welcome back 👋 to the Profile and contribute for designs and creativity !👋👋👋',
                               textAlign: TextAlign.justify,
                               style: TextStyle(
@@ -88,7 +88,7 @@ class HomeWidget extends GetView<HomeController> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 25,
                             ),
                             Row(
@@ -97,14 +97,12 @@ class HomeWidget extends GetView<HomeController> {
                                   padding: const EdgeInsets.all(5.0),
                                   child: RaisedButton(
                                     padding: const EdgeInsets.all(18.0),
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(7),
                                       ),
                                     ),
-                                    onPressed: () => {
-                                      
-                                    },
+                                    onPressed: () => {},
                                     color: Colors.pinkAccent,
                                     child: const Text(
                                       'Upload',
@@ -115,14 +113,14 @@ class HomeWidget extends GetView<HomeController> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 15,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(5.0),
                                   child: RaisedButton(
                                     padding: const EdgeInsets.all(18.0),
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(7),
                                       ),
@@ -140,7 +138,7 @@ class HomeWidget extends GetView<HomeController> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Container(
@@ -156,8 +154,8 @@ class HomeWidget extends GetView<HomeController> {
                 Container(
                   width: screenWidth / 2 - 10,
                   alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
                     child: Image(
                       image: AssetImage('projectphoto.jpeg'),
                       fit: BoxFit.cover,

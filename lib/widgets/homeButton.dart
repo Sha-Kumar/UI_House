@@ -14,7 +14,7 @@ class HomeButton extends GetView<AuthController> {
       onPressed: () {},
       child: Text(
         description.toString(),
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),

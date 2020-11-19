@@ -15,7 +15,7 @@ class StartView extends GetView<AuthController> {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 20,
           bottom: 20,
           right: 20,
@@ -29,7 +29,7 @@ class StartView extends GetView<AuthController> {
             elevation: 0,
             onPressed: () async {
               if (controller.isSigned.value) {
-                UploadController up = UploadController();
+                final UploadController up = UploadController();
                 up.uploadImage();
               }
               // print(await up.uploadImage().toString());
@@ -44,16 +44,16 @@ class StartView extends GetView<AuthController> {
                   width: 4,
                 ),
                 shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  begin: const Alignment(0.7, -0.5),
-                  end: const Alignment(0.6, 0.5),
+                gradient: const LinearGradient(
+                  begin: Alignment(0.7, -0.5),
+                  end: Alignment(0.6, 0.5),
                   colors: [
                     Color(0xFF53a78c),
                     Color(0xFF70d88b),
                   ],
                 ),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.add,
                 size: 50,
                 color: Colors.pinkAccent,
@@ -93,10 +93,10 @@ class StartView extends GetView<AuthController> {
           ),
         ),
         actions: [
-          HomeButton(description: 'About'),
-          HomeButton(description: 'Help & Feedback'),
-          HomeButton(description: 'Upload'),
-          InOutWidget(),
+          const HomeButton(description: 'About'),
+          const HomeButton(description: 'Help & Feedback'),
+          const HomeButton(description: 'Upload'),
+          const InOutWidget(),
           Padding(
             padding: const EdgeInsets.fromLTRB(
               25,
@@ -106,7 +106,7 @@ class StartView extends GetView<AuthController> {
             ),
             child: RaisedButton(
               padding: const EdgeInsets.all(10.0),
-              shape: RoundedRectangleBorder(
+              shape:const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(8),
                 ),

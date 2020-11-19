@@ -25,9 +25,9 @@ class AuthWidget extends GetView<AuthController> {
                 child: Column(
                   children: [
                     const Spacer(),
-                    Text(
+                    const Text(
                       'Sign up with email',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontFamily: "Times New Roman",
                           fontSize: 28,
                           fontWeight: FontWeight.w400),
@@ -45,7 +45,7 @@ class AuthWidget extends GetView<AuthController> {
                           // labelStyle: TextStyle(
                           //   color: Colors.redAccent,
                           // ),
-                          prefixIcon: Material(
+                          prefixIcon: const Material(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             child: Icon(
                               Icons.email,
@@ -188,9 +188,9 @@ class AuthWidget extends GetView<AuthController> {
                         }
                       },
                       color: Colors.blueAccent,
-                      child: Text(
+                      child: const Text(
                         'Sign Up',
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                     const Spacer(),
