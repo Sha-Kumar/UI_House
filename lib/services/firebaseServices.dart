@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:UI_House/models/models.dart';
 import 'package:UI_House/services/services.dart';
+import 'package:UI_House/constants/constants.dart';
 // import '../routes.dart';
 
 class FirebaseService {
@@ -29,20 +30,20 @@ class FirebaseService {
   Future<void> uploadImage(Uint8List data, String name) async {
     final UserModel userval = LocalService.instance.getUser();
 
-    // print(userval.toJson().toString());
+    print(userval.toJson().toString());
 
     // var email = userval.email;
     // var postphotos = userval.postphotos;
 
     if (userval == null) {
-      print('Error not signedup');
+      print('Error not signed-up');
       return;
     }
     final String username = userval.name;
     final String uid = userval.uid;
 
-    final CollectionReference postCollection = _firestore.collection('posts');
-    final CollectionReference userCollection = _firestore.collection('users');
+    // final CollectionReference postCollection = _firestore.collection('posts');
+    // final CollectionReference userCollection = _firestore.collection('users');
 
     final post = Photo(
       uid: uid,
@@ -63,8 +64,8 @@ class FirebaseService {
 
     await LocalService.instance.clearLocalData();
 
-    final UserModel uservalue = UserModel.fromJson(
-        (await _firestore.collection('users').doc(uid).get()).data());
+    final UserModel uservalue =
+        UserModel.fromJson((await userCollection.doc(uid).get()).data());
     await LocalService.instance.save(uservalue);
   }
 
@@ -162,8 +163,7 @@ class FirebaseService {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
 
-      final UserModel user = UserModel.fromJson((await _firestore
-              .collection('users')
+      final UserModel user = UserModel.fromJson((await userCollection
               .doc(userCredential.user.uid)
               .get())
           .data());

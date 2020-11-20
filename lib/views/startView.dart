@@ -30,7 +30,7 @@ class StartView extends GetView<AuthController> {
             onPressed: () async {
               if (controller.isSigned.value) {
                 final UploadController up = UploadController();
-                up.uploadImage();
+                await up.uploadImage();
               }
               // print(await up.uploadImage().toString());
               // controller.isSigned.value ? print('Hello') : print('Nooro');
@@ -95,7 +95,7 @@ class StartView extends GetView<AuthController> {
         actions: [
           const HomeButton(description: 'About'),
           const HomeButton(description: 'Help & Feedback'),
-          const HomeButton(description: 'Upload'),
+          const HomeButton(description: 'Upload',),
           const InOutWidget(),
           Padding(
             padding: const EdgeInsets.fromLTRB(

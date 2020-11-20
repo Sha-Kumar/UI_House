@@ -127,8 +127,9 @@ class SigninView extends GetView<AuthController> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           if (await service.signInWithEmailAndPassword(
-                              controller.email.text, controller.pass.text))
+                              controller.email.text, controller.pass.text)) {
                             controller.isSigned.value = true;
+                          }
 
                           if (Get.isDialogOpen) {
                             controller.email.clear();

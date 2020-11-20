@@ -63,7 +63,7 @@ class HomeWidget extends GetView<HomeController> {
                             Text(
                               '😁😁😁  Shashank Kumar  😁😁😁',
                               textAlign: TextAlign.justify,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 27,
                                 fontWeight: FontWeight.w500,
@@ -102,7 +102,17 @@ class HomeWidget extends GetView<HomeController> {
                                         Radius.circular(7),
                                       ),
                                     ),
-                                    onPressed: () => {},
+                                    onPressed: () async {
+                                      // AuthController.controller to = Get.find();
+                                      if (AuthController
+                                          .controller.isSigned.value) {
+                                        final UploadController up =
+                                            UploadController();
+                                        await up.uploadImage();
+                                      }
+                                      // print(await up.uploadImage().toString());
+                                      // controller.isSigned.value ? print('Hello') : print('Nooro');
+                                    },
                                     color: Colors.pinkAccent,
                                     child: const Text(
                                       'Upload',
@@ -180,7 +190,7 @@ class HomeWidget extends GetView<HomeController> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Container(
                       height: 1.0,
                       width: double.infinity,
@@ -204,7 +214,7 @@ class HomeWidget extends GetView<HomeController> {
             width: double.infinity,
             color: Colors.blueAccent,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           BottomBar(
