@@ -11,6 +11,7 @@ class LocalService {
   }
 
   Future<void> save(UserModel user) async {
+    // await _box.erase();
     await _box.write('user', user.toJson());
     // print(_box.read('user'));
     // print(getUser());

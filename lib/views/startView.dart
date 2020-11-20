@@ -106,7 +106,7 @@ class StartView extends GetView<AuthController> {
             ),
             child: RaisedButton(
               padding: const EdgeInsets.all(10.0),
-              shape:const RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(8),
                 ),

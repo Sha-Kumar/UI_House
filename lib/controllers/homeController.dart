@@ -51,7 +51,7 @@ class HomeController extends GetxController {
     final PhotoModel photo = await HomeService.instance.fetch(
       reset: reset,
       type: Type.loadPhotos,
-      collectionReference: photosCollection,
+      collectionReference: postCollection,
     ) as PhotoModel;
     reset = false;
     if (photo != null) {

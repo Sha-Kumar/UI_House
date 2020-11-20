@@ -24,6 +24,6 @@ class UserModel {
         "name": name,
         "email": email,
         "uid": uid,
-        "postphotos": <dynamic>[],
+        "postphotos": postphotos.cast<String>(),
       };
 }

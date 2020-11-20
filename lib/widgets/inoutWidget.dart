@@ -14,6 +14,15 @@ class InOutWidget extends GetView<AuthController> {
       stream: FirebaseService().authChange,
       builder: (context, snapshot) {
         return FlatButton(
+          child: Obx(
+            () => Text(
+              controller.isSigned.value ? 'SignOut' : 'SignIn',
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           onPressed: () async {
             controller.isSigned.value
                 ? await FirebaseService().signOut()
@@ -22,13 +31,6 @@ class InOutWidget extends GetView<AuthController> {
                   );
             if (controller.isSigned.value) controller.isSigned.value = false;
           },
-          child: Text(
-            controller.isSigned.value ? 'SignOut' : 'SignIn',
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
         );
       },
     );

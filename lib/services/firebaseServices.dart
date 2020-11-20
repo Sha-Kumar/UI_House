@@ -12,31 +12,60 @@ class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  UserModel userModel;
-  UserModel get currentUser => userModel;
-  set currentUser(UserModel userModel) => this.userModel = userModel;
+  // UserModel userModel;
+  // UserModel get currentUser => userModel;
+  // set currentUser(UserModel userModel) => this.userModel = userModel;
   Stream<User> get authChange => _auth.authStateChanges();
 
-  Future<void> uploadImage(Uint8List data, String name) async {
-    // final UserModel userval = LocalService.instance.getUser();
-    // if (currentUser == null) {
-    //   print('Error not signedup');
-    // } else {
-    final String userid = 'kkk';
-    final String usernameval = currentUser.name;
+  // Future<void> getUserFromDB(String uid) async {
+  //   final CollectionReference userCollection = _firestore.collection('users');
+  //   final user = UserModel.fromJson(
+  //     (await userCollection.doc(uid).get()).data(),
+  // );
 
-    // final CollectionReference postCollection = _firestore.collection('posts');
+  // await LocalService.instance.save(user);
+  // }
+
+  Future<void> uploadImage(Uint8List data, String name) async {
+    final UserModel userval = LocalService.instance.getUser();
+
+    // print(userval.toJson().toString());
+
+    // var email = userval.email;
+    // var postphotos = userval.postphotos;
+
+    if (userval == null) {
+      print('Error not signedup');
+      return;
+    }
+    final String username = userval.name;
+    final String uid = userval.uid;
+
+    final CollectionReference postCollection = _firestore.collection('posts');
+    final CollectionReference userCollection = _firestore.collection('users');
+
     final post = Photo(
-      uid: userid,
+      uid: uid,
       likedUsers: [],
-      username: usernameval,
+      username: username,
       likes: 0,
       photo: data,
       timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
     );
-    print(post);
-    // await postCollection.doc().set(post.toJson());
-    // }
+    // print(post.toJson().toString());
+    final String url = postCollection.doc().id;
+
+    await postCollection.doc(url).set(post.toJson());
+
+    await userCollection.doc(uid).update({
+      'postphotos': FieldValue.arrayUnion([url]),
+    });
+
+    await LocalService.instance.clearLocalData();
+
+    final UserModel uservalue = UserModel.fromJson(
+        (await _firestore.collection('users').doc(uid).get()).data());
+    await LocalService.instance.save(uservalue);
   }
 
 //Add the user to DB
@@ -48,7 +77,14 @@ class FirebaseService {
       email: userCredential.user.email,
       name: username,
     );
+
     await userCollection.doc(userCredential.user.uid).set(user.toJson());
+    final UserModel userval = UserModel.fromJson((await _firestore
+            .collection('users')
+            .doc(userCredential.user.uid)
+            .get())
+        .data());
+    await LocalService.instance.save(userval);
 
     // Map<String, dynamic> dataval =
     //     (await userCollection.doc(userCredential.user.uid).get()).data();
@@ -126,20 +162,12 @@ class FirebaseService {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
 
-      //   Map<String, dynamic> dataval =
-      // (await _firestore.collection('users').doc(userCredential.user.uid).get()).data();
-
-      // dataval.putIfAbsent('uid', () => userCredential.user.uid);
-      // // uid = userCredential.user.uid;
-      // currentUser = UserModel.fromJson(dataval);
-      //   // currentUser = UserModel.fromJson(
-      //   //   (await _firestore
-      //   //           .collection('users')
-      //   //           .doc(userCredential.user.uid)
-      //   //           .get())
-      //   //       .data(),
-      //   // );
-      //   print(currentUser.toJson());
+      final UserModel user = UserModel.fromJson((await _firestore
+              .collection('users')
+              .doc(userCredential.user.uid)
+              .get())
+          .data());
+      await LocalService.instance.save(user);
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -201,12 +229,3 @@ class FirebaseService {
     }
   }
 }
-
-// Future<void> getUserFromDB(String uid) async {
-//   final CollectionReference userCollection = _firestore.collection('users');
-//   final user = UserModel.fromJson(
-//     (await userCollection.doc(uid).get()).data(),
-//   );
-
-//   // await LocalService.instance.save(user);
-// }
