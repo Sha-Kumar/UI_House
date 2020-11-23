@@ -21,7 +21,7 @@ class PhotoModel {
 class Photo {
   Photo({
     @required this.uid,
-    @required this.photo,
+    @required this.photoUrl,
     @required this.username,
     @required this.likes,
     @required this.likedUsers,
@@ -29,7 +29,7 @@ class Photo {
   });
 
   String uid;
-  List<int> photo;
+  String photoUrl;
   String username;
   int likes;
   String timeStamp;
@@ -37,7 +37,7 @@ class Photo {
 
   factory Photo.fromMap(Map<String, dynamic> json) => Photo(
         uid: json["uid"] as String,
-        photo: json["photoUrl"] as List<int>,
+        photoUrl: json["photoUrl"] as String,
         username: json["username"] as String,
         likes: json["likes"] as int,
         likedUsers: json["likedUsers"] as List<String>,
@@ -49,6 +49,6 @@ class Photo {
         "likedUsers": likedUsers,
         "uid": uid,
         "timeStamp": timeStamp,
-        "photo": photo,
+        "photo": photoUrl,
       };
 }

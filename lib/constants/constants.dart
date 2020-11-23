@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 //firebase collections...
-final CollectionReference postCollection = _firestore.collection('photos');
+final CollectionReference photoCollection = _firestore.collection('photos');
 final CollectionReference userCollection = _firestore.collection('users');
 
 enum Type {

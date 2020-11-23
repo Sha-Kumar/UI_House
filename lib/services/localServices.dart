@@ -6,12 +6,12 @@ class LocalService {
   LocalService._private();
   static LocalService instance = LocalService._private();
   final GetStorage _box = GetStorage();
+
   Future<void> clearLocalData() async {
     await _box.erase();
   }
 
   Future<void> save(UserModel user) async {
-    // await _box.erase();
     await _box.write('user', user.toJson());
     // print(_box.read('user'));
     // print(getUser());
@@ -23,6 +23,6 @@ class LocalService {
     if (user != null) {
       return UserModel.fromJson(user);
     }
-     return null;
+    return null;
   }
 }

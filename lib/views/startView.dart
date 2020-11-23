@@ -95,7 +95,9 @@ class StartView extends GetView<AuthController> {
         actions: [
           const HomeButton(description: 'About'),
           const HomeButton(description: 'Help & Feedback'),
-          const HomeButton(description: 'Upload',),
+          const HomeButton(
+            description: 'Upload',
+          ),
           const InOutWidget(),
           Padding(
             padding: const EdgeInsets.fromLTRB(

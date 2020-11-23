@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,55 +16,53 @@ class FirebaseService {
   // set currentUser(UserModel userModel) => this.userModel = userModel;
   Stream<User> get authChange => _auth.authStateChanges();
 
-  // Future<void> getUserFromDB(String uid) async {
-  //   final CollectionReference userCollection = _firestore.collection('users');
-  //   final user = UserModel.fromJson(
-  //     (await userCollection.doc(uid).get()).data(),
-  // );
+  Future<void> uploadImageURLToCollection(String imgurl) async {
+    try {
+      final UserModel userval = LocalService.instance.getUser();
 
-  // await LocalService.instance.save(user);
-  // }
+      // print(userval.toJson().toString());
 
-  Future<void> uploadImage(Uint8List data, String name) async {
-    final UserModel userval = LocalService.instance.getUser();
+      if (userval == null) {
+        print('Error not signed-up');
+        return;
+      }
+      final String username = userval.name;
+      final String uid = userval.uid;
 
-    print(userval.toJson().toString());
+      final post = Photo(
+        uid: uid,
+        likedUsers: [],
+        username: username,
+        likes: 0,
+        photoUrl: imgurl,
+        timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
+      );
+      // print(post.toJson().toString());
+      final String url = photoCollection.doc().id;
 
-    // var email = userval.email;
-    // var postphotos = userval.postphotos;
+      await photoCollection.doc(url).set(post.toJson());
 
-    if (userval == null) {
-      print('Error not signed-up');
-      return;
+      await userCollection.doc(uid).update({
+        'postphotos': FieldValue.arrayUnion([url]),
+      });
+
+      await LocalService.instance.clearLocalData();
+
+      final UserModel uservalue =
+          UserModel.fromJson((await userCollection.doc(uid).get()).data());
+      await LocalService.instance.save(uservalue);
+    } on Exception catch (e) {
+      Get.snackbar(
+        'Upload problem',
+        'Not able to upload, try again later !!!\n${e.toString()}',
+        duration: const Duration(
+          seconds: 2,
+        ),
+        colorText: Colors.white,
+        backgroundColor: Colors.black87,
+        snackPosition: SnackPosition.TOP,
+      );
     }
-    final String username = userval.name;
-    final String uid = userval.uid;
-
-    // final CollectionReference postCollection = _firestore.collection('posts');
-    // final CollectionReference userCollection = _firestore.collection('users');
-
-    final post = Photo(
-      uid: uid,
-      likedUsers: [],
-      username: username,
-      likes: 0,
-      photo: data,
-      timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
-    );
-    // print(post.toJson().toString());
-    final String url = postCollection.doc().id;
-
-    await postCollection.doc(url).set(post.toJson());
-
-    await userCollection.doc(uid).update({
-      'postphotos': FieldValue.arrayUnion([url]),
-    });
-
-    await LocalService.instance.clearLocalData();
-
-    final UserModel uservalue =
-        UserModel.fromJson((await userCollection.doc(uid).get()).data());
-    await LocalService.instance.save(uservalue);
   }
 
 //Add the user to DB
@@ -163,10 +159,8 @@ class FirebaseService {
       final UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: pass);
 
-      final UserModel user = UserModel.fromJson((await userCollection
-              .doc(userCredential.user.uid)
-              .get())
-          .data());
+      final UserModel user = UserModel.fromJson(
+          (await userCollection.doc(userCredential.user.uid).get()).data());
       await LocalService.instance.save(user);
       return true;
     } on FirebaseAuthException catch (e) {
@@ -229,3 +223,54 @@ class FirebaseService {
     }
   }
 }
+
+// Future<void> getUserFromDB(String uid) async {
+//   final CollectionReference userCollection = _firestore.collection('users');
+//   final user = UserModel.fromJson(
+//     (await userCollection.doc(uid).get()).data(),
+// );
+
+// await LocalService.instance.save(user);
+// }
+
+// Future<void> uploadImage(Uint8List data, String name) async {
+//   final UserModel userval = LocalService.instance.getUser();
+
+//   print(userval.toJson().toString());
+
+//   // var email = userval.email;
+//   // var postphotos = userval.postphotos;
+
+//   if (userval == null) {
+//     print('Error not signed-up');
+//     return;
+//   }
+//   final String username = userval.name;
+//   final String uid = userval.uid;
+
+//   // final CollectionReference postCollection = _firestore.collection('posts');
+//   // final CollectionReference userCollection = _firestore.collection('users');
+
+//   final post = Photo(
+//     uid: uid,
+//     likedUsers: [],
+//     username: username,
+//     likes: 0,
+//     photo: data,
+//     timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
+//   );
+//   // print(post.toJson().toString());
+//   final String url = postCollection.doc().id;
+
+//   await postCollection.doc(url).set(post.toJson());
+
+//   await userCollection.doc(uid).update({
+//     'postphotos': FieldValue.arrayUnion([url]),
+//   });
+
+//   await LocalService.instance.clearLocalData();
+
+//   final UserModel uservalue =
+//       UserModel.fromJson((await userCollection.doc(uid).get()).data());
+//   await LocalService.instance.save(uservalue);
+// }
