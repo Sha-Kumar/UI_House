@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:UI_House/controllers/controllers.dart';
 import 'package:UI_House/widgets/widgets.dart';
 
+import '../routes.dart';
+
 class StartView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
@@ -31,9 +33,18 @@ class StartView extends GetView<AuthController> {
               if (controller.isSigned.value) {
                 final UploadController up = UploadController();
                 await up.uploadImage();
+              } else {
+                Get.snackbar(
+                  'Error - Not Signed-In',
+                  'Unable to upload without login',
+                  colorText: Colors.white,
+                  backgroundColor: Colors.black87,
+                  duration: const Duration(
+                    seconds: 2,
+                  ),
+                  snackPosition: SnackPosition.TOP,
+                );
               }
-              // print(await up.uploadImage().toString());
-              // controller.isSigned.value ? print('Hello') : print('Nooro');
             },
             child: Container(
               height: 70,
@@ -94,7 +105,18 @@ class StartView extends GetView<AuthController> {
         ),
         actions: [
           const HomeButton(description: 'About'),
-          const HomeButton(description: 'Help & Feedback'),
+          FlatButton(
+            onPressed: () {
+              Get.toNamed(hafroute);
+            },
+            child: Text(
+              'Help & Feedback',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          // const HomeButton(description: 'Help & Feedback'),
           const HomeButton(
             description: 'Upload',
           ),
