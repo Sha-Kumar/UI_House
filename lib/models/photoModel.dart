@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -26,9 +28,11 @@ class Photo {
     @required this.likes,
     @required this.likedUsers,
     @required this.timeStamp,
+    @required this.title,
   });
 
   String uid;
+  String title;
   String photoUrl;
   String username;
   int likes;
@@ -42,6 +46,7 @@ class Photo {
         likes: json["likes"] as int,
         likedUsers: json["likedUsers"] as List<String>,
         timeStamp: json['timeStamp'] as String,
+        title: json['title'] as String,
       );
   Map<String, dynamic> toJson() => {
         "username": username,
@@ -50,5 +55,6 @@ class Photo {
         "uid": uid,
         "timeStamp": timeStamp,
         "photo": photoUrl,
+        "title": title,
       };
 }

@@ -16,7 +16,7 @@ class FirebaseService {
   // set currentUser(UserModel userModel) => this.userModel = userModel;
   Stream<User> get authChange => _auth.authStateChanges();
 
-  Future<void> uploadImageURLToCollection(String imgurl) async {
+  Future<void> uploadImageURLToCollection(String imgurl, String title) async {
     try {
       final UserModel userval = LocalService.instance.getUser();
 
@@ -30,6 +30,7 @@ class FirebaseService {
       final String uid = userval.uid;
 
       final post = Photo(
+        title: title,
         uid: uid,
         likedUsers: [],
         username: username,

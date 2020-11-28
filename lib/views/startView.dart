@@ -31,8 +31,9 @@ class StartView extends GetView<AuthController> {
             elevation: 0,
             onPressed: () async {
               if (controller.isSigned.value) {
-                final UploadController up = UploadController();
-                await up.uploadImage();
+                // final UploadController up = UploadController();
+                // await up.uploadImage();
+                Get.dialog(UploadView());
               } else {
                 Get.snackbar(
                   'Error - Not Signed-In',
