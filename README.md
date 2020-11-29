@@ -11,7 +11,7 @@
 
 UI_House is a web app which gives you a list of UI designs used for application development. 
 To get the designs and to upload designs sign-up using a email and get the requirements.
-It consists of Web or Android User interface designs which is used to make less the work of a developer.
+It consists of User interface designs which is used to reduce the work of a developer in developing the web, Android, IOS or cross-platform applications.
 
 
 ## Getting Started
