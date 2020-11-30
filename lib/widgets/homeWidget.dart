@@ -16,6 +16,7 @@ class HomeWidget extends GetView<HomeController> {
     return Center(
       child: ListView(
         children: [
+          // ignore: sized_box_for_whitespace
           Container(
             width: screenWidth,
             height: screenHeight * (550 / 754.4) + 50,

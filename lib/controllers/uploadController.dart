@@ -34,6 +34,10 @@ class UploadController extends GetxController {
       type: FileType.image,
       withData: true,
     );
+    if (img != null) {
+      isUploaded.value = false;
+      // imageCache.clear();
+    }
     filename = img.files[0].name;
     ext = img.files[0].extension;
 

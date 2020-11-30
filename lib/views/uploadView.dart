@@ -77,8 +77,8 @@ class UploadView extends GetView<UploadController> {
                             padding: const EdgeInsets.all(10.0),
                             child: InkWell(
                               onTap: () {
-                                uploadController.isUploaded.value = false;
-                                imageCache.clear();
+                                // uploadController.isUploaded.value = false;
+                                // imageCache.clear();
                                 uploadController.uploadImage();
                                 // uploadController.isUploaded.value
                               },
