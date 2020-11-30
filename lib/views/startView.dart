@@ -105,21 +105,34 @@ class StartView extends GetView<AuthController> {
           ),
         ),
         actions: [
-          const HomeButton(description: 'About'),
-          FlatButton(
+          HomeButton(
+            description: 'About',
+            onPressed: () {},
+          ),
+          HomeButton(
+            description: 'Help & Feedback',
             onPressed: () {
               Get.toNamed(hafroute);
             },
-            child: Text(
-              'Help & Feedback',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
           ),
-          // const HomeButton(description: 'Help & Feedback'),
-          const HomeButton(
+          HomeButton(
             description: 'Upload',
+            onPressed: () async {
+              if (controller.isSigned.value) {
+                Get.dialog(UploadView());
+              } else {
+                Get.snackbar(
+                  'Error - Not Signed-In',
+                  'Unable to upload without login',
+                  colorText: Colors.white,
+                  backgroundColor: Colors.black87,
+                  duration: const Duration(
+                    seconds: 2,
+                  ),
+                  snackPosition: SnackPosition.TOP,
+                );
+              }
+            },
           ),
           const InOutWidget(),
           Padding(

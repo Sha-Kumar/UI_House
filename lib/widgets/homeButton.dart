@@ -4,14 +4,16 @@ import 'package:get/get.dart';
 
 class HomeButton extends GetView<AuthController> {
   final String description;
+  final Function() onPressed;
   const HomeButton({
     @required this.description,
+    this.onPressed,
   }) : super();
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(
         description.toString(),
         style: const TextStyle(
