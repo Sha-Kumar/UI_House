@@ -13,6 +13,7 @@ final routes = [
   ),
   GetPage(
     name: hafroute,
+    // ignore: prefer_const_constructors
     page: () => HAndFView(),
     binding: HAFBinding(),
   ),

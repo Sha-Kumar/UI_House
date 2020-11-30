@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:UI_House/controllers/controllers.dart';
-import 'package:UI_House/widgets/widgets.dart';
-import 'package:path/path.dart';
 
 class HAndFView extends GetView<HAndFController> {
   const HAndFView({Key key}) : super(key: key);

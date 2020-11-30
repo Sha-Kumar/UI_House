@@ -15,7 +15,7 @@ class UploadController extends GetxController {
   TextEditingController title;
   final isUploaded = false.obs;
 
-  Uint8List upimg;
+  Rx<Uint8List> upimg;
 
   @override
   void onClose() {
@@ -37,42 +37,16 @@ class UploadController extends GetxController {
     filename = img.files[0].name;
     ext = img.files[0].extension;
 
-    upimg = img.files[0].bytes;
+    upimg = img.files[0].bytes.obs;
     isUploaded.value = true;
-
-    // print(filename);
-    // print(ext);
-
-    // if (await uploadFile(img.files[0].bytes, filename, ext)) {
-    //   Get.snackbar(
-    //     'Upload Successful',
-    //     'Successfully uploaded the image $filename to the UI_House',
-    //     duration: const Duration(
-    //       seconds: 2,
-    //     ),
-    //     colorText: Colors.white,
-    //     backgroundColor: Colors.black87,
-    //     snackPosition: SnackPosition.TOP,
-    //   );
-    // } else {
-    //   Get.snackbar(
-    //     'Upload problem',
-    //     'Not able to upload, try again later !!!',
-    //     duration: const Duration(
-    //       seconds: 2,
-    //     ),
-    //     colorText: Colors.white,
-    //     backgroundColor: Colors.black87,
-    //     snackPosition: SnackPosition.TOP,
-    //   );
-    // }
   }
 
   Future<void> nextUpload() async {
-    print(filename);
-    print(title.text.trim().toString());
+    // print(filename);
+    // print(title.text.trim().toString());
 
-    if (await uploadFile(upimg, filename, ext, title.text.trim().toString())) {
+    if (await uploadFile(
+        upimg.value, filename, ext, title.text.trim().toString())) {
       print('Done');
       // Get.snackbar(
       //   'Upload Successful',

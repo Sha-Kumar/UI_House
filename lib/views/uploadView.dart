@@ -68,40 +68,56 @@ class UploadView extends GetView<UploadController> {
                   const SizedBox(
                     height: 20,
                   ),
-                  // Container(
-                  //   height: 40,
-                  //   child: InkWell(
-                  //     onTap: () {
-                  //       uploadController.uploadImage();
-                  //     },
-                  //     child: Obx(
-                  //       () => uploadController.isUploaded.value
-                  //           ? const Icon(
-                  //               Icons.add_photo_alternate,
-                  //               color: Colors.black,
-                  //             )
-                  //           : const Spacer(),
-                  //     ),
-                  //   ),
-                  // ),
                   Obx(
                     () => Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Container(
-                        height: 200,
-                        width: 250,
-                        child: uploadController.isUploaded.value
-                            ? Image.memory(uploadController.upimg)
-                            : InkWell(
-                                onTap: () {
-                                  uploadController.uploadImage();
-                                },
-                                child: const Icon(
-                                  Icons.add_photo_alternate,
-                                  color: Colors.black,
-                                  size: 50,
-                                ),
-                              ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: InkWell(
+                              onTap: () {
+                                uploadController.isUploaded.value = false;
+                                imageCache.clear();
+                                uploadController.uploadImage();
+                                // uploadController.isUploaded.value
+                              },
+                              child: uploadController.isUploaded.value
+                                  ? const Icon(
+                                      Icons.add_photo_alternate,
+                                      color: Colors.black,
+                                      size: 30,
+                                    )
+                                  : const SizedBox(
+                                      height: 20,
+                                    ),
+                            ),
+                          ),
+
+                          // ignore: sized_box_for_whitespace
+                          Container(
+                            height: 200,
+                            width: 250,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: uploadController.isUploaded.value
+                                  ? Image.memory(uploadController.upimg.value)
+                                  : InkWell(
+                                      onTap: () {
+                                        uploadController.uploadImage();
+                                      },
+                                      child: const Icon(
+                                        Icons.add_photo_alternate,
+                                        color: Colors.black,
+                                        size: 50,
+                                      ),
+                                    ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -163,21 +179,6 @@ class UploadView extends GetView<UploadController> {
                       ),
                     ],
                   ),
-                  // RaisedButton(
-                  //   onPressed: () async {
-                  //     if (_formKey.currentState.validate()) {
-                  //       if (Get.isDialogOpen) {
-                  //         uploadController.title.clear();
-                  //         Get.back();
-                  //       }
-                  //     }
-                  //   },
-                  //   color: Colors.blueAccent,
-                  //   child: const Text(
-                  //     'Upload',
-                  //     style: TextStyle(color: Colors.white),
-                  //   ),
-                  // ),
                   const Spacer(),
                   const SizedBox.shrink(),
                   const Spacer(),
