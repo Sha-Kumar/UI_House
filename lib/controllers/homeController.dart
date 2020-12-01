@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  static HomeController get to => Get.find();
+  static HomeController hcontroller = Get.find();
 
   ScrollController homecontroller;
   final RxList photos = [].obs;

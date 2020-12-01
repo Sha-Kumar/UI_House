@@ -90,6 +90,8 @@ class UploadController extends GetxController {
 
       service.uploadImageURLToCollection(imageUrl.toString(), tit);
 
+      imageCache.clear();
+
       return true;
     } catch (e) {
       Get.snackbar(

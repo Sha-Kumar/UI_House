@@ -1,4 +1,3 @@
-// import 'package:UI_House/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,8 +5,8 @@ import 'package:UI_House/controllers/controllers.dart';
 
 class UploadView extends GetView<UploadController> {
   final UploadController uploadController = Get.find();
-  // final service = FirebaseService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   UploadView({
     Key key,
   }) : super(key: key);
@@ -26,11 +25,12 @@ class UploadView extends GetView<UploadController> {
                 children: [
                   const Spacer(),
                   const Text(
-                    'Upload The UI - Image',
+                    'Upload The UI-Design Image',
                     style: TextStyle(
-                        fontFamily: "Times New Roman",
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400),
+                      fontFamily: "Times New Roman",
+                      fontSize: 28,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   const Spacer(),
                   Padding(
@@ -39,7 +39,7 @@ class UploadView extends GetView<UploadController> {
                     child: TextFormField(
                       controller: uploadController.title,
                       decoration: InputDecoration(
-                        labelText: "Enter the title of the Image",
+                        labelText: "Enter the Title of the Image",
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(21.0),
@@ -51,7 +51,6 @@ class UploadView extends GetView<UploadController> {
                             color: Colors.lime,
                           ),
                         ),
-                        //fillColor: Colors.green
                       ),
                       validator: (val) {
                         if (val.isEmpty) {
@@ -77,10 +76,7 @@ class UploadView extends GetView<UploadController> {
                             padding: const EdgeInsets.all(10.0),
                             child: InkWell(
                               onTap: () {
-                                // uploadController.isUploaded.value = false;
-                                // imageCache.clear();
                                 uploadController.uploadImage();
-                                // uploadController.isUploaded.value
                               },
                               child: uploadController.isUploaded.value
                                   ? const Icon(
@@ -142,7 +138,9 @@ class UploadView extends GetView<UploadController> {
                           color: Colors.blueAccent,
                           child: const Text(
                             'Cancel',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -162,7 +160,7 @@ class UploadView extends GetView<UploadController> {
                                 'Upload Successful',
                                 'Successfully uploaded the image to the UI_House',
                                 duration: const Duration(
-                                  seconds: 2,
+                                  seconds: 1,
                                 ),
                                 colorText: Colors.white,
                                 backgroundColor: Colors.black87,
@@ -173,7 +171,9 @@ class UploadView extends GetView<UploadController> {
                           color: Colors.blueAccent,
                           child: const Text(
                             'Upload',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
