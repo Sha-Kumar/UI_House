@@ -349,45 +349,174 @@ class HomeWidget extends GetView<HomeController> {
                 //   ],
                 // );
 
-                // FutureBuilder<List<Photo>>(
-                //   future: ,
-                //   builder: (context, snapshot) {
-                //     return snapshot.hasData
-                //         ? null
-                //         : const Center(
-                //             child: CircularProgressIndicator(),
-                //           );
-                //   },
+                // Expanded(
+                  // ignore: sized_box_for_whitespace
+                  // Container(
+                  //   height: screenHeight * 0.85,
+                  //   child:
+                     Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.all(25),
+                        child: GridView.builder(
+                            controller: controller.homecontroller,
+                            // scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: controller.photos.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                            ),
+                            itemBuilder: (context, index) {
+                              if (controller.photos.isEmpty) {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 10,
+                                  ),
+                                );
+                              }
+                              return
+                                  // Container(
+                                  //   child:
+                                  Text(controller.photos[index].title.toString());
+                              // );
+                            }),
+                      ),
+                    ),
+                  // ),
                 // ),
-
-                Obx(() {
-                  return GridView.builder(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    controller: HomeController.hcontroller.homecontroller,
-                    itemCount: HomeController.hcontroller.photos.length,
-                    itemBuilder: (context, index) {
-                      return null;
-                    },
-                    gridDelegate: null,
-                  );
-                }),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(35.0),
-            child: Container(
-              height: 1.0,
-              width: double.infinity,
-              color: Colors.black,
-            ),
-          ),
-          BottomBar(
-            screenWidth: screenWidth,
-            screenHeight: screenHeight,
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(35.0),
+          //   child: Container(
+          //     height: 1.0,
+          //     width: double.infinity,
+          //     color: Colors.black,
+          //   ),
+          // ),
+          // BottomBar(
+          //   screenWidth: screenWidth,
+          //   screenHeight: screenHeight,
+          // ),
         ],
       ),
     );
   }
 }
+// Container(
+//   height: screenHeight * 0.5,
+//   width: screenWidth,
+//   // flex: 2,
+//   child: Obx(() {
+//     return GridView.builder(
+//       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+//       controller: controller.homecontroller,
+//       itemCount: controller.photos.length,
+//       itemBuilder: (context, index) {
+//         if (controller.photos.isEmpty) {
+//           return const Center(
+//               child: CircularProgressIndicator());
+//         }
+//         return Container(
+//           child: Text(
+//             controller.photos[index].title.toString(),
+//           ),
+//         );
+//         // return Card(
+//         //   shape: RoundedRectangleBorder(
+//         //     borderRadius: BorderRadius.circular(25.0),
+//         //     side: BorderSide(
+//         //       width: 2,
+//         //       color: Colors.cyan.withOpacity(0.8),
+//         //       // style: BorderStyle.solid,
+//         //     ),
+//         //   ),
+//         //   child: Column(
+//         //     children: <Widget>[
+//         //       SizedBox(
+//         //         height: 30,
+//         //         child: Text(
+//         //           controller.photos[index].value.title
+//         //               .toString(),
+//         //         ),
+//         //         // child: ListView(
+//         //         //   padding: const EdgeInsets.only(
+//         //         //     left: 20,
+//         //         //     right: 20,
+//         //         //     top: 10,
+//         //         //   ),
+//         //         //   physics: const BouncingScrollPhysics(),
+//         //         //   shrinkWrap: true,
+//         //         //   scrollDirection: Axis.horizontal,
+//         //         //   children: <Widget>[
+//         //         //     InkWell(
+//         //         //       onTap: () => controller.homecontroller
+//         //         //           .jumpTo(controller.homecontroller
+//         //         //               .position.minScrollExtent),
+//         //         //       child: Text(
+//         //         //         // kural.kurals[index].chapter,
+//         //         //         controller.photos[index].title
+//         //         //             .toString(),
+//         //         //         style: const TextStyle(
+//         //         //           fontSize: 15,
+//         //         //           color: Colors.purple,
+//         //         //         ),
+//         //         //       ),
+//         //         //     ),
+//         //         //     SizedBox(
+//         //         //       height: 20,
+//         //         //       child: VerticalDivider(
+//         //         //         color: Colors.redAccent[400],
+//         //         //         // thickness: 2,
+//         //         //       ),
+//         //         //     ),
+//         //         //     // InkWell(
+//         //         //     //   onTap: () => controller.controller.jumpTo(
+//         //         //     //       controller
+//         //         //     //           .controller.position.maxScrollExtent),
+//         //         //     //   child: Text(
+//         //         //     //     controller.kurals[index].section.toString(),
+//         //         //     //     style: const TextStyle(
+//         //         //     //         fontSize: 15, color: Colors.purple),
+//         //         //     //   ),
+//         //         //     // ),
+//         //         //   ],
+//         //         // ),
+//         //         // ),
+//         //         // const Divider(
+//         //         //   height: 10,
+//         //         //   color: Colors.orange,
+//         //         // ),
+//         //         // ListTile(
+//         //         //   contentPadding: const EdgeInsets.only(
+//         //         //     bottom: 20,
+//         //         //     left: 15,
+//         //         //   ),
+//         //         //   title: Text(
+//         //         //     controller.photos[index].title.toString(),
+//         //         //     style: const TextStyle(
+//         //         //       fontSize: 15,
+//         //         //       color: Colors.indigoAccent,
+//         //         //     ),
+//         //         //   ),
+//         //         // subtitle: Text(
+//         //         //   '${controller.photos[index].kural[1]} [${controller.photos[index].number}]',
+//         //         //   style: const TextStyle(
+//         //         //       fontSize: 14, color: Colors.indigo),
+//         //         // ),
+//         //       ),
+//         //     ],
+//         //   ),
+//         // );
+//       },
+//       gridDelegate:
+//           const SliverGridDelegateWithFixedCrossAxisCount(
+//         crossAxisCount: 3,
+//         childAspectRatio: 16 / 9,
+//         // crossAxisSpacing: 10.0,
+//         // mainAxisSpacing: 10.0,
+//       ),
+//     );
+//   }),
+// ),

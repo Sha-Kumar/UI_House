@@ -74,6 +74,8 @@ class FirebaseService {
       uid: userCredential.user.uid,
       email: userCredential.user.email,
       name: username,
+      postphotos: [],
+      bookmarks: [],
     );
 
     await userCollection.doc(userCredential.user.uid).set(user.toJson());

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:UI_House/controllers/controllers.dart';
 
 class UploadView extends GetView<UploadController> {
-  final UploadController uploadController = Get.find();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   UploadView({
@@ -37,7 +36,7 @@ class UploadView extends GetView<UploadController> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50, vertical: 20),
                     child: TextFormField(
-                      controller: uploadController.title,
+                      controller: controller.title,
                       decoration: InputDecoration(
                         labelText: "Enter the Title of the Image",
                         fillColor: Colors.white,
@@ -76,9 +75,9 @@ class UploadView extends GetView<UploadController> {
                             padding: const EdgeInsets.all(10.0),
                             child: InkWell(
                               onTap: () {
-                                uploadController.uploadImage();
+                                controller.uploadImage();
                               },
-                              child: uploadController.isUploaded.value
+                              child: controller.isUploaded.value
                                   ? const Icon(
                                       Icons.add_photo_alternate,
                                       color: Colors.black,
@@ -96,11 +95,11 @@ class UploadView extends GetView<UploadController> {
                             width: 250,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: uploadController.isUploaded.value
-                                  ? Image.memory(uploadController.upimg.value)
+                              child: controller.isUploaded.value
+                                  ? Image.memory(controller.upimg.value)
                                   : InkWell(
                                       onTap: () {
-                                        uploadController.uploadImage();
+                                        controller.uploadImage();
                                       },
                                       child: const Icon(
                                         Icons.add_photo_alternate,
@@ -130,8 +129,8 @@ class UploadView extends GetView<UploadController> {
                         child: RaisedButton(
                           onPressed: () async {
                             if (Get.isDialogOpen) {
-                              uploadController.title.clear();
-                              uploadController.isUploaded.value = false;
+                              controller.title.clear();
+                              controller.isUploaded.value = false;
                               Get.back();
                             }
                           },
@@ -149,11 +148,11 @@ class UploadView extends GetView<UploadController> {
                         child: RaisedButton(
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              await uploadController.nextUpload();
+                              await controller.nextUpload();
 
                               if (Get.isDialogOpen) {
-                                uploadController.title.clear();
-                                uploadController.isUploaded.value = false;
+                                controller.title.clear();
+                                controller.isUploaded.value = false;
                                 Get.back();
                               }
                               Get.snackbar(

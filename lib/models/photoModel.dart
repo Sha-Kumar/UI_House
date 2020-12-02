@@ -35,24 +35,24 @@ class Photo {
   String username;
   int likes;
   String timeStamp;
-  List<String> likedUsers = [];
+  List<dynamic> likedUsers;
 
   factory Photo.fromMap(Map<String, dynamic> json) => Photo(
         uid: json["uid"] as String,
         photoUrl: json["photoUrl"] as String,
         username: json["username"] as String,
         likes: json["likes"] as int,
-        likedUsers: json["likedUsers"] as List<String>,
+        likedUsers: json["likedUsers"] as List<dynamic>,
         timeStamp: json['timeStamp'] as String,
         title: json['title'] as String,
       );
   Map<String, dynamic> toJson() => {
         "username": username,
         "likes": likes,
-        "likedUsers": likedUsers,
+        "likedUsers": likedUsers.cast<String>(),
         "uid": uid,
         "timeStamp": timeStamp,
-        "photo": photoUrl,
+        "photoUrl": photoUrl,
         "title": title,
       };
 }
