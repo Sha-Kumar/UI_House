@@ -6,7 +6,7 @@ class HomeService {
   HomeService._private();
   static final instance = HomeService._private();
   DocumentSnapshot last;
-  int limit = 2;
+  int limit = 8;
   bool moreAvail = true;
 
   Future<Object> fetch(
@@ -23,7 +23,6 @@ class HomeService {
       switch (type) {
         case Type.loadPhotos:
           return PhotoModel.fromDocumentSnapshot(data);
-       
       }
     }
 
@@ -36,14 +35,12 @@ class HomeService {
     final QuerySnapshot snapshot = await query.get();
     final List<DocumentSnapshot> phts = snapshot.docs;
     last = snapshot.docs[phts.length - 1];
-    // print(l.fromJson(krls));
-    // return Kural.fromJson(krls);
     return phts;
   }
 
   Future<List<DocumentSnapshot>> _fetchMorePhotos(
       CollectionReference collection) async {
-    print('fetch more kural func');
+    print('fetch more photos func');
 
     final Query query = collection
         .orderBy('timeStamp')
@@ -51,7 +48,6 @@ class HomeService {
 
     if (moreAvail) {
       final QuerySnapshot snapshot = await query.get();
-      // krls.addAll(snapshot.docs);
       if (snapshot.docs.length >= limit) {
         last = snapshot.docs[snapshot.docs.length - 1];
       } else {
