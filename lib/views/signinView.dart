@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:UI_House/services/services.dart';
 import 'package:UI_House/controllers/controllers.dart';
 
+import '../routes.dart';
+
 class SigninView extends GetView<AuthController> {
   final service = FirebaseService();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -137,7 +139,7 @@ class SigninView extends GetView<AuthController> {
                             Get.back();
                           }
                           // if(controller.isSigned.value)
-                          // Get.toNamed(homeroute);
+                          Get.toNamed(homeroute);
                         }
                       },
                       color: Colors.blueAccent,

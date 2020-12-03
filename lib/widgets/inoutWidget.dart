@@ -20,7 +20,10 @@ class InOutWidget extends GetView<AuthController> {
                 : Get.dialog(
                     SigninView(),
                   );
-            if (controller.isSigned.value) controller.isSigned.value = false;
+            if (controller.isSigned.value) {
+              controller.isSigned.value = false;
+              Get.back();
+            }
           },
           child: Obx(
             () => Text(

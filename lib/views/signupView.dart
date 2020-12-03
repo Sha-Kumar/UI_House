@@ -1,3 +1,4 @@
+import 'package:UI_House/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -185,6 +186,7 @@ class AuthWidget extends GetView<AuthController> {
                             controller.pass.clear();
                             Get.back();
                           }
+                          Get.toNamed(homeroute);
                         }
                       },
                       color: Colors.blueAccent,
