@@ -31,6 +31,12 @@ class HomeController extends GetxController {
             }
             fetch();
           }
+          if (homecontroller.position.pixels <
+              homecontroller.position.minScrollExtent && max > 25) {
+            reset = true;
+            photos.value = [];
+            fetch();
+          }
         },
       );
     fetch();

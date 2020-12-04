@@ -438,8 +438,9 @@ class HomeView extends GetView<HomeController> {
                             height: 50,
                             width: 145,
                             decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
@@ -490,21 +491,22 @@ class HomeView extends GetView<HomeController> {
                         color: Colors.black,
                       ),
                     ),
-
-                  
                     Padding(
                       padding: const EdgeInsets.all(25),
                       // ignore: sized_box_for_whitespace
                       child: Container(
-                        height: screenHeight * 0.6,
+                        height: screenHeight * 2.5,
                         child: GridView.builder(
                             controller: controller.homecontroller,
                             shrinkWrap: true,
                             itemCount: controller.photos.length,
-                            // physics: const BouncingScrollPhysics(),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 1.05,
                             ),
                             itemBuilder: (context, index) {
                               if (controller.photos.isEmpty) {
@@ -518,21 +520,122 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 );
                               }
-                              return
-                                  // Container(
-                                  //   child:
-                                  Text(controller.photos[index].title
-                                      .toString());
-                              // );
+                              return Card(
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  side: BorderSide(
+                                    width: 0.5,
+                                    color: Colors.blueGrey.withOpacity(0.5),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: screenHeight * (250 / 754.4),
+                                        width: screenWidth * (345 / 1536),
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(25.0),
+                                          ),
+                                          color: Colors.amber,
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          child: Image.network(
+                                            controller.photos[index].photoUrl
+                                                .toString(),
+                                            fit: BoxFit.fill,
+                                            // scale: ,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 5,
+                                          right: 5,
+                                          top: 10,
+                                          bottom: 10,
+                                        ),
+                                        child: Container(
+                                          height: 0.5,
+                                          width: double.infinity,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 5,
+                                            ),
+                                            child: Text(
+                                              controller.photos[index].title
+                                                  .toString(),
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(
+                                                fontSize: (screenHeight /
+                                                        screenWidth) *
+                                                    (1536 / 754.4) *
+                                                    18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 2,
+                                                  right: 3,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {},
+                                                  child: Icon(
+                                                    Icons.bookmark,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 3.0,
+                                                  right: 2.0,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {},
+                                                  child: Icon(
+                                                    Icons.thumb_up,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
                             }),
                       ),
                     ),
-                    // ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(35.0),
+                padding: const EdgeInsets.only(
+                  top: 8,
+                  left: 35,
+                  right: 35,
+                  bottom: 35,
+                ),
                 child: Container(
                   height: 1.0,
                   width: double.infinity,
@@ -568,100 +671,100 @@ class HomeView extends GetView<HomeController> {
 //           child: Text(
 //             controller.photos[index].title.toString(),
 //           ),
-//         );
-//         // return Card(
-//         //   shape: RoundedRectangleBorder(
-//         //     borderRadius: BorderRadius.circular(25.0),
-//         //     side: BorderSide(
-//         //       width: 2,
-//         //       color: Colors.cyan.withOpacity(0.8),
-//         //       // style: BorderStyle.solid,
-//         //     ),
-//         //   ),
-//         //   child: Column(
-//         //     children: <Widget>[
-//         //       SizedBox(
-//         //         height: 30,
-//         //         child: Text(
-//         //           controller.photos[index].value.title
-//         //               .toString(),
-//         //         ),
-//         //         // child: ListView(
-//         //         //   padding: const EdgeInsets.only(
-//         //         //     left: 20,
-//         //         //     right: 20,
-//         //         //     top: 10,
-//         //         //   ),
-//         //         //   physics: const BouncingScrollPhysics(),
-//         //         //   shrinkWrap: true,
-//         //         //   scrollDirection: Axis.horizontal,
-//         //         //   children: <Widget>[
-//         //         //     InkWell(
-//         //         //       onTap: () => controller.homecontroller
-//         //         //           .jumpTo(controller.homecontroller
-//         //         //               .position.minScrollExtent),
-//         //         //       child: Text(
-//         //         //         // kural.kurals[index].chapter,
-//         //         //         controller.photos[index].title
-//         //         //             .toString(),
-//         //         //         style: const TextStyle(
-//         //         //           fontSize: 15,
-//         //         //           color: Colors.purple,
-//         //         //         ),
-//         //         //       ),
-//         //         //     ),
-//         //         //     SizedBox(
-//         //         //       height: 20,
-//         //         //       child: VerticalDivider(
-//         //         //         color: Colors.redAccent[400],
-//         //         //         // thickness: 2,
-//         //         //       ),
-//         //         //     ),
-//         //         //     // InkWell(
-//         //         //     //   onTap: () => controller.controller.jumpTo(
-//         //         //     //       controller
-//         //         //     //           .controller.position.maxScrollExtent),
-//         //         //     //   child: Text(
-//         //         //     //     controller.kurals[index].section.toString(),
-//         //         //     //     style: const TextStyle(
-//         //         //     //         fontSize: 15, color: Colors.purple),
-//         //         //     //   ),
-//         //         //     // ),
-//         //         //   ],
-//         //         // ),
-//         //         // ),
-//         //         // const Divider(
-//         //         //   height: 10,
-//         //         //   color: Colors.orange,
-//         //         // ),
-//         //         // ListTile(
-//         //         //   contentPadding: const EdgeInsets.only(
-//         //         //     bottom: 20,
-//         //         //     left: 15,
-//         //         //   ),
-//         //         //   title: Text(
-//         //         //     controller.photos[index].title.toString(),
-//         //         //     style: const TextStyle(
-//         //         //       fontSize: 15,
-//         //         //       color: Colors.indigoAccent,
-//         //         //     ),
-//         //         //   ),
-//         //         // subtitle: Text(
-//         //         //   '${controller.photos[index].kural[1]} [${controller.photos[index].number}]',
-//         //         //   style: const TextStyle(
-//         //         //       fontSize: 14, color: Colors.indigo),
-//         //         // ),
-//         //       ),
-//         //     ],
-//         //   ),
-//         // );
+// );
+// return Card(
+//   shape: RoundedRectangleBorder(
+//     borderRadius: BorderRadius.circular(25.0),
+//     side: BorderSide(
+//       width: 2,
+//       color: Colors.cyan.withOpacity(0.8),
+//       // style: BorderStyle.solid,
+//     ),
+//   ),
+//   child: Column(
+//     children: <Widget>[
+//       SizedBox(
+//         height: 30,
+//         child: Text(
+//           controller.photos[index].value.title
+//               .toString(),
+// ),
+// child: ListView(
+//   padding: const EdgeInsets.only(
+//     left: 20,
+//     right: 20,
+//     top: 10,
+//   ),
+//   physics: const BouncingScrollPhysics(),
+//   shrinkWrap: true,
+//   scrollDirection: Axis.horizontal,
+//   children: <Widget>[
+//     InkWell(
+//       onTap: () => controller.homecontroller
+//           .jumpTo(controller.homecontroller
+//               .position.minScrollExtent),
+//       child: Text(
+//         // kural.kurals[index].chapter,
+//         controller.photos[index].title
+//             .toString(),
+//         style: const TextStyle(
+//           fontSize: 15,
+//           color: Colors.purple,
+//         ),
+//       ),
+//     ),
+//     SizedBox(
+//       height: 20,
+//       child: VerticalDivider(
+//         color: Colors.redAccent[400],
+// thickness: 2,
+//       ),
+//     ),
+// InkWell(
+//   onTap: () => controller.controller.jumpTo(
+//       controller
+//           .controller.position.maxScrollExtent),
+//   child: Text(
+//     controller.kurals[index].section.toString(),
+//     style: const TextStyle(
+//         fontSize: 15, color: Colors.purple),
+//   ),
+// ),
+//   ],
+// ),
+// ),
+// const Divider(
+//   height: 10,
+//   color: Colors.orange,
+// ),
+// ListTile(
+//   contentPadding: const EdgeInsets.only(
+//     bottom: 20,
+//     left: 15,
+//   ),
+//   title: Text(
+//     controller.photos[index].title.toString(),
+//     style: const TextStyle(
+//       fontSize: 15,
+//       color: Colors.indigoAccent,
+//     ),
+//   ),
+// subtitle: Text(
+//   '${controller.photos[index].kural[1]} [${controller.photos[index].number}]',
+//   style: const TextStyle(
+//       fontSize: 14, color: Colors.indigo),
+// ),
+//       ),
+//     ],
+//   ),
+// );
 //       },
 //       gridDelegate:
 //           const SliverGridDelegateWithFixedCrossAxisCount(
 //         crossAxisCount: 3,
 //         childAspectRatio: 16 / 9,
-//         // crossAxisSpacing: 10.0,
-//         // mainAxisSpacing: 10.0,
+// crossAxisSpacing: 10.0,
+// mainAxisSpacing: 10.0,
 //       ),
 //     );
 //   }),
