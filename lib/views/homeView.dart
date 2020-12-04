@@ -1,3 +1,4 @@
+import 'package:UI_House/constants/constants.dart';
 import 'package:UI_House/controllers/controllers.dart';
 import 'package:UI_House/routes.dart';
 import 'package:UI_House/views/views.dart';
@@ -212,7 +213,7 @@ class HomeView extends GetView<HomeController> {
                             child: Column(
                               children: [
                                 Text(
-                                  '😁😁😁  Shashank Kumar  😁😁😁',
+                                  '😁😁😁 $nameOfUser 😁😁😁',
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
                                     color: Colors.black,
@@ -516,7 +517,6 @@ class HomeView extends GetView<HomeController> {
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                       Colors.blue,
                                     ),
-                                    // backgroundColor: Colors.red,
                                   ),
                                 );
                               }
@@ -581,7 +581,7 @@ class HomeView extends GetView<HomeController> {
                                               style: TextStyle(
                                                 fontSize: (screenHeight /
                                                         screenWidth) *
-                                                    (1536 / 754.4) *
+                                                    (1 / screenRatio) *
                                                     18,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -596,7 +596,7 @@ class HomeView extends GetView<HomeController> {
                                                 ),
                                                 child: InkWell(
                                                   onTap: () {},
-                                                  child: Icon(
+                                                  child: const Icon(
                                                     Icons.bookmark,
                                                     color: Colors.black,
                                                   ),
@@ -609,7 +609,7 @@ class HomeView extends GetView<HomeController> {
                                                 ),
                                                 child: InkWell(
                                                   onTap: () {},
-                                                  child: Icon(
+                                                  child: const Icon(
                                                     Icons.thumb_up,
                                                     color: Colors.black,
                                                   ),

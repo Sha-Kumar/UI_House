@@ -6,7 +6,7 @@ class HomeService {
   HomeService._private();
   static final instance = HomeService._private();
   DocumentSnapshot last;
-  int limit = 15;
+  int limit = 25;
   bool moreAvail = true;
 
   Future<Object> fetch(
@@ -23,6 +23,12 @@ class HomeService {
       switch (type) {
         case Type.loadPhotos:
           return PhotoModel.fromDocumentSnapshot(data);
+        case Type.savedPhotos:
+          return null;
+        case Type.likedPhots:
+          return null;
+        case Type.shotPhotos:
+          return null;
       }
     }
 
@@ -42,7 +48,6 @@ class HomeService {
 
   Future<List<DocumentSnapshot>> _fetchMorePhotos(
       CollectionReference collection) async {
-        
     print('fetch more photos func');
 
     final Query query = collection

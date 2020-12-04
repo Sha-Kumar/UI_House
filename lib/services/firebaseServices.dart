@@ -51,6 +51,8 @@ class FirebaseService {
 
       final UserModel uservalue =
           UserModel.fromJson((await userCollection.doc(uid).get()).data());
+      // nameOfUser = userval.name;
+      // uidOfUser = userval.uid;
       await LocalService.instance.save(uservalue);
     } on Exception catch (e) {
       Get.snackbar(
@@ -84,6 +86,10 @@ class FirebaseService {
             .doc(userCredential.user.uid)
             .get())
         .data());
+
+    nameOfUser = userval.name;
+    uidOfUser = userval.uid;
+
     await LocalService.instance.save(userval);
 
     // Map<String, dynamic> dataval =
@@ -164,7 +170,12 @@ class FirebaseService {
 
       final UserModel user = UserModel.fromJson(
           (await userCollection.doc(userCredential.user.uid).get()).data());
+
+      nameOfUser = user.name;
+      uidOfUser = user.uid;
+
       await LocalService.instance.save(user);
+
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
