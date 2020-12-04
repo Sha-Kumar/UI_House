@@ -186,7 +186,9 @@ class AuthWidget extends GetView<AuthController> {
                             controller.pass.clear();
                             Get.back();
                           }
-                          Get.toNamed(homeroute);
+                          if (controller.isSigned.value) {
+                            Get.toNamed(homeroute);
+                          }
                         }
                       },
                       color: Colors.blueAccent,

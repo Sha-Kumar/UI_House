@@ -138,8 +138,9 @@ class SigninView extends GetView<AuthController> {
                             controller.pass.clear();
                             Get.back();
                           }
-                          // if(controller.isSigned.value)
-                          Get.toNamed(homeroute);
+                          if (controller.isSigned.value) {
+                            Get.toNamed(homeroute);
+                          }
                         }
                       },
                       color: Colors.blueAccent,

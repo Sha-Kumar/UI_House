@@ -42,11 +42,10 @@ class HomeController extends GetxController {
     photos.clear();
     homecontroller.dispose();
     super.onClose();
-    // return super.onClose();
   }
 
   Future<void> fetch() async {
-    // print('fetch');
+    print('fetch');
     isLoading.value = true;
     final PhotoModel photo = await HomeService.instance.fetch(
       reset: reset,
@@ -58,7 +57,7 @@ class HomeController extends GetxController {
       photos.addAll(photo.photos);
       max = photo.photos.length;
     } else {
-      // print('went wrong');
+      print('went wrong');
     }
     isLoading.value = false;
   }
