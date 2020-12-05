@@ -123,7 +123,7 @@ class UploadView extends GetView<UploadController> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 165,
+                          left: 160,
                           right: 10,
                         ),
                         child: RaisedButton(
@@ -147,24 +147,40 @@ class UploadView extends GetView<UploadController> {
                         padding: const EdgeInsets.all(10.0),
                         child: RaisedButton(
                           onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              await controller.nextUpload();
-
-                              if (Get.isDialogOpen) {
-                                controller.title.clear();
-                                controller.isUploaded.value = false;
-                                Get.back();
+                            if (!controller.isUploaded.value) {
+                              print('error');
+                              //This snackbar should be printed...
+                              // return Get.snackbar(
+                              //   'Upload an image',
+                              //   'Select an image first to upload!!!',
+                              //   duration: const Duration(
+                              //     seconds: 1,
+                              //   ),
+                              //   colorText: Colors.white,
+                              //   backgroundColor: Colors.black87,
+                              //   snackPosition: SnackPosition.TOP,
+                              // );
+                            } else {
+                              if (_formKey.currentState.validate()) {
+                                // await controller.nextUpload();
+                                print('came...');
+                                if (Get.isDialogOpen) {
+                                  controller.title.clear();
+                                  controller.isUploaded.value = false;
+                                  Get.back();
+                                }
+                                Get.snackbar(
+                                  'Upload Successful',
+                                  'Successfully uploaded the image to the UI_House',
+                                  duration: const Duration(
+                                    seconds: 1,
+                                  ),
+                                  colorText: Colors.white,
+                                  backgroundColor: Colors.black87,
+                                  snackPosition: SnackPosition.TOP,
+                                  
+                                );
                               }
-                              Get.snackbar(
-                                'Upload Successful',
-                                'Successfully uploaded the image to the UI_House',
-                                duration: const Duration(
-                                  seconds: 1,
-                                ),
-                                colorText: Colors.white,
-                                backgroundColor: Colors.black87,
-                                snackPosition: SnackPosition.TOP,
-                              );
                             }
                           },
                           color: Colors.blueAccent,

@@ -36,8 +36,8 @@ class UploadController extends GetxController {
     );
     if (img != null) {
       isUploaded.value = false;
-      // imageCache.clear();
     }
+    if (img.isNull) return;
     filename = img.files[0].name;
     ext = img.files[0].extension;
 
@@ -46,9 +46,6 @@ class UploadController extends GetxController {
   }
 
   Future<void> nextUpload() async {
-    // print(filename);
-    // print(title.text.trim().toString());
-
     if (await uploadFile(
         upimg.value, filename, ext, title.text.trim().toString())) {
       print('Done');
@@ -91,7 +88,6 @@ class UploadController extends GetxController {
       service.uploadImageURLToCollection(imageUrl.toString(), tit);
 
       imageCache.clear();
-
       return true;
     } catch (e) {
       Get.snackbar(

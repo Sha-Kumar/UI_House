@@ -80,7 +80,7 @@ class FirebaseService {
       bookmarks: [],
     );
 
-    await userCollection.doc(userCredential.user.uid).set(user.toJson());
+    await userCollection.doc(user.uid).set(user.toJson());
     final UserModel userval = UserModel.fromJson((await _firestore
             .collection('users')
             .doc(userCredential.user.uid)
