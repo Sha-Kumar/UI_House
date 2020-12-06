@@ -20,6 +20,7 @@ class PhotoModel {
 
 class Photo {
   Photo({
+    @required this.photoId,
     @required this.uid,
     @required this.photoUrl,
     @required this.username,
@@ -28,7 +29,7 @@ class Photo {
     @required this.timeStamp,
     @required this.title,
   });
-
+  String photoId;
   String uid;
   String title;
   String photoUrl;
@@ -38,6 +39,7 @@ class Photo {
   List<dynamic> likedUsers;
 
   factory Photo.fromMap(Map<String, dynamic> json) => Photo(
+        photoId: json['photoId'] as String,
         uid: json["uid"] as String,
         photoUrl: json["photoUrl"] as String,
         username: json["username"] as String,
@@ -47,6 +49,7 @@ class Photo {
         title: json['title'] as String,
       );
   Map<String, dynamic> toJson() => {
+        "photoId": photoId,
         "username": username,
         "likes": likes,
         "likedUsers": likedUsers.cast<String>(),

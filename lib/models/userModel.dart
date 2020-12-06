@@ -7,6 +7,7 @@ class UserModel {
     @required this.uid,
     this.postphotos,
     this.bookmarks,
+    this.likedPhotos,
   });
 
   String name;
@@ -14,6 +15,7 @@ class UserModel {
   String uid;
   List<dynamic> postphotos;
   List<dynamic> bookmarks;
+  List<dynamic> likedPhotos;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         name: json["name"] == null ? null : json["name"] as String,
@@ -21,6 +23,7 @@ class UserModel {
         uid: json["uid"] == null ? null : json["uid"] as String,
         postphotos: json["postphotos"] as List<dynamic>,
         bookmarks: json["postphotos"] as List<dynamic>,
+        likedPhotos: json["likedPhotos"] as List<dynamic>,
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +31,7 @@ class UserModel {
         "email": email,
         "uid": uid,
         "postphotos": postphotos.cast<String>(),
-        "bookmarks":bookmarks.cast<String>(),
+        "bookmarks": bookmarks.cast<String>(),
+        "likedPhotos": likedPhotos.cast<String>(),
       };
 }

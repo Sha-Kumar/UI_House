@@ -162,7 +162,7 @@ class UploadView extends GetView<UploadController> {
                               // );
                             } else {
                               if (_formKey.currentState.validate()) {
-                                // await controller.nextUpload();
+                                await controller.nextUpload();
                                 print('came...');
                                 if (Get.isDialogOpen) {
                                   controller.title.clear();

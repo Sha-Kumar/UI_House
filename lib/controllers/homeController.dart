@@ -10,10 +10,36 @@ class HomeController extends GetxController {
 
   ScrollController homecontroller;
   final RxList photos = [].obs;
+  // final RxList colorLike = [].obs;
+  final RxInt minscroll = 0.obs;
+
   final isLoading = false.obs;
-  final firstView = true.obs;
+  final liked = false.obs;
+  RxInt likes;
+  // final firstView = true.obs;
   int max = 0;
   bool reset = true;
+
+  Future<void> likePost(dynamic photo, int postIndex) async {
+    final int val = await HomeService.instance.likeOrDisLikePhoto(photo);
+
+    if (val == 0) {
+      liked.value = true;
+      reset = true;
+      photos.value = [];
+      fetch();
+      Get.snackbar('Liked this design', 'Liked this image....');
+      return;
+    } else if (val == 1) {
+      liked.value = true;
+      reset = true;
+      photos.value = [];
+      fetch();
+      Get.snackbar('DisLiked this design', 'DisLiked this image....');
+    } else {
+      Get.snackbar('Error', 'Error in liking this image....');
+    }
+  }
 
   @override
   void onInit() {
@@ -26,13 +52,18 @@ class HomeController extends GetxController {
           if (homecontroller.position.pixels ==
               homecontroller.position.maxScrollExtent) {
             print('no');
-            if (max >= 5 && firstView.value) {
-              return;
-            }
+            // if (max >= 5 && firstView.value) {
+            //   return;
+            // }
             fetch();
           }
-          if (homecontroller.position.pixels <
-              homecontroller.position.minScrollExtent && max > 25) {
+          if (homecontroller.position.pixels <=
+                  homecontroller.position.minScrollExtent &&
+              max > 5) {
+            minscroll.value += 1;
+          }
+          if (minscroll.value >= 3) {
+            minscroll.value = 0;
             reset = true;
             photos.value = [];
             fetch();

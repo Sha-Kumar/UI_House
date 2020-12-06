@@ -9,6 +9,57 @@ class HomeService {
   int limit = 25;
   bool moreAvail = true;
 
+  Future<int> likesCount(dynamic photoId) async {
+    try {
+      final Map<String, dynamic> querySnapshot =
+          (await photoCollection.doc(photoId.toString()).get()).data();
+      if (querySnapshot.isEmpty) {
+        print(querySnapshot);
+        return 0;
+      }
+      final Photo photoSnapshot = Photo.fromMap(querySnapshot);
+      return photoSnapshot.likes;
+    } catch (e) {
+      print(e.toString());
+    }
+    return 0;
+  }
+
+  Future<int> likeOrDisLikePhoto(dynamic photo) async {
+    try {
+      final Map<String, dynamic> querySnapshot =
+          (await photoCollection.doc(photo.photoId.toString()).get()).data();
+      if (querySnapshot.isEmpty) {
+        print(querySnapshot);
+        return 2;
+      }
+      final Photo photoSnapshot = Photo.fromMap(querySnapshot);
+
+      if (photoSnapshot.likedUsers.contains(uidOfUser as dynamic)) {
+        await photoCollection.doc(photo.photoId.toString()).update({
+          'likes': photoSnapshot.likes - 1,
+          'likedUsers': FieldValue.arrayRemove([uidOfUser]),
+        });
+        await userCollection.doc(uidOfUser.toString()).update({
+          'likedPhotos': FieldValue.arrayRemove([photo.photoId]),
+        });
+        return 1;
+      } else {
+        await photoCollection.doc(photo.photoId.toString()).update({
+          'likes': photoSnapshot.likes + 1,
+          'likedUsers': FieldValue.arrayUnion([uidOfUser.toString()]),
+        });
+        await userCollection.doc(uidOfUser.toString()).update({
+          'likedPhotos': FieldValue.arrayUnion([photo.photoId.toString()]),
+        });
+        return 0;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return 2;
+  }
+
   Future<Object> fetch(
       {bool reset, Type type, CollectionReference collectionReference}) async {
     if (reset) last = null;

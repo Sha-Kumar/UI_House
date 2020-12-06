@@ -512,14 +512,16 @@ class HomeView extends GetView<HomeController> {
                             itemBuilder: (context, index) {
                               if (controller.photos.isEmpty) {
                                 return const Center(
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 10,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      Colors.blue,
-                                    ),
-                                  ),
+                                  child: Text('End'),
+                                  //  CircularProgressIndicator(
+                                  //   strokeWidth: 10,
+                                  //   valueColor: AlwaysStoppedAnimation<Color>(
+                                  //     Colors.blue,
+                                  //   ),
+                                  // ),
                                 );
                               }
+                              // else {
                               return Card(
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
@@ -549,6 +551,7 @@ class HomeView extends GetView<HomeController> {
                                             controller.photos[index].photoUrl
                                                 .toString(),
                                             fit: BoxFit.fill,
+                                            repeat: ImageRepeat.repeat,
                                             // scale: ,
                                           ),
                                         ),
@@ -598,7 +601,8 @@ class HomeView extends GetView<HomeController> {
                                                   onTap: () {},
                                                   child: const Icon(
                                                     Icons.bookmark,
-                                                    color: Colors.black,
+                                                    color: 
+                                                    Colors.black,
                                                   ),
                                                 ),
                                               ),
@@ -608,10 +612,40 @@ class HomeView extends GetView<HomeController> {
                                                   right: 2.0,
                                                 ),
                                                 child: InkWell(
-                                                  onTap: () {},
-                                                  child: const Icon(
+                                                  onTap: () async {
+                                                    controller.likePost(
+                                                      await controller
+                                                          .photos[index],
+                                                      index,
+                                                    );
+                                                  },
+                                                  child: Icon(
                                                     Icons.thumb_up,
-                                                    color: Colors.black,
+                                                    color: controller
+                                                                .photos[index]
+                                                                .likedUsers
+                                                                .contains(uidOfUser
+                                                                    as dynamic) !=
+                                                            false
+                                                        ? Colors.blue
+                                                        : Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 2.0,
+                                                  right: 2.0,
+                                                ),
+                                                child: Text(
+                                                  controller.photos[index].likes
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                    fontSize: (screenHeight /
+                                                            screenWidth) *
+                                                        (1 / screenRatio) *
+                                                        18,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
                                               ),
@@ -623,6 +657,7 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 ),
                               );
+                              // }
                             }),
                       ),
                     ),
@@ -653,119 +688,3 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-// Container(
-//   height: screenHeight * 0.5,
-//   width: screenWidth,
-//   // flex: 2,
-//   child: Obx(() {
-//     return GridView.builder(
-//       padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-//       controller: controller.homecontroller,
-//       itemCount: controller.photos.length,
-//       itemBuilder: (context, index) {
-//         if (controller.photos.isEmpty) {
-//           return const Center(
-//               child: CircularProgressIndicator());
-//         }
-//         return Container(
-//           child: Text(
-//             controller.photos[index].title.toString(),
-//           ),
-// );
-// return Card(
-//   shape: RoundedRectangleBorder(
-//     borderRadius: BorderRadius.circular(25.0),
-//     side: BorderSide(
-//       width: 2,
-//       color: Colors.cyan.withOpacity(0.8),
-//       // style: BorderStyle.solid,
-//     ),
-//   ),
-//   child: Column(
-//     children: <Widget>[
-//       SizedBox(
-//         height: 30,
-//         child: Text(
-//           controller.photos[index].value.title
-//               .toString(),
-// ),
-// child: ListView(
-//   padding: const EdgeInsets.only(
-//     left: 20,
-//     right: 20,
-//     top: 10,
-//   ),
-//   physics: const BouncingScrollPhysics(),
-//   shrinkWrap: true,
-//   scrollDirection: Axis.horizontal,
-//   children: <Widget>[
-//     InkWell(
-//       onTap: () => controller.homecontroller
-//           .jumpTo(controller.homecontroller
-//               .position.minScrollExtent),
-//       child: Text(
-//         // kural.kurals[index].chapter,
-//         controller.photos[index].title
-//             .toString(),
-//         style: const TextStyle(
-//           fontSize: 15,
-//           color: Colors.purple,
-//         ),
-//       ),
-//     ),
-//     SizedBox(
-//       height: 20,
-//       child: VerticalDivider(
-//         color: Colors.redAccent[400],
-// thickness: 2,
-//       ),
-//     ),
-// InkWell(
-//   onTap: () => controller.controller.jumpTo(
-//       controller
-//           .controller.position.maxScrollExtent),
-//   child: Text(
-//     controller.kurals[index].section.toString(),
-//     style: const TextStyle(
-//         fontSize: 15, color: Colors.purple),
-//   ),
-// ),
-//   ],
-// ),
-// ),
-// const Divider(
-//   height: 10,
-//   color: Colors.orange,
-// ),
-// ListTile(
-//   contentPadding: const EdgeInsets.only(
-//     bottom: 20,
-//     left: 15,
-//   ),
-//   title: Text(
-//     controller.photos[index].title.toString(),
-//     style: const TextStyle(
-//       fontSize: 15,
-//       color: Colors.indigoAccent,
-//     ),
-//   ),
-// subtitle: Text(
-//   '${controller.photos[index].kural[1]} [${controller.photos[index].number}]',
-//   style: const TextStyle(
-//       fontSize: 14, color: Colors.indigo),
-// ),
-//       ),
-//     ],
-//   ),
-// );
-//       },
-//       gridDelegate:
-//           const SliverGridDelegateWithFixedCrossAxisCount(
-//         crossAxisCount: 3,
-//         childAspectRatio: 16 / 9,
-// crossAxisSpacing: 10.0,
-// mainAxisSpacing: 10.0,
-//       ),
-//     );
-//   }),
-// ),

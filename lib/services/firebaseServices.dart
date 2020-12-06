@@ -29,7 +29,11 @@ class FirebaseService {
       final String username = userval.name;
       final String uid = userval.uid;
 
+      // print(post.toJson().toString());
+      final String url = photoCollection.doc().id;
+
       final post = Photo(
+        photoId: url,
         title: title,
         uid: uid,
         likedUsers: [],
@@ -38,8 +42,6 @@ class FirebaseService {
         photoUrl: imgurl,
         timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
       );
-      // print(post.toJson().toString());
-      final String url = photoCollection.doc().id;
 
       await photoCollection.doc(url).set(post.toJson());
 
@@ -78,6 +80,7 @@ class FirebaseService {
       name: username,
       postphotos: [],
       bookmarks: [],
+      likedPhotos: [],
     );
 
     await userCollection.doc(user.uid).set(user.toJson());
