@@ -22,7 +22,7 @@ class UserModel {
         email: json["email"] == null ? null : json["email"] as String,
         uid: json["uid"] == null ? null : json["uid"] as String,
         postphotos: json["postphotos"] as List<dynamic>,
-        bookmarks: json["postphotos"] as List<dynamic>,
+        bookmarks: json["bookmarks"] as List<dynamic>,
         likedPhotos: json["likedPhotos"] as List<dynamic>,
       );
 

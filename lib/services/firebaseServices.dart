@@ -176,7 +176,9 @@ class FirebaseService {
 
       nameOfUser = user.name;
       uidOfUser = user.uid;
-
+      likedPostsOfUser = user.likedPhotos;
+      savedPostsOfUser = user.bookmarks;
+      
       await LocalService.instance.save(user);
 
       return true;

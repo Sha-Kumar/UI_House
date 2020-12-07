@@ -9,20 +9,30 @@ class HomeService {
   int limit = 25;
   bool moreAvail = true;
 
-  Future<int> likesCount(dynamic photoId) async {
+  Future<int> saveOrUnSave(dynamic photoId) async {
     try {
       final Map<String, dynamic> querySnapshot =
-          (await photoCollection.doc(photoId.toString()).get()).data();
+          (await userCollection.doc(uidOfUser.toString()).get()).data();
       if (querySnapshot.isEmpty) {
         print(querySnapshot);
-        return 0;
+        return 2;
       }
-      final Photo photoSnapshot = Photo.fromMap(querySnapshot);
-      return photoSnapshot.likes;
+      final UserModel usrval = UserModel.fromJson(querySnapshot);
+
+      if (usrval.bookmarks.contains(photoId as dynamic)) {
+        await userCollection.doc(uidOfUser.toString()).update({
+          'bookmarks': FieldValue.arrayRemove([photoId as dynamic]),
+        });
+        return 1;
+      }
+      await userCollection.doc(uidOfUser.toString()).update({
+        'bookmarks': FieldValue.arrayUnion([photoId]),
+      });
+      return 0;
     } catch (e) {
       print(e.toString());
     }
-    return 0;
+    return 2;
   }
 
   Future<int> likeOrDisLikePhoto(dynamic photo) async {

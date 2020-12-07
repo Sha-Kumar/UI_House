@@ -10,32 +10,38 @@ class HomeController extends GetxController {
 
   ScrollController homecontroller;
   final RxList photos = [].obs;
-  // final RxList colorLike = [].obs;
   final RxInt minscroll = 0.obs;
-
+  RxList likedPosts = [].obs;
+  RxList savedPosts = [].obs;
   final isLoading = false.obs;
-  final liked = false.obs;
   RxInt likes;
-  // final firstView = true.obs;
   int max = 0;
   bool reset = true;
 
-  Future<void> likePost(dynamic photo, int postIndex) async {
-    final int val = await HomeService.instance.likeOrDisLikePhoto(photo);
-
+  Future<void> savePost(dynamic photoId) async {
+    final int val = await HomeService.instance.saveOrUnSave(photoId);
     if (val == 0) {
-      liked.value = true;
-      reset = true;
-      photos.value = [];
-      fetch();
-      Get.snackbar('Liked this design', 'Liked this image....');
+      savedPosts.add(photoId);
+      update();
       return;
     } else if (val == 1) {
-      liked.value = true;
-      reset = true;
-      photos.value = [];
-      fetch();
-      Get.snackbar('DisLiked this design', 'DisLiked this image....');
+      savedPosts.remove(photoId);
+      update();
+      return;
+    } else {
+      Get.snackbar('Error', 'Error in saving this image....');
+    }
+  }
+
+  Future<void> likePost(dynamic photo, int postIndex) async {
+    final int val = await HomeService.instance.likeOrDisLikePhoto(photo);
+    if (val == 0) {
+      likedPosts.add(photo.photoId);
+      update();
+      return;
+    } else if (val == 1) {
+      likedPosts.remove(photo.photoId);
+      update();
     } else {
       Get.snackbar('Error', 'Error in liking this image....');
     }
@@ -45,6 +51,10 @@ class HomeController extends GetxController {
   void onInit() {
     reset = true;
     isLoading.value = true;
+    likedPosts.addAll(likedPostsOfUser);
+    savedPosts.addAll(savedPostsOfUser);
+
+    update();
     print('in controller');
     homecontroller = ScrollController()
       ..addListener(

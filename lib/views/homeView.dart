@@ -598,11 +598,26 @@ class HomeView extends GetView<HomeController> {
                                                   right: 3,
                                                 ),
                                                 child: InkWell(
-                                                  onTap: () {},
-                                                  child: const Icon(
-                                                    Icons.bookmark,
-                                                    color: 
-                                                    Colors.black,
+                                                  onTap: () async {
+                                                    await controller.savePost(
+                                                        controller.photos[index]
+                                                            .photoId);
+                                                  },
+                                                  child: Obx(
+                                                    () => Icon(
+                                                      
+                                                      Icons.bookmark,
+                                                      color: controller
+                                                              .savedPosts
+                                                              .contains(
+                                                                  controller
+                                                                      .photos[
+                                                                          index]
+                                                                      .photoId)
+                                                          ? Colors.yellowAccent
+                                                          : Colors.black,
+                                                          // size: ,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -619,33 +634,50 @@ class HomeView extends GetView<HomeController> {
                                                       index,
                                                     );
                                                   },
-                                                  child: Icon(
-                                                    Icons.thumb_up,
-                                                    color: controller
-                                                                .photos[index]
-                                                                .likedUsers
-                                                                .contains(uidOfUser
-                                                                    as dynamic) !=
-                                                            false
-                                                        ? Colors.blue
-                                                        : Colors.black,
+                                                  child: Obx(
+                                                    () => Icon(
+                                                      Icons.thumb_up,
+                                                      color: controller
+                                                              .likedPosts
+                                                              .contains(
+                                                                  controller
+                                                                      .photos[
+                                                                          index]
+                                                                      .photoId)
+                                                          ? Colors.blue
+                                                          : Colors.black,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                  left: 2.0,
+                                                  left: 3.0,
                                                   right: 2.0,
                                                 ),
-                                                child: Text(
-                                                  controller.photos[index].likes
-                                                      .toString(),
-                                                  style: TextStyle(
-                                                    fontSize: (screenHeight /
-                                                            screenWidth) *
-                                                        (1 / screenRatio) *
-                                                        18,
-                                                    fontWeight: FontWeight.bold,
+                                                child: Obx(
+                                                  () => Text(
+                                                    controller.likedPosts
+                                                            .contains(controller
+                                                                .photos[index]
+                                                                .photoId)
+                                                        ? (controller
+                                                                    .photos[
+                                                                        index]
+                                                                    .likes +
+                                                                1)
+                                                            .toString()
+                                                        : controller
+                                                            .photos[index].likes
+                                                            .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: (screenHeight /
+                                                              screenWidth) *
+                                                          (1 / screenRatio) *
+                                                          18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
