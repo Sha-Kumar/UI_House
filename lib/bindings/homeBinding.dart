@@ -16,7 +16,7 @@ class HomeBinding extends Bindings {
       () {
         return Get.put(
           HomeController(),
-          permanent: true,
+          // permanent: true,
         );
       },
     );

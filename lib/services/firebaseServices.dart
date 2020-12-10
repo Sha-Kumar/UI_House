@@ -55,6 +55,8 @@ class FirebaseService {
           UserModel.fromJson((await userCollection.doc(uid).get()).data());
       // nameOfUser = userval.name;
       // uidOfUser = userval.uid;
+      postsOfUser.add(url as dynamic);
+
       await LocalService.instance.save(uservalue);
     } on Exception catch (e) {
       Get.snackbar(
@@ -84,24 +86,17 @@ class FirebaseService {
     );
 
     await userCollection.doc(user.uid).set(user.toJson());
-    final UserModel userval = UserModel.fromJson((await _firestore
-            .collection('users')
-            .doc(userCredential.user.uid)
-            .get())
-        .data());
-
+    final UserModel userval = UserModel.fromJson(
+        (await userCollection.doc(userCredential.user.uid.toString()).get())
+            .data());
     nameOfUser = userval.name;
     uidOfUser = userval.uid;
+    likedPostsOfUser = userval.likedPhotos;
+    savedPostsOfUser = userval.bookmarks;
+    postsOfUser = userval.postphotos;
+    // print(nameOfUser);
 
     await LocalService.instance.save(userval);
-
-    // Map<String, dynamic> dataval =
-    //     (await userCollection.doc(userCredential.user.uid).get()).data();
-
-    // dataval.putIfAbsent('uid', () => userCredential.user.uid);
-    // // uid = userCredential.user.uid;
-    // currentUser = UserModel.fromJson(dataval);
-    // await getUserFromDB(userCredential.user.uid);
   }
 
   Future<bool> createUserWithEmailAndPassword(
@@ -111,7 +106,6 @@ class FirebaseService {
           .createUserWithEmailAndPassword(email: email, password: pass);
       _addUserToDB(userCredential, name);
 
-      // print(userCredential);
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -178,7 +172,8 @@ class FirebaseService {
       uidOfUser = user.uid;
       likedPostsOfUser = user.likedPhotos;
       savedPostsOfUser = user.bookmarks;
-      
+      postsOfUser = user.postphotos;
+
       await LocalService.instance.save(user);
 
       return true;
@@ -225,9 +220,12 @@ class FirebaseService {
 
   Future<void> signOut() async {
     try {
+      uidOfUser = '';
+      nameOfUser = '';
+      likedPostsOfUser = [];
+      savedPostsOfUser = [];
       await LocalService.instance.clearLocalData();
       await _auth.signOut();
-      // await Get.offNamedUntil(loginRoute, (route) => false);
     } catch (e) {
       Get.snackbar(
         'PROBLEM IN LOGOUT',
@@ -242,54 +240,3 @@ class FirebaseService {
     }
   }
 }
-
-// Future<void> getUserFromDB(String uid) async {
-//   final CollectionReference userCollection = _firestore.collection('users');
-//   final user = UserModel.fromJson(
-//     (await userCollection.doc(uid).get()).data(),
-// );
-
-// await LocalService.instance.save(user);
-// }
-
-// Future<void> uploadImage(Uint8List data, String name) async {
-//   final UserModel userval = LocalService.instance.getUser();
-
-//   print(userval.toJson().toString());
-
-//   // var email = userval.email;
-//   // var postphotos = userval.postphotos;
-
-//   if (userval == null) {
-//     print('Error not signed-up');
-//     return;
-//   }
-//   final String username = userval.name;
-//   final String uid = userval.uid;
-
-//   // final CollectionReference postCollection = _firestore.collection('posts');
-//   // final CollectionReference userCollection = _firestore.collection('users');
-
-//   final post = Photo(
-//     uid: uid,
-//     likedUsers: [],
-//     username: username,
-//     likes: 0,
-//     photo: data,
-//     timeStamp: DateTime.now().microsecondsSinceEpoch.toString(),
-//   );
-//   // print(post.toJson().toString());
-//   final String url = postCollection.doc().id;
-
-//   await postCollection.doc(url).set(post.toJson());
-
-//   await userCollection.doc(uid).update({
-//     'postphotos': FieldValue.arrayUnion([url]),
-//   });
-
-//   await LocalService.instance.clearLocalData();
-
-//   final UserModel uservalue =
-//       UserModel.fromJson((await userCollection.doc(uid).get()).data());
-//   await LocalService.instance.save(uservalue);
-// }

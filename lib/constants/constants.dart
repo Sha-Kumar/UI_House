@@ -8,6 +8,7 @@ String nameOfUser = '';
 String uidOfUser = '';
 List likedPostsOfUser = [];
 List savedPostsOfUser = [];
+List postsOfUser = [];
 
 // Firestore instance creation...
 FirebaseFirestore _firestore = FirebaseFirestore.instance;

@@ -35,10 +35,10 @@ class HomeService {
     return 2;
   }
 
-  Future<int> likeOrDisLikePhoto(dynamic photo) async {
+  Future<int> likeOrDisLikePhoto(dynamic photoId) async {
     try {
       final Map<String, dynamic> querySnapshot =
-          (await photoCollection.doc(photo.photoId.toString()).get()).data();
+          (await photoCollection.doc(photoId.toString()).get()).data();
       if (querySnapshot.isEmpty) {
         print(querySnapshot);
         return 2;
@@ -46,21 +46,21 @@ class HomeService {
       final Photo photoSnapshot = Photo.fromMap(querySnapshot);
 
       if (photoSnapshot.likedUsers.contains(uidOfUser as dynamic)) {
-        await photoCollection.doc(photo.photoId.toString()).update({
+        await photoCollection.doc(photoId.toString()).update({
           'likes': photoSnapshot.likes - 1,
           'likedUsers': FieldValue.arrayRemove([uidOfUser]),
         });
         await userCollection.doc(uidOfUser.toString()).update({
-          'likedPhotos': FieldValue.arrayRemove([photo.photoId]),
+          'likedPhotos': FieldValue.arrayRemove([photoId]),
         });
         return 1;
       } else {
-        await photoCollection.doc(photo.photoId.toString()).update({
+        await photoCollection.doc(photoId.toString()).update({
           'likes': photoSnapshot.likes + 1,
           'likedUsers': FieldValue.arrayUnion([uidOfUser.toString()]),
         });
         await userCollection.doc(uidOfUser.toString()).update({
-          'likedPhotos': FieldValue.arrayUnion([photo.photoId.toString()]),
+          'likedPhotos': FieldValue.arrayUnion([photoId.toString()]),
         });
         return 0;
       }

@@ -7,44 +7,29 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   static HomeController hcontroller = Get.find();
-
   ScrollController homecontroller;
+
   final RxList photos = [].obs;
-  final RxInt minscroll = 0.obs;
   RxList likedPosts = [].obs;
   RxList savedPosts = [].obs;
+  final name = nameOfUser.obs;
+
+  final RxInt minscroll = 0.obs;
+  RxInt photoCount = 0.obs;
   final isLoading = false.obs;
-  RxInt likes;
+  final refreshCount = 0.obs;
+  // final isUpdated = false.obs;
+
   int max = 0;
   bool reset = true;
 
-  Future<void> savePost(dynamic photoId) async {
-    final int val = await HomeService.instance.saveOrUnSave(photoId);
-    if (val == 0) {
-      savedPosts.add(photoId);
-      update();
-      return;
-    } else if (val == 1) {
-      savedPosts.remove(photoId);
-      update();
-      return;
-    } else {
-      Get.snackbar('Error', 'Error in saving this image....');
-    }
-  }
-
-  Future<void> likePost(dynamic photo, int postIndex) async {
-    final int val = await HomeService.instance.likeOrDisLikePhoto(photo);
-    if (val == 0) {
-      likedPosts.add(photo.photoId);
-      update();
-      return;
-    } else if (val == 1) {
-      likedPosts.remove(photo.photoId);
-      update();
-    } else {
-      Get.snackbar('Error', 'Error in liking this image....');
-    }
+  @override
+  FutureOr onClose() {
+    photos.clear();
+    likedPosts.clear();
+    savedPosts.cast();
+    homecontroller.dispose();
+    super.onClose();
   }
 
   @override
@@ -53,18 +38,23 @@ class HomeController extends GetxController {
     isLoading.value = true;
     likedPosts.addAll(likedPostsOfUser);
     savedPosts.addAll(savedPostsOfUser);
+    photoCount.value = postsOfUser.length;
+    name.value = nameOfUser;
 
     update();
     print('in controller');
     homecontroller = ScrollController()
       ..addListener(
         () {
+          photoCount.value = postsOfUser.length;
+
           if (homecontroller.position.pixels ==
               homecontroller.position.maxScrollExtent) {
             print('no');
             // if (max >= 5 && firstView.value) {
             //   return;
             // }
+            photoCount.value = postsOfUser.length;
             fetch();
           }
           if (homecontroller.position.pixels <=
@@ -73,9 +63,12 @@ class HomeController extends GetxController {
             minscroll.value += 1;
           }
           if (minscroll.value >= 3) {
+            // likedPostsOfUser.clear();
+            // likedPostsOfUser.addAll(likedPosts);
             minscroll.value = 0;
             reset = true;
             photos.value = [];
+            refreshCount.value = 1;
             fetch();
           }
         },
@@ -84,14 +77,10 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  @override
-  FutureOr onClose() {
-    photos.clear();
-    homecontroller.dispose();
-    super.onClose();
-  }
-
   Future<void> fetch() async {
+    name.value = nameOfUser;
+    // photoCount.value = postsOfUser.length;
+
     print('fetch');
     isLoading.value = true;
     final PhotoModel photo = await HomeService.instance.fetch(
@@ -107,5 +96,34 @@ class HomeController extends GetxController {
       print('went wrong');
     }
     isLoading.value = false;
+  }
+
+  Future<void> likePost(dynamic photoId) async {
+    final int val = await HomeService.instance.likeOrDisLikePhoto(photoId);
+    if (val == 0) {
+      likedPosts.add(photoId);
+      update();
+      return;
+    } else if (val == 1) {
+      likedPosts.remove(photoId);
+      update();
+    } else {
+      Get.snackbar('Error', 'Error in liking this image....');
+    }
+  }
+
+  Future<void> savePost(dynamic photoId) async {
+    final int val = await HomeService.instance.saveOrUnSave(photoId);
+    if (val == 0) {
+      savedPosts.add(photoId);
+      update();
+      return;
+    } else if (val == 1) {
+      savedPosts.remove(photoId);
+      update();
+      return;
+    } else {
+      Get.snackbar('Error', 'Error in saving this image....');
+    }
   }
 }
