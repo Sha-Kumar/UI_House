@@ -179,26 +179,32 @@ class HomeView extends GetView<HomeController> {
                           left: 50,
                           top: 65,
                           right: 25,
-                          bottom: 25,
+                          bottom: 18,
                         ),
                         child: CircleAvatar(
-                          radius: 55,
+                          radius: 80,
                           backgroundColor: Colors.black,
                           child: CircleAvatar(
-                            radius: 52.5,
+                            radius: 77.5,
                             backgroundColor: Colors.pinkAccent,
                             child: CircleAvatar(
-                              radius: 50,
+                              radius: 75,
                               backgroundColor: Colors.black,
-                              child:
-                                  // Obx(
-                                  //   () =>
-                                  Icon(
-                                Icons.person,
-                                color: Colors.white,
-                                size: 85.0,
-                              ),
-                              // ),
+                              child: Obx(() => Container(
+                                    child: controller.photoSet.value
+                                        ? ClipOval(
+                                            child: Image.network(
+                                              photoOfUser.toString(),
+                                              fit: BoxFit.fill,
+                                              repeat: ImageRepeat.repeat,
+                                            ),
+                                          )
+                                        : const Icon(
+                                            Icons.person,
+                                            color: Colors.white,
+                                            size: 100.0,
+                                          ),
+                                  )),
                             ),
                           ),
                         ),
@@ -206,7 +212,7 @@ class HomeView extends GetView<HomeController> {
                       Padding(
                         padding: const EdgeInsets.only(
                           left: 50,
-                          top: 10,
+                          top: 5,
                           right: 25,
                           bottom: 10,
                         ),
@@ -289,7 +295,9 @@ class HomeView extends GetView<HomeController> {
                                           Radius.circular(7),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.toNamed(profilrroute);
+                                      },
                                       color: Colors.pinkAccent,
                                       child: const Text(
                                         'Profile',
@@ -433,7 +441,9 @@ class HomeView extends GetView<HomeController> {
                                 Radius.circular(7),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed(profilrroute);
+                            },
                             color: Colors.white,
                             child: const Text(
                               'Profile',
@@ -517,7 +527,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       // ignore: sized_box_for_whitespace
                       child: Container(
-                        height: screenHeight * 0.65,
+                        height: screenHeight * 0.6,
                         child: GridView.builder(
                             controller: controller.homecontroller,
                             shrinkWrap: true,

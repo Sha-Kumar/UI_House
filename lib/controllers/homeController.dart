@@ -17,10 +17,11 @@ class HomeController extends GetxController {
   final RxInt minscroll = 0.obs;
   RxInt photoCount = 0.obs;
   final isLoading = false.obs;
+  final photoSet = false.obs;
+  final loadType = Type.loadPhotos.obs;
 
   int max = 0;
   bool reset = true;
-
   @override
   FutureOr onClose() {
     photos.clear();
@@ -38,55 +39,65 @@ class HomeController extends GetxController {
     savedPosts.addAll(savedPostsOfUser);
     photoCount.value = postsOfUser.length;
     name.value = nameOfUser;
+    if (photoOfUser.isNotEmpty) {
+      photoSet.value = true;
+    }
 
     update();
     print('in controller');
     homecontroller = ScrollController()
       ..addListener(
         () {
-          // photoCount.value = postsOfUser.length;
-
+          if (photoCount.value < postsOfUser.length) {
+              minscroll.value = 5;
+            }
           if (homecontroller.position.pixels ==
               homecontroller.position.maxScrollExtent) {
             print('no');
+
             // if (max >= 5 && firstView.value) {
             //   return;
             // }
             fetch();
+            if (photoCount.value < postsOfUser.length) {
+              minscroll.value = 5;
+            }
           }
           if (homecontroller.position.pixels <=
                   homecontroller.position.minScrollExtent &&
               max > 5) {
             minscroll.value += 1;
+            if (photoCount.value < postsOfUser.length) {
+              minscroll.value = 5;
+            }
           }
           if (minscroll.value >= 3) {
+            photos.clear();
             likedPostsOfUser.clear();
             likedPostsOfUser.addAll(likedPosts);
             minscroll.value = 0;
             reset = true;
             photoCount.value = postsOfUser.length;
-            photos.value = [];
             fetch();
           }
-          if (photoCount.value < postsOfUser.length) {
-            likedPostsOfUser.clear();
-            likedPostsOfUser.addAll(likedPosts);
-            minscroll.value = 0;
-            reset = true;
-            photoCount.value = postsOfUser.length;
-            photos.value = [];
-            fetch();
-          }
+          // if (photoCount.value < postsOfUser.length) {
+          //   likedPostsOfUser.clear();
+          //   likedPostsOfUser.addAll(likedPosts);
+          //   minscroll.value = 0;
+          //   reset = true;
+          //   photoCount.value = postsOfUser.length;
+          //   photos.clear();
+          //   fetch();
+          // }
         },
       );
     fetch();
+
     super.onInit();
   }
 
   Future<void> fetch() async {
     name.value = nameOfUser;
-
-    print('fetch');
     isLoading.value = true;
     final PhotoModel photo = await HomeService.instance.fetch(
       reset: reset,

@@ -8,11 +8,13 @@ class UserModel {
     this.postphotos,
     this.bookmarks,
     this.likedPhotos,
+    this.userPhotoUrl,
   });
 
   String name;
   String email;
   String uid;
+  String userPhotoUrl;
   List<dynamic> postphotos;
   List<dynamic> bookmarks;
   List<dynamic> likedPhotos;
@@ -24,12 +26,16 @@ class UserModel {
         postphotos: json["postphotos"] as List<dynamic>,
         bookmarks: json["bookmarks"] as List<dynamic>,
         likedPhotos: json["likedPhotos"] as List<dynamic>,
+        userPhotoUrl: json["userPhotoUrl"] == null
+            ? null
+            : json["userPhotoUrl"] as String,
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "email": email,
         "uid": uid,
+        "userPhotoUrl": userPhotoUrl,
         "postphotos": postphotos.cast<String>(),
         "bookmarks": bookmarks.cast<String>(),
         "likedPhotos": likedPhotos.cast<String>(),

@@ -72,25 +72,28 @@ class HomeService {
 
   Future<Object> fetch(
       {bool reset, Type type, CollectionReference collectionReference}) async {
-    if (reset) last = null;
-    List<DocumentSnapshot> data;
-
-    if (last != null) {
-      data = await _fetchMorePhotos(collectionReference);
-    } else {
-      data = await _fetchPhotos(collectionReference);
+    if (reset) {
+      last = null;
+      moreAvail = true;
     }
-    if (data != null) {
-      switch (type) {
-        case Type.loadPhotos:
+    List<DocumentSnapshot> data;
+    switch (type) {
+      case Type.loadPhotos:
+        if (last != null) {
+          data = await _fetchMorePhotos(collectionReference);
+        } else {
+          data = await _fetchPhotos(collectionReference);
+        }
+        if (data != null) {
           return PhotoModel.fromDocumentSnapshot(data);
-        case Type.savedPhotos:
-          return null;
-        case Type.likedPhots:
-          return null;
-        case Type.shotPhotos:
-          return null;
-      }
+        }
+        return null;
+      case Type.savedPhotos:
+        return null;
+      case Type.likedPhots:
+        return null;
+      case Type.shotPhotos:
+        return null;
     }
 
     return null;
@@ -104,18 +107,18 @@ class HomeService {
     final QuerySnapshot snapshot = await query.get();
     final List<DocumentSnapshot> phts = snapshot.docs;
     last = snapshot.docs[phts.length - 1];
+    // moreAvail = true;
     return phts;
   }
 
   Future<List<DocumentSnapshot>> _fetchMorePhotos(
       CollectionReference collection) async {
     print('fetch more photos func');
-
-    final Query query = collection
-        .orderBy('timeStamp', descending: true)
-        .startAfter([last.data()['timeStamp']]).limit(limit);
-
     if (moreAvail) {
+      final Query query = collection
+          .orderBy('timeStamp', descending: true)
+          .startAfter([last.data()['timeStamp']]).limit(limit);
+
       final QuerySnapshot snapshot = await query.get();
       if (snapshot.docs.length >= limit) {
         last = snapshot.docs[snapshot.docs.length - 1];

@@ -6,6 +6,7 @@ const double screenRatio = 754.4 / 1536;
 //Userval...
 String nameOfUser = '';
 String uidOfUser = '';
+String photoOfUser = '';
 List likedPostsOfUser = [];
 List savedPostsOfUser = [];
 List postsOfUser = [];

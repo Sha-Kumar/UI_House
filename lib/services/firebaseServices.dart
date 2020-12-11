@@ -4,30 +4,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import 'package:UI_House/models/models.dart';
-import 'package:UI_House/services/services.dart';
 import 'package:UI_House/constants/constants.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // UserModel userModel;
-  // UserModel get currentUser => userModel;
-  // set currentUser(UserModel userModel) => this.userModel = userModel;
   Stream<User> get authChange => _auth.authStateChanges();
 
   Future<void> uploadImageURLToCollection(String imgurl, String title) async {
     try {
-      final UserModel userval = LocalService.instance.getUser();
-
-      // print(userval.toJson().toString());
-
-      if (userval == null) {
+      if (nameOfUser == '' || uidOfUser == '') {
         print('Error not signed-up');
         return;
       }
-      final String username = userval.name;
-      final String uid = userval.uid;
+      // final UserModel userval = LocalService.instance.getUser();
+
+      // print(userval.toJson().toString());
+
+      // if (userval == null) {
+      // print('Error not signed-up');
+      // return;
+      // }
+      final String username = nameOfUser;
+      final String uid = uidOfUser;
 
       // print(post.toJson().toString());
       final String url = photoCollection.doc().id;
@@ -49,15 +49,15 @@ class FirebaseService {
         'postphotos': FieldValue.arrayUnion([url]),
       });
 
-      await LocalService.instance.clearLocalData();
+      // await LocalService.instance.clearLocalData();
 
-      final UserModel uservalue =
-          UserModel.fromJson((await userCollection.doc(uid).get()).data());
+      // final UserModel uservalue =
+      //     UserModel.fromJson((await userCollection.doc(uid).get()).data());
       // nameOfUser = userval.name;
       // uidOfUser = userval.uid;
       postsOfUser.add(url as dynamic);
 
-      await LocalService.instance.save(uservalue);
+      // await LocalService.instance.save(uservalue);
     } on Exception catch (e) {
       Get.snackbar(
         'Upload problem',
@@ -80,6 +80,7 @@ class FirebaseService {
       uid: userCredential.user.uid,
       email: userCredential.user.email,
       name: username,
+      userPhotoUrl: '',
       postphotos: [],
       bookmarks: [],
       likedPhotos: [],
@@ -94,9 +95,10 @@ class FirebaseService {
     likedPostsOfUser = userval.likedPhotos;
     savedPostsOfUser = userval.bookmarks;
     postsOfUser = userval.postphotos;
+    photoOfUser = '';
     // print(nameOfUser);
 
-    await LocalService.instance.save(userval);
+    // await LocalService.instance.save(userval);
   }
 
   Future<bool> createUserWithEmailAndPassword(
@@ -173,8 +175,9 @@ class FirebaseService {
       likedPostsOfUser = user.likedPhotos;
       savedPostsOfUser = user.bookmarks;
       postsOfUser = user.postphotos;
+      photoOfUser = user.userPhotoUrl;
 
-      await LocalService.instance.save(user);
+      // await LocalService.instance.save(user);
 
       return true;
     } on FirebaseAuthException catch (e) {
@@ -224,7 +227,7 @@ class FirebaseService {
       nameOfUser = '';
       likedPostsOfUser = [];
       savedPostsOfUser = [];
-      await LocalService.instance.clearLocalData();
+      // await LocalService.instance.clearLocalData();
       await _auth.signOut();
     } catch (e) {
       Get.snackbar(

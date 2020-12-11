@@ -6,6 +6,7 @@ import 'package:get/route_manager.dart';
 const String startroute = '/';
 const String hafroute = '/helpandsuport';
 const String homeroute = '/home';
+const String profilrroute = '/profile';
 
 final routes = [
   GetPage(
@@ -24,4 +25,10 @@ final routes = [
     page: () => HomeView(),
     binding: HomeBinding(),
   ),
+  GetPage(
+    name: profilrroute,
+    // ignore: prefer_const_constructors
+    page: () => ProfileView(),
+    binding: ProfileBinding(),
+  )
 ];
