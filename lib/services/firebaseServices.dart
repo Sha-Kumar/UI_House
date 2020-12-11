@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
 import 'package:UI_House/models/models.dart';
 import 'package:UI_House/services/services.dart';
 import 'package:UI_House/constants/constants.dart';
-// import '../routes.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;

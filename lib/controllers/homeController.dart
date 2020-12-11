@@ -17,8 +17,6 @@ class HomeController extends GetxController {
   final RxInt minscroll = 0.obs;
   RxInt photoCount = 0.obs;
   final isLoading = false.obs;
-  final refreshCount = 0.obs;
-  // final isUpdated = false.obs;
 
   int max = 0;
   bool reset = true;
@@ -46,7 +44,7 @@ class HomeController extends GetxController {
     homecontroller = ScrollController()
       ..addListener(
         () {
-          photoCount.value = postsOfUser.length;
+          // photoCount.value = postsOfUser.length;
 
           if (homecontroller.position.pixels ==
               homecontroller.position.maxScrollExtent) {
@@ -54,7 +52,6 @@ class HomeController extends GetxController {
             // if (max >= 5 && firstView.value) {
             //   return;
             // }
-            photoCount.value = postsOfUser.length;
             fetch();
           }
           if (homecontroller.position.pixels <=
@@ -63,12 +60,21 @@ class HomeController extends GetxController {
             minscroll.value += 1;
           }
           if (minscroll.value >= 3) {
-            // likedPostsOfUser.clear();
-            // likedPostsOfUser.addAll(likedPosts);
+            likedPostsOfUser.clear();
+            likedPostsOfUser.addAll(likedPosts);
             minscroll.value = 0;
             reset = true;
+            photoCount.value = postsOfUser.length;
             photos.value = [];
-            refreshCount.value = 1;
+            fetch();
+          }
+          if (photoCount.value < postsOfUser.length) {
+            likedPostsOfUser.clear();
+            likedPostsOfUser.addAll(likedPosts);
+            minscroll.value = 0;
+            reset = true;
+            photoCount.value = postsOfUser.length;
+            photos.value = [];
             fetch();
           }
         },
@@ -79,7 +85,6 @@ class HomeController extends GetxController {
 
   Future<void> fetch() async {
     name.value = nameOfUser;
-    // photoCount.value = postsOfUser.length;
 
     print('fetch');
     isLoading.value = true;

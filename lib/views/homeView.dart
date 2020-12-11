@@ -174,8 +174,9 @@ class HomeView extends GetView<HomeController> {
                 children: [
                   Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 50,
                           top: 65,
                           right: 25,
                           bottom: 25,
@@ -189,11 +190,15 @@ class HomeView extends GetView<HomeController> {
                             child: CircleAvatar(
                               radius: 50,
                               backgroundColor: Colors.black,
-                              child: Icon(
+                              child:
+                                  // Obx(
+                                  //   () =>
+                                  Icon(
                                 Icons.person,
                                 color: Colors.white,
                                 size: 85.0,
                               ),
+                              // ),
                             ),
                           ),
                         ),
@@ -504,7 +509,12 @@ class HomeView extends GetView<HomeController> {
                   ),
                   Obx(
                     () => Padding(
-                      padding: const EdgeInsets.all(25),
+                      padding: const EdgeInsets.only(
+                        top: 5,
+                        bottom: 2,
+                        left: 25,
+                        right: 25,
+                      ),
                       // ignore: sized_box_for_whitespace
                       child: Container(
                         height: screenHeight * 0.65,
@@ -669,27 +679,42 @@ class HomeView extends GetView<HomeController> {
                                                 ),
                                                 child: Obx(
                                                   () => Text(
-                                                    controller.likedPosts
-                                                            .contains(controller
+                                                    (likedPostsOfUser.contains(
+                                                            controller
                                                                 .photos[index]
-                                                                .photoId)
-                                                        ? (controller
+                                                                .photoId))
+                                                        ? controller.likedPosts
+                                                                .contains(controller
                                                                     .photos[
                                                                         index]
-                                                                    .likes -
-                                                                controller
-                                                                    .refreshCount
-                                                                    .value +
-                                                                1)
-                                                            .toString()
-                                                        : (controller
+                                                                    .photoId)
+                                                            ? (controller
                                                                     .photos[
                                                                         index]
-                                                                    .likes -
-                                                                controller
-                                                                    .refreshCount
-                                                                    .value)
-                                                            .toString(),
+                                                                    .likes)
+                                                                .toString()
+                                                            : (controller
+                                                                        .photos[
+                                                                            index]
+                                                                        .likes -
+                                                                    1)
+                                                                .toString()
+                                                        : controller.likedPosts
+                                                                .contains(
+                                                                    controller
+                                                                        .photos[
+                                                                            index]
+                                                                        .photoId)
+                                                            ? (controller
+                                                                        .photos[
+                                                                            index]
+                                                                        .likes +
+                                                                    1)
+                                                                .toString()
+                                                            : (controller
+                                                                    .photos[index]
+                                                                    .likes)
+                                                                .toString(),
                                                     style: TextStyle(
                                                       fontSize: (screenHeight /
                                                               screenWidth) *
@@ -719,7 +744,7 @@ class HomeView extends GetView<HomeController> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                top: 8,
+                top: 2,
                 left: 35,
                 right: 35,
                 bottom: 35,
