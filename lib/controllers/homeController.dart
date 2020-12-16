@@ -49,8 +49,8 @@ class HomeController extends GetxController {
       ..addListener(
         () {
           if (photoCount.value < postsOfUser.length) {
-              minscroll.value = 5;
-            }
+            minscroll.value = 5;
+          }
           if (homecontroller.position.pixels ==
               homecontroller.position.maxScrollExtent) {
             print('no');
@@ -92,8 +92,23 @@ class HomeController extends GetxController {
         },
       );
     fetch();
-
     super.onInit();
+  }
+
+  void started() {
+    reset = true;
+    isLoading.value = true;
+    likedPosts.addAll(likedPostsOfUser);
+    savedPosts.addAll(savedPostsOfUser);
+    photoCount.value = postsOfUser.length;
+    name.value = nameOfUser;
+    if (photoOfUser.isNotEmpty) {
+      photoSet.value = true;
+    }
+
+    update();
+    print('in starter');
+    fetch();
   }
 
   Future<void> fetch() async {
@@ -101,7 +116,7 @@ class HomeController extends GetxController {
     isLoading.value = true;
     final PhotoModel photo = await HomeService.instance.fetch(
       reset: reset,
-      type: Type.loadPhotos,
+      type: loadType.value,
       collectionReference: photoCollection,
     ) as PhotoModel;
     reset = false;

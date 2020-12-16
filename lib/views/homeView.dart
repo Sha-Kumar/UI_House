@@ -482,26 +482,39 @@ class HomeView extends GetView<HomeController> {
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton(
                                 focusColor: Colors.grey,
-                                value: 1,
-                                items: const [
+                                items: [
                                   DropdownMenuItem(
-                                    value: 1,
-                                    child: Text("All"),
+                                    onTap: () {
+                                      controller.loadType.value =
+                                          Type.loadPhotos;
+                                    },
+                                    child: const Text("All"),
                                   ),
                                   DropdownMenuItem(
-                                    value: 2,
-                                    child: Text("Shotted"),
+                                    onTap: () {
+                                      controller.loadType.value =
+                                          Type.shotPhotos;
+                                    },
+                                    child: const Text("Shotted"),
                                   ),
                                   DropdownMenuItem(
-                                    value: 3,
-                                    child: Text("Saved"),
+                                    onTap: () {
+                                      controller.loadType.value =
+                                          Type.savedPhotos;
+                                    },
+                                    child: const Text("Saved"),
                                   ),
                                   DropdownMenuItem(
-                                    value: 4,
-                                    child: Text("Liked"),
+                                    onTap: () {
+                                      controller.loadType.value =
+                                          Type.likedPhots;
+                                    },
+                                    child: const Text("Liked"),
                                   )
                                 ],
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  controller.started();
+                                },
                               ),
                             ),
                           ),

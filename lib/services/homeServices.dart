@@ -89,13 +89,169 @@ class HomeService {
         }
         return null;
       case Type.savedPhotos:
+        if (last != null) {
+          data = await _fetchSavePhotos(collectionReference);
+        } else {
+          data = await _fetchMoreSavePhotos(collectionReference);
+        }
+        if (data != null) {
+          return PhotoModel.fromDocumentSnapshot(data);
+        }
         return null;
       case Type.likedPhots:
+        if (last != null) {
+          data = await _fetchLikePhotos(collectionReference);
+        } else {
+          data = await _fetchMoreLikePhotos(collectionReference);
+        }
+        if (data != null) {
+          return PhotoModel.fromDocumentSnapshot(data);
+        }
         return null;
       case Type.shotPhotos:
+        if (last != null) {
+          data = await _fetchShotPhotos(collectionReference);
+        } else {
+          data = await _fetchMoreShotPhotos(collectionReference);
+        }
+        if (data != null) {
+          return PhotoModel.fromDocumentSnapshot(data);
+        }
         return null;
     }
 
+    return null;
+  }
+
+  Future<List<DocumentSnapshot>> _fetchSavePhotos(
+      CollectionReference collection) async {
+    print('Inside fetchshotphotos method');
+    final Query query =
+        collection.orderBy('timeStamp', descending: true).limit(limit);
+    final QuerySnapshot snapshot = await query.get();
+    List<DocumentSnapshot> phts;
+    // ignore: avoid_function_literals_in_foreach_calls
+    snapshot.docs.forEach((element) {
+      if (savedPostsOfUser.contains(element.id as dynamic)) {
+        phts.add(element);
+      }
+    });
+    last = snapshot.docs[phts.length - 1];
+    return phts;
+  }
+
+  Future<List<DocumentSnapshot>> _fetchMoreSavePhotos(
+      CollectionReference collection) async {
+    print('fetch more shotphotos func');
+    if (moreAvail) {
+      final Query query = collection
+          .orderBy('timeStamp', descending: true)
+          .startAfter([last.data()['timeStamp']]).limit(limit);
+
+      final QuerySnapshot snapshot = await query.get();
+      if (snapshot.docs.length >= limit) {
+        last = snapshot.docs[snapshot.docs.length - 1];
+      } else {
+        moreAvail = false;
+      }
+      List<DocumentSnapshot> phts;
+      // ignore: avoid_function_literals_in_foreach_calls
+      snapshot.docs.forEach((element) {
+        if (savedPostsOfUser.contains(element.id as dynamic)) {
+          phts.add(element);
+        }
+      });
+      return phts;
+    }
+    print('nulllll');
+    return null;
+  }
+
+  Future<List<DocumentSnapshot>> _fetchLikePhotos(
+      CollectionReference collection) async {
+    print('Inside fetchshotphotos method');
+    final Query query =
+        collection.orderBy('timeStamp', descending: true).limit(limit);
+    final QuerySnapshot snapshot = await query.get();
+    List<DocumentSnapshot> phts;
+    // ignore: avoid_function_literals_in_foreach_calls
+    snapshot.docs.forEach((element) {
+      if (likedPostsOfUser.contains(element.id as dynamic)) {
+        phts.add(element);
+      }
+    });
+    last = snapshot.docs[phts.length - 1];
+    return phts;
+  }
+
+  Future<List<DocumentSnapshot>> _fetchMoreLikePhotos(
+      CollectionReference collection) async {
+    print('fetch more shotphotos func');
+    if (moreAvail) {
+      final Query query = collection
+          .orderBy('timeStamp', descending: true)
+          .startAfter([last.data()['timeStamp']]).limit(limit);
+
+      final QuerySnapshot snapshot = await query.get();
+      if (snapshot.docs.length >= limit) {
+        last = snapshot.docs[snapshot.docs.length - 1];
+      } else {
+        moreAvail = false;
+      }
+      List<DocumentSnapshot> phts;
+      // ignore: avoid_function_literals_in_foreach_calls
+      snapshot.docs.forEach((element) {
+        if (likedPostsOfUser.contains(element.id as dynamic)) {
+          phts.add(element);
+        }
+      });
+      return phts;
+    }
+    print('nulllll');
+    return null;
+  }
+
+  Future<List<DocumentSnapshot>> _fetchShotPhotos(
+      CollectionReference collection) async {
+    print('Inside fetchshotphotos method');
+    final Query query =
+        collection.orderBy('timeStamp', descending: true).limit(limit);
+    final QuerySnapshot snapshot = await query.get();
+    List<DocumentSnapshot> phts;
+    // ignore: avoid_function_literals_in_foreach_calls
+    snapshot.docs.forEach((element) {
+      if (postsOfUser.contains(element.id as dynamic)) {
+        phts.add(element);
+      }
+    });
+    last = snapshot.docs[phts.length - 1];
+    return phts;
+  }
+
+  Future<List<DocumentSnapshot>> _fetchMoreShotPhotos(
+      CollectionReference collection) async {
+    print('fetch more shotphotos func');
+    if (moreAvail) {
+      final Query query = collection
+          .orderBy('timeStamp', descending: true)
+          .startAfter([last.data()['timeStamp']]).limit(limit);
+
+      final QuerySnapshot snapshot = await query.get();
+      if (snapshot.docs.length >= limit) {
+        last = snapshot.docs[snapshot.docs.length - 1];
+      } else {
+        moreAvail = false;
+      }
+      List<DocumentSnapshot> phts;
+      // ignore: avoid_function_literals_in_foreach_calls
+      snapshot.docs.forEach((element) {
+        if (postsOfUser.contains(element.id as dynamic)) {
+          phts.add(element);
+        }
+      });
+      return phts;
+    }
+    print('nulllll');
     return null;
   }
 
@@ -107,7 +263,6 @@ class HomeService {
     final QuerySnapshot snapshot = await query.get();
     final List<DocumentSnapshot> phts = snapshot.docs;
     last = snapshot.docs[phts.length - 1];
-    // moreAvail = true;
     return phts;
   }
 
