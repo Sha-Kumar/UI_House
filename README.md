@@ -9,7 +9,7 @@
 
 # UI_House
 
-UI_House is a web app which gives you a list of UI designs and design patterns which are used for application development. 
+UI_House is a web application, which gives you a list of UI designs and design patterns which are used for application development. 
 To get the designs and to upload designs sign-up using a email and get the requirements.
 It consists of User interface designs and design patterns which are used to reduce the work of a developer in developing the web, Android, IOS or cross-platform applications.
 
