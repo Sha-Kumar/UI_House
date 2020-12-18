@@ -19,6 +19,7 @@ class HomeController extends GetxController {
   final isLoading = false.obs;
   final photoSet = false.obs;
   final loadType = Type.loadPhotos.obs;
+  final dropval = 1.obs;
 
   int max = 0;
   bool reset = true;
@@ -95,20 +96,31 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  void started() {
-    reset = true;
-    isLoading.value = true;
-    likedPosts.addAll(likedPostsOfUser);
-    savedPosts.addAll(savedPostsOfUser);
-    photoCount.value = postsOfUser.length;
-    name.value = nameOfUser;
-    if (photoOfUser.isNotEmpty) {
-      photoSet.value = true;
+  Future<void> started() async {
+    switch (dropval.value) {
+      case 1:
+        loadType.value = Type.loadPhotos;
+        break;
+      case 2:
+        loadType.value = Type.shotPhotos;
+        break;
+      case 3:
+        loadType.value = Type.savedPhotos;
+        break;
+      case 4:
+        loadType.value = Type.likedPhots;
+        break;
+      default:
+        loadType.value = Type.loadPhotos;
+        break;
     }
+    reset = true;
 
-    update();
-    print('in starter');
-    fetch();
+    photos.clear();
+    likedPostsOfUser.clear();
+    likedPostsOfUser.addAll(likedPosts);
+    photoCount.value = postsOfUser.length;
+    await fetch();
   }
 
   Future<void> fetch() async {

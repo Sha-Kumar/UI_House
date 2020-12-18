@@ -480,41 +480,49 @@ class HomeView extends GetView<HomeController> {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                focusColor: Colors.grey,
-                                items: [
-                                  DropdownMenuItem(
-                                    onTap: () {
-                                      controller.loadType.value =
-                                          Type.loadPhotos;
-                                    },
-                                    child: const Text("All"),
-                                  ),
-                                  DropdownMenuItem(
-                                    onTap: () {
-                                      controller.loadType.value =
-                                          Type.shotPhotos;
-                                    },
-                                    child: const Text("Shotted"),
-                                  ),
-                                  DropdownMenuItem(
-                                    onTap: () {
-                                      controller.loadType.value =
-                                          Type.savedPhotos;
-                                    },
-                                    child: const Text("Saved"),
-                                  ),
-                                  DropdownMenuItem(
-                                    onTap: () {
-                                      controller.loadType.value =
-                                          Type.likedPhots;
-                                    },
-                                    child: const Text("Liked"),
-                                  )
-                                ],
-                                onChanged: (value) {
-                                  controller.started();
-                                },
+                              child: Obx(
+                                () => DropdownButton(
+                                  focusColor: Colors.grey,
+                                  value: controller.dropval.value,
+                                  items: [
+                                    const DropdownMenuItem(
+                                      value: 1,
+                                      // onTap: () {
+                                      //   controller.loadType.value =
+                                      //       Type.loadPhotos;
+                                      // },
+                                      child: Text("All"),
+                                    ),
+                                    const DropdownMenuItem(
+                                      value: 2,
+                                      // onTap: () {
+                                      //   controller.loadType.value =
+                                      //       Type.shotPhotos;
+                                      // },
+                                      child: Text("Shotted"),
+                                    ),
+                                    const DropdownMenuItem(
+                                      value: 3,
+                                      // onTap: () {
+                                      //   controller.loadType.value =
+                                      //       Type.savedPhotos;
+                                      // },
+                                      child: Text("Saved"),
+                                    ),
+                                    const DropdownMenuItem(
+                                      value: 4,
+                                      // onTap: () {
+                                      //   controller.loadType.value =
+                                      //       Type.likedPhots;
+                                      // },
+                                      child: Text("Liked"),
+                                    )
+                                  ],
+                                  onChanged: (value) {
+                                    controller.dropval.value = value as int;
+                                    controller.started();
+                                  },
+                                ),
                               ),
                             ),
                           ),

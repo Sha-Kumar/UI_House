@@ -77,6 +77,8 @@ class HomeService {
       moreAvail = true;
     }
     List<DocumentSnapshot> data;
+    List<DocumentSnapshot> data2;
+
     switch (type) {
       case Type.loadPhotos:
         if (last != null) {
@@ -89,7 +91,7 @@ class HomeService {
         }
         return null;
       case Type.savedPhotos:
-        if (last != null) {
+        if (last == null) {
           data = await _fetchSavePhotos(collectionReference);
         } else {
           data = await _fetchMoreSavePhotos(collectionReference);
@@ -99,17 +101,25 @@ class HomeService {
         }
         return null;
       case Type.likedPhots:
-        if (last != null) {
+        if (last == null) {
           data = await _fetchLikePhotos(collectionReference);
         } else {
           data = await _fetchMoreLikePhotos(collectionReference);
         }
+
         if (data != null) {
+          while (data.length != likedPostsOfUser.length && data.length > 0) {
+            for (DocumentSnapshot ele in data) {
+              if (!likedPostsOfUser.contains(ele.id as dynamic)) {
+                data.remove(ele);
+              }
+            }
+          }
           return PhotoModel.fromDocumentSnapshot(data);
         }
         return null;
       case Type.shotPhotos:
-        if (last != null) {
+        if (last == null) {
           data = await _fetchShotPhotos(collectionReference);
         } else {
           data = await _fetchMoreShotPhotos(collectionReference);
@@ -119,30 +129,22 @@ class HomeService {
         }
         return null;
     }
-
     return null;
   }
 
   Future<List<DocumentSnapshot>> _fetchSavePhotos(
       CollectionReference collection) async {
-    print('Inside fetchshotphotos method');
+    print('Inside savephts method');
     final Query query =
         collection.orderBy('timeStamp', descending: true).limit(limit);
     final QuerySnapshot snapshot = await query.get();
-    List<DocumentSnapshot> phts;
-    // ignore: avoid_function_literals_in_foreach_calls
-    snapshot.docs.forEach((element) {
-      if (savedPostsOfUser.contains(element.id as dynamic)) {
-        phts.add(element);
-      }
-    });
-    last = snapshot.docs[phts.length - 1];
-    return phts;
+    last = snapshot.docs[snapshot.docs.length - 1];
+    return snapshot.docs;
   }
 
   Future<List<DocumentSnapshot>> _fetchMoreSavePhotos(
       CollectionReference collection) async {
-    print('fetch more shotphotos func');
+    print('fetch more save func');
     if (moreAvail) {
       final Query query = collection
           .orderBy('timeStamp', descending: true)
@@ -154,14 +156,7 @@ class HomeService {
       } else {
         moreAvail = false;
       }
-      List<DocumentSnapshot> phts;
-      // ignore: avoid_function_literals_in_foreach_calls
-      snapshot.docs.forEach((element) {
-        if (savedPostsOfUser.contains(element.id as dynamic)) {
-          phts.add(element);
-        }
-      });
-      return phts;
+      return snapshot.docs;
     }
     print('nulllll');
     return null;
@@ -169,24 +164,25 @@ class HomeService {
 
   Future<List<DocumentSnapshot>> _fetchLikePhotos(
       CollectionReference collection) async {
-    print('Inside fetchshotphotos method');
+    print('Inside fetch like photos method');
     final Query query =
         collection.orderBy('timeStamp', descending: true).limit(limit);
     final QuerySnapshot snapshot = await query.get();
-    List<DocumentSnapshot> phts;
-    // ignore: avoid_function_literals_in_foreach_calls
-    snapshot.docs.forEach((element) {
-      if (likedPostsOfUser.contains(element.id as dynamic)) {
-        phts.add(element);
-      }
-    });
-    last = snapshot.docs[phts.length - 1];
-    return phts;
+    last = snapshot.docs[snapshot.docs.length - 1];
+    return snapshot.docs;
+    // List<DocumentSnapshot> phts;
+    // snapshot.docs.forEach((element) {
+    //   if (likedPostsOfUser.contains(element.id as dynamic)) {
+    //     phts.add(element);
+    //   }
+    // });
+    // last = snapshot.docs[snapshot.docs.length - 1];
+    // return phts;
   }
 
   Future<List<DocumentSnapshot>> _fetchMoreLikePhotos(
       CollectionReference collection) async {
-    print('fetch more shotphotos func');
+    print('fetch more likephotos func');
     if (moreAvail) {
       final Query query = collection
           .orderBy('timeStamp', descending: true)
@@ -198,14 +194,7 @@ class HomeService {
       } else {
         moreAvail = false;
       }
-      List<DocumentSnapshot> phts;
-      // ignore: avoid_function_literals_in_foreach_calls
-      snapshot.docs.forEach((element) {
-        if (likedPostsOfUser.contains(element.id as dynamic)) {
-          phts.add(element);
-        }
-      });
-      return phts;
+      return snapshot.docs;
     }
     print('nulllll');
     return null;
@@ -217,15 +206,15 @@ class HomeService {
     final Query query =
         collection.orderBy('timeStamp', descending: true).limit(limit);
     final QuerySnapshot snapshot = await query.get();
-    List<DocumentSnapshot> phts;
-    // ignore: avoid_function_literals_in_foreach_calls
-    snapshot.docs.forEach((element) {
-      if (postsOfUser.contains(element.id as dynamic)) {
-        phts.add(element);
-      }
-    });
-    last = snapshot.docs[phts.length - 1];
-    return phts;
+    // List<DocumentSnapshot> phts;
+    // // ignore: avoid_function_literals_in_foreach_calls
+    // snapshot.docs.forEach((element) {
+    //   if (postsOfUser.contains(element.id as dynamic)) {
+    //     phts.add(element);
+    //   }
+    // });
+    last = snapshot.docs[snapshot.docs.length - 1];
+    return snapshot.docs;
   }
 
   Future<List<DocumentSnapshot>> _fetchMoreShotPhotos(
@@ -242,14 +231,7 @@ class HomeService {
       } else {
         moreAvail = false;
       }
-      List<DocumentSnapshot> phts;
-      // ignore: avoid_function_literals_in_foreach_calls
-      snapshot.docs.forEach((element) {
-        if (postsOfUser.contains(element.id as dynamic)) {
-          phts.add(element);
-        }
-      });
-      return phts;
+      return snapshot.docs;
     }
     print('nulllll');
     return null;
