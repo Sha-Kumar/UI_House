@@ -45,7 +45,7 @@ Any advise for common problems or issues.
 
 ## Version History
 
-- 1.0.0
+- 1.0
 
 
 ## Feedback
