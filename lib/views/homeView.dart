@@ -92,7 +92,7 @@ class HomeView extends GetView<HomeController> {
             onPressed: () {},
           ),
           HomeButton(
-            description: 'Help & Feedback',
+            description: 'Help & Contact',
             onPressed: () {
               Get.toNamed(hafroute);
             },
@@ -344,25 +344,74 @@ class HomeView extends GetView<HomeController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Padding(
+                      //   padding: const EdgeInsets.all(10.0),
+                      //   child: Container(
+                      //     height: 1.0,
+                      //     width: double.infinity,
+                      //     color: Colors.black,
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ButtonTheme(
                           height: 50,
                           minWidth: 120,
                           hoverColor: Colors.grey,
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(18.0),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(7),
+                          child: Obx(
+                            () => RaisedButton(
+                              padding: const EdgeInsets.all(18.0),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
+                              ),
+                              onPressed: () {
+                                controller.dropval.value = 1;
+                                controller.butcol.value = 1;
+
+                                controller.started();
+                              },
+                              color: (controller.butcol.value == 1)
+                                  ? Colors.pink
+                                  : Colors.white,
+                              child: const Text(
+                                'All',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: "Lucida Sans",
+                                ),
                               ),
                             ),
-                            onPressed: () {},
-                            color: Colors.white,
-                            child: Obx(
-                              () => Text(
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ButtonTheme(
+                          height: 50,
+                          minWidth: 55,
+                          hoverColor: Colors.grey,
+                          child: Obx(
+                            () => RaisedButton(
+                              padding: const EdgeInsets.all(18.0),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
+                              ),
+                              onPressed: () {
+                                controller.dropval.value = 2;
+                                controller.butcol.value = 2;
+
+                                controller.started();
+                              },
+                              color: (controller.butcol.value == 2)
+                                  ? Colors.pink
+                                  : Colors.white,
+                              child: Text(
                                 'Shots - ${controller.photoCount.value}',
-                                textAlign: TextAlign.justify,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontFamily: "Lucida Sans",
@@ -378,17 +427,24 @@ class HomeView extends GetView<HomeController> {
                           hoverColor: Colors.grey,
                           height: 50,
                           minWidth: 150,
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(18.0),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(7),
+                          child: Obx(
+                            () => RaisedButton(
+                              padding: const EdgeInsets.all(18.0),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
                               ),
-                            ),
-                            onPressed: () {},
-                            color: Colors.white,
-                            child: Obx(
-                              () => Text(
+                              onPressed: () {
+                                controller.dropval.value = 4;
+                                controller.butcol.value = 4;
+
+                                controller.started();
+                              },
+                              color: (controller.butcol.value == 4)
+                                  ? Colors.pink
+                                  : Colors.white,
+                              child: Text(
                                 'Liked Shots - ${controller.likedPosts.length}',
                                 textAlign: TextAlign.justify,
                                 style: const TextStyle(
@@ -406,17 +462,24 @@ class HomeView extends GetView<HomeController> {
                           height: 50,
                           hoverColor: Colors.grey,
                           minWidth: 150,
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(18.0),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(7),
+                          child: Obx(
+                            () => RaisedButton(
+                              padding: const EdgeInsets.all(18.0),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
                               ),
-                            ),
-                            onPressed: () {},
-                            color: Colors.white,
-                            child: Obx(
-                              () => Text(
+                              onPressed: () {
+                                controller.dropval.value = 3;
+                                controller.butcol.value = 3;
+
+                                controller.started();
+                              },
+                              color: (controller.butcol.value == 3)
+                                  ? Colors.pink
+                                  : Colors.white,
+                              child: Text(
                                 'Saved Shots - ${controller.savedPosts.length}',
                                 textAlign: TextAlign.justify,
                                 style: const TextStyle(
@@ -428,33 +491,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ButtonTheme(
-                          height: 50,
-                          minWidth: 55,
-                          hoverColor: Colors.grey,
-                          child: RaisedButton(
-                            padding: const EdgeInsets.all(18.0),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(7),
-                              ),
-                            ),
-                            onPressed: () {
-                              Get.toNamed(profilrroute);
-                            },
-                            color: Colors.white,
-                            child: const Text(
-                              'Profile',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: "Lucida Sans",
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+
                       SizedBox(
                         width: screenWidth * 0.48,
                       ),
@@ -487,39 +524,24 @@ class HomeView extends GetView<HomeController> {
                                   items: [
                                     const DropdownMenuItem(
                                       value: 1,
-                                      // onTap: () {
-                                      //   controller.loadType.value =
-                                      //       Type.loadPhotos;
-                                      // },
                                       child: Text("All"),
                                     ),
                                     const DropdownMenuItem(
                                       value: 2,
-                                      // onTap: () {
-                                      //   controller.loadType.value =
-                                      //       Type.shotPhotos;
-                                      // },
                                       child: Text("Shotted"),
                                     ),
                                     const DropdownMenuItem(
                                       value: 3,
-                                      // onTap: () {
-                                      //   controller.loadType.value =
-                                      //       Type.savedPhotos;
-                                      // },
                                       child: Text("Saved"),
                                     ),
                                     const DropdownMenuItem(
                                       value: 4,
-                                      // onTap: () {
-                                      //   controller.loadType.value =
-                                      //       Type.likedPhots;
-                                      // },
                                       child: Text("Liked"),
                                     )
                                   ],
                                   onChanged: (value) {
                                     controller.dropval.value = value as int;
+                                    controller.butcol.value = value as int;
                                     controller.started();
                                   },
                                 ),

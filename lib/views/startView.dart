@@ -110,7 +110,7 @@ class StartView extends GetView<AuthController> {
               onPressed: () {},
             ),
             HomeButton(
-              description: 'Help & Feedback',
+              description: 'Help & Contact',
               onPressed: () {
                 Get.toNamed(hafroute);
               },

@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   final photoSet = false.obs;
   final loadType = Type.loadPhotos.obs;
   final dropval = 1.obs;
+  final RxInt butcol = 1.obs;
 
   int max = 0;
   bool reset = true;
@@ -50,20 +51,14 @@ class HomeController extends GetxController {
       ..addListener(
         () {
           if (photoCount.value < postsOfUser.length) {
-            minscroll.value = 5;
+            minscroll.value = 3;
           }
           if (homecontroller.position.pixels ==
               homecontroller.position.maxScrollExtent) {
             print('no');
-
-            // if (max >= 5 && firstView.value) {
-            //   return;
-            // }
             fetch();
-            if (photoCount.value < postsOfUser.length) {
-              minscroll.value = 5;
-            }
           }
+
           if (homecontroller.position.pixels <=
                   homecontroller.position.minScrollExtent &&
               max > 5) {
@@ -90,6 +85,7 @@ class HomeController extends GetxController {
           //   photos.clear();
           //   fetch();
           // }
+          // }
         },
       );
     fetch();
@@ -115,11 +111,13 @@ class HomeController extends GetxController {
         break;
     }
     reset = true;
-
     photos.clear();
     likedPostsOfUser.clear();
     likedPostsOfUser.addAll(likedPosts);
+    savedPosts.clear();
+    savedPosts.addAll(savedPostsOfUser);
     photoCount.value = postsOfUser.length;
+    minscroll.value = 0;
     await fetch();
   }
 
@@ -145,10 +143,12 @@ class HomeController extends GetxController {
     final int val = await HomeService.instance.likeOrDisLikePhoto(photoId);
     if (val == 0) {
       likedPosts.add(photoId);
+      // likedPostsOfUser.add(photoId);
       update();
       return;
     } else if (val == 1) {
       likedPosts.remove(photoId);
+      // likedPostsOfUser.remove(photoId);
       update();
     } else {
       Get.snackbar('Error', 'Error in liking this image....');
@@ -159,10 +159,12 @@ class HomeController extends GetxController {
     final int val = await HomeService.instance.saveOrUnSave(photoId);
     if (val == 0) {
       savedPosts.add(photoId);
+      savedPostsOfUser.add(photoId);
       update();
       return;
     } else if (val == 1) {
       savedPosts.remove(photoId);
+      savedPostsOfUser.remove(photoId);
       update();
       return;
     } else {
