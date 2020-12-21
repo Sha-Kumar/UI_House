@@ -521,20 +521,20 @@ class HomeView extends GetView<HomeController> {
                                 () => DropdownButton(
                                   focusColor: Colors.grey,
                                   value: controller.dropval.value,
-                                  items: [
-                                    const DropdownMenuItem(
+                                  items: const [
+                                    DropdownMenuItem(
                                       value: 1,
                                       child: Text("All"),
                                     ),
-                                    const DropdownMenuItem(
+                                    DropdownMenuItem(
                                       value: 2,
                                       child: Text("Shotted"),
                                     ),
-                                    const DropdownMenuItem(
+                                    DropdownMenuItem(
                                       value: 3,
                                       child: Text("Saved"),
                                     ),
-                                    const DropdownMenuItem(
+                                    DropdownMenuItem(
                                       value: 4,
                                       child: Text("Liked"),
                                     )

@@ -76,16 +76,6 @@ class HomeController extends GetxController {
             photoCount.value = postsOfUser.length;
             fetch();
           }
-          // if (photoCount.value < postsOfUser.length) {
-          //   likedPostsOfUser.clear();
-          //   likedPostsOfUser.addAll(likedPosts);
-          //   minscroll.value = 0;
-          //   reset = true;
-          //   photoCount.value = postsOfUser.length;
-          //   photos.clear();
-          //   fetch();
-          // }
-          // }
         },
       );
     fetch();
@@ -143,12 +133,10 @@ class HomeController extends GetxController {
     final int val = await HomeService.instance.likeOrDisLikePhoto(photoId);
     if (val == 0) {
       likedPosts.add(photoId);
-      // likedPostsOfUser.add(photoId);
       update();
       return;
     } else if (val == 1) {
       likedPosts.remove(photoId);
-      // likedPostsOfUser.remove(photoId);
       update();
     } else {
       Get.snackbar('Error', 'Error in liking this image....');
