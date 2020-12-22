@@ -344,14 +344,6 @@ class HomeView extends GetView<HomeController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10.0),
-                      //   child: Container(
-                      //     height: 1.0,
-                      //     width: double.infinity,
-                      //     color: Colors.black,
-                      //   ),
-                      // ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ButtonTheme(
@@ -369,7 +361,6 @@ class HomeView extends GetView<HomeController> {
                               onPressed: () {
                                 controller.dropval.value = 1;
                                 controller.butcol.value = 1;
-
                                 controller.started();
                               },
                               color: (controller.butcol.value == 1)
@@ -404,7 +395,6 @@ class HomeView extends GetView<HomeController> {
                               onPressed: () {
                                 controller.dropval.value = 2;
                                 controller.butcol.value = 2;
-
                                 controller.started();
                               },
                               color: (controller.butcol.value == 2)
@@ -438,7 +428,6 @@ class HomeView extends GetView<HomeController> {
                               onPressed: () {
                                 controller.dropval.value = 4;
                                 controller.butcol.value = 4;
-
                                 controller.started();
                               },
                               color: (controller.butcol.value == 4)
@@ -473,7 +462,6 @@ class HomeView extends GetView<HomeController> {
                               onPressed: () {
                                 controller.dropval.value = 3;
                                 controller.butcol.value = 3;
-
                                 controller.started();
                               },
                               color: (controller.butcol.value == 3)
@@ -491,7 +479,6 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                       ),
-
                       SizedBox(
                         width: screenWidth * 0.48,
                       ),
