@@ -35,13 +35,6 @@ flutter run
 ```
 
 
-## Help
-
-Any advise for common problems or issues.
-```
-
-```
-
 
 ## Version History
 
