@@ -31,27 +31,65 @@ class HelpDialog extends GetView<HAndFController> {
                     style: const TextStyle(
                       color: Colors.pinkAccent,
                       fontFamily: "Times New Roman",
-                      fontSize: 28,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 50.0,
+                      vertical: 10,
+                    ),
+                    child: Container(
+                      height: 1.0,
+                      color: Colors.grey,
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(50),
-                    child: Text(
-                      desc,
-                      textAlign: TextAlign.justify,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontFamily: "Times New Roman",
-                        fontSize: 21,
-                        fontWeight: FontWeight.w300,
+                    child: Container(
+                      height: 275,
+                      width: 625,
+                      decoration: BoxDecoration(
+                        color: Colors.amberAccent,
+                        border: Border.all(
+                          color: Colors.redAccent,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 25,
+                          bottom: 25,
+                          right: 25,
+                          left: 25,
+                        ),
+                        child: Text(
+                          desc,
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: "Times New Roman",
+                            fontSize: 27,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 50.0,
+                      vertical: 10,
+                    ),
+                    child: Container(
+                      height: 1.0,
+                      color: Colors.grey,
+                    ),
                   ),
+                  const Spacer(),
                   RaisedButton(
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
@@ -63,7 +101,10 @@ class HelpDialog extends GetView<HAndFController> {
                     color: Colors.blueAccent,
                     child: const Text(
                       'OK',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 21,
+                      ),
                     ),
                   ),
                   const Spacer(),

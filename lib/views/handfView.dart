@@ -1,7 +1,4 @@
-// import 'package:UI_House/views/views.dart';
-// import 'package:UI_House/widgets/homeButton.dart';
-import 'dart:ui';
-
+import 'package:UI_House/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -178,32 +175,53 @@ class HAndFView extends GetView<HAndFController> {
                             ],
                           ),
                           Row(
-                            children: const [
-                              SizedBox(
+                            children: [
+                              const SizedBox(
                                 width: 240,
                               ),
                               Padding(
-                                padding: EdgeInsets.all(0.0),
-                                child: Text(
-                                  'Signup',
-                                  style: TextStyle(
-                                    color: Colors.pinkAccent,
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.w500,
+                                padding: const EdgeInsets.all(0.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.dialog(
+                                      HelpDialog(
+                                        heading: 'Signup/Get Started',
+                                        desc:
+                                            'By pressing the signup/Get-Started button and after that filling the form containing email, name and password, the user can create new account in the UI-House for opening his horizon.',
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'Signup',
+                                    style: TextStyle(
+                                      color: Colors.pinkAccent,
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 530,
                               ),
                               Padding(
-                                padding: EdgeInsets.all(0.0),
-                                child: Text(
-                                  'Profile Update',
-                                  style: TextStyle(
-                                    color: Colors.pinkAccent,
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.w500,
+                                padding: const EdgeInsets.all(0.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.dialog(
+                                      HelpDialog(
+                                        heading: 'Updating User Profile',
+                                        desc: 'yet to start',
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    'Profile Update',
+                                    style: TextStyle(
+                                      color: Colors.pinkAccent,
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -618,16 +636,115 @@ class HAndFView extends GetView<HAndFController> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Container(
                     height: 1.0,
                     width: double.infinity,
                     color: Colors.black,
                   ),
                 ),
-                Container(
-                  // height: screenHeight * 0.3,
-                  width: screenWidth,
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Contact & Support',
+                          style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: Container(
+                            width: screenWidth * 0.75,
+                            height: 200,
+                            decoration: BoxDecoration(
+                              color: Colors.lightGreenAccent,
+                              border: Border.all(
+                                color: Colors.redAccent,
+                              ),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                const Spacer(),
+                                Row(
+                                  children: const [
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Text(
+                                      '😺 GitHub : https://github.com/Sha-Kumar',
+                                      style: TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 180,
+                                    ),
+                                    Text(
+                                      '🐶 Telegram : https://t.me/Dangling_Sha',
+                                      style: TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Row(
+                                  children: const [
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Text(
+                                      '📧 Email -1 : shashankneeded@gmail.com',
+                                      style: TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 192,
+                                    ),
+                                    Text(
+                                      '📧 Email - 2 : swaprusts@gmail.com',
+                                      style: TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Row(
+                                  children: const [
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Text(
+                                      '📱 Phone : +918970327932 / +918970327932',
+                                      style: TextStyle(
+                                        fontSize: 21,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
