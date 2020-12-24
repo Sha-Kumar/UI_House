@@ -4,7 +4,7 @@
 ![last-commit](https://img.shields.io/github/last-commit/Sha-Kumar/UI_House)
 
 
-# Still in development
+# Almost work is on the way of completion for the current version.
 
 
 # UI_House
