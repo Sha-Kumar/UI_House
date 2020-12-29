@@ -75,6 +75,7 @@ class StartView extends GetView<AuthController> {
           ),
         ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 18.0,
           // bottom: PreferredSize(
           //   child: Container(
@@ -92,7 +93,7 @@ class StartView extends GetView<AuthController> {
           //   ),
           //   preferredSize: Size.fromHeight(4.0),
           // ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           titleSpacing: 70,
           title: const Text(
             'UI-HOUSE',

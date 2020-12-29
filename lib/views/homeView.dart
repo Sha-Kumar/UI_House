@@ -74,8 +74,9 @@ class HomeView extends GetView<HomeController> {
       ),
       appBar: AppBar(
         elevation: 18.0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         titleSpacing: 70,
+        automaticallyImplyLeading: false,
         title: const Text(
           'UI-HOUSE',
           style: TextStyle(
