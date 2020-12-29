@@ -18,17 +18,29 @@ It consists of User interface designs and design patterns which are used to redu
 
 ### Dependencies
 
-- flutter SDK with web enabled
+- flutter SDK with web-wnabled( To enable the web app development in flutter SDK  [  ```Click Here```  ](https://flutter.dev/docs/get-started/web) .)
 - Android Studio
 - VS Code/Sublime Text(Any Editor) 
 
-### Installing
+# Installing
 
 ```
 flutter pub get
 ```
 
-### Usage 
+### For upgrading the packages. (Only necassary if version conflict in packages)
+```
+flutter pub upgrade
+```
+
+# Usage
+
+### For Debugging in chrome
+
+```
+flutter run -d chrome
+```
+### For running without Debug
 
 ```
 flutter run
