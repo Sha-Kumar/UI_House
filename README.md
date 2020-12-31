@@ -18,7 +18,7 @@ It consists of User interface designs and design patterns which are used to redu
 
 ### Dependencies
 
-- flutter SDK with web-wnabled( To enable the web app development in flutter SDK  [  ```Click Here```  ](https://flutter.dev/docs/get-started/web) .)
+- flutter SDK with web-wnabled( To enable the web app development in flutter SDK  [  ```Click Here```  ](https://flutter.dev/docs/get-started/web) )
 - Android Studio
 - VS Code/Sublime Text(Any Editor) 
 
