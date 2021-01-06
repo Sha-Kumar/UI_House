@@ -20,7 +20,7 @@ It consists of User interface designs and design patterns which are used to redu
 
 - flutter SDK with web-wnabled( To enable the web app development in flutter SDK  [  ```Click Here```  ](https://flutter.dev/docs/get-started/web) )
 - Android Studio(The latest version)
-- VS Code 
+- VS Code(Any text editor with the dart and other neccassary extensions)
 
 # Installing
 
