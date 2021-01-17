@@ -4,7 +4,7 @@
 ![last-commit](https://img.shields.io/github/last-commit/Sha-Kumar/UI_House)
 
 
-# Almost work is on the way of completion for the current version.
+# Still under development. Almost work is on the way of completion for the current version.
 
 
 # UI_House
@@ -18,9 +18,9 @@ It consists of User interface designs and design patterns which are used to redu
 
 ### Dependencies
 
-- flutter SDK with web-wnabled( To enable the web app development in flutter SDK  [  ```Click Here```  ](https://flutter.dev/docs/get-started/web) .)
-- Android Studio
-- VS Code/Sublime Text(Any Editor) 
+- flutter SDK with web-wnabled( To enable the web app development in flutter SDK  [  ```Click Here```  ](https://flutter.dev/docs/get-started/web) )
+- Android Studio(The latest version)
+- VS Code(Any text editor with the dart and other neccassary extensions)
 
 # Installing
 
@@ -50,7 +50,8 @@ flutter run
 
 ## Version History
 
-- 1.0
+- 1.1.0
+- 1.0.0
 
 
 ## Feedback
