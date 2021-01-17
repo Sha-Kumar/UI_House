@@ -141,6 +141,9 @@ class HomeService {
     final Query query =
         collection.orderBy('timeStamp', descending: true).limit(limit);
     final QuerySnapshot snapshot = await query.get();
+    if (snapshot.docs.isEmpty) {
+      return null;
+    }
     final List<DocumentSnapshot> phts = snapshot.docs;
     last = snapshot.docs[phts.length - 1];
     return phts;
@@ -155,6 +158,9 @@ class HomeService {
           .startAfter([last.data()['timeStamp']]).limit(limit);
 
       final QuerySnapshot snapshot = await query.get();
+      if (snapshot.docs.isEmpty) {
+        return null;
+      }
       if (snapshot.docs.length >= limit) {
         last = snapshot.docs[snapshot.docs.length - 1];
       } else {
