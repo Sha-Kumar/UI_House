@@ -90,7 +90,9 @@ class HomeView extends GetView<HomeController> {
         actions: [
           HomeButton(
             description: 'About',
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(abtroute);
+            },
           ),
           HomeButton(
             description: 'Help & Contact',
@@ -296,12 +298,13 @@ class HomeView extends GetView<HomeController> {
                                           Radius.circular(7),
                                         ),
                                       ),
-                                      onPressed: () {
-                                        Get.toNamed(profilrroute);
+                                      onPressed: () async {
+                                        // Get.toNamed(profilrroute);
+                                        await controller.started();
                                       },
                                       color: Colors.pinkAccent,
                                       child: const Text(
-                                        'Profile',
+                                        'Refresh',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: "Lucida Sans",

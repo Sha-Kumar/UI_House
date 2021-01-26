@@ -108,7 +108,9 @@ class StartView extends GetView<AuthController> {
           actions: [
             HomeButton(
               description: 'About',
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(abtroute);
+              },
             ),
             HomeButton(
               description: 'Help & Contact',

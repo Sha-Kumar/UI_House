@@ -1,4 +1,5 @@
 import 'package:UI_House/bindings/bindings.dart';
+import 'package:UI_House/views/aboutView.dart';
 import 'package:UI_House/views/homeView.dart';
 import 'package:UI_House/views/views.dart';
 import 'package:get/route_manager.dart';
@@ -7,6 +8,7 @@ const String startroute = '/';
 const String hafroute = '/helpandsuport';
 const String homeroute = '/home';
 const String profilrroute = '/profile';
+const String abtroute = '/about';
 
 final routes = [
   GetPage(
@@ -30,5 +32,10 @@ final routes = [
     // ignore: prefer_const_constructors
     page: () => ProfileView(),
     binding: ProfileBinding(),
-  )
+  ),
+  GetPage(
+    name: abtroute,
+    page: () => AboutView(),
+    binding: HomeBinding(),
+  ),
 ];
