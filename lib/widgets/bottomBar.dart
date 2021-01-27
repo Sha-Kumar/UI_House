@@ -1,7 +1,11 @@
+import 'package:UI_House/controllers/controllers.dart';
+import 'package:UI_House/routes.dart';
+import 'package:UI_House/views/views.dart';
 import 'package:UI_House/widgets/introFlagButton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class BottomBar extends StatelessWidget {
+class BottomBar extends GetView<AuthController> {
   final double screenWidth;
   final double screenHeight;
 
@@ -58,28 +62,62 @@ class BottomBar extends StatelessWidget {
                   children: [
                     IntroPageFlatButton(
                       title: 'Home',
-                      onPressed: () {},
+                      onPressed: () {
+                        // Get.toNamed(startroute);
+                      },
                     ),
                     const SizedBox(
                       width: 50,
                     ),
                     IntroPageFlatButton(
                       title: 'Getting Started',
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.isSigned.value
+                      ? Get.snackbar(
+                          'SignOut - First',
+                          'Signout from the account first, Then sign-up with new account...',
+                          duration: const Duration(
+                            seconds: 2,
+                          ),
+                          snackPosition: SnackPosition.TOP,
+                          colorText: Colors.blueAccent,
+                          backgroundColor: Colors.black87,
+                        )
+                      : Get.dialog(
+                          AuthWidget(),
+                        );
+                      },
                     ),
                     const SizedBox(
                       width: 50,
                     ),
                     IntroPageFlatButton(
                       title: 'Subscribe',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(abtroute);
+                      },
                     ),
                     const SizedBox(
                       width: 50,
                     ),
                     IntroPageFlatButton(
                       title: 'Have an account? Sign in',
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.isSigned.value
+                            ? Get.snackbar(
+                                'SignOut - First',
+                                'Signout from the account first, Then sign-up with new account...',
+                                duration: const Duration(
+                                  seconds: 2,
+                                ),
+                                snackPosition: SnackPosition.TOP,
+                                colorText: Colors.blueAccent,
+                                backgroundColor: Colors.black87,
+                              )
+                            : Get.dialog(
+                                AuthWidget(),
+                              );
+                      },
                     ),
                   ],
                 ),
@@ -87,14 +125,31 @@ class BottomBar extends StatelessWidget {
                   children: [
                     IntroPageFlatButton(
                       title: 'About',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(abtroute);
+                      },
                     ),
                     const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Upload',
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (controller.isSigned.value) {
+                          Get.dialog(UploadView());
+                        } else {
+                          Get.snackbar(
+                            'Error - Not Signed-In',
+                            'Unable to upload without login',
+                            colorText: Colors.white,
+                            backgroundColor: Colors.black87,
+                            duration: const Duration(
+                              seconds: 2,
+                            ),
+                            snackPosition: SnackPosition.TOP,
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(
                       width: 25,
@@ -108,35 +163,45 @@ class BottomBar extends StatelessWidget {
                     ),
                     IntroPageFlatButton(
                       title: 'Help & Feedback',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(hafroute);
+                      },
                     ),
                     const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Contacts',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(hafroute);
+                      },
                     ),
                     const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Careers',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(hafroute);
+                      },
                     ),
                     const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Privacy',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(abtroute);
+                      },
                     ),
                     const SizedBox(
                       width: 25,
                     ),
                     IntroPageFlatButton(
                       title: 'Terms',
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.toNamed(abtroute);
+                      },
                     ),
                   ],
                 ),

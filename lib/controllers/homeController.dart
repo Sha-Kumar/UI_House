@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   final name = nameOfUser.obs;
 
   final RxInt minscroll = 0.obs;
+  final RxInt curind = 0.obs;
   RxInt photoCount = 0.obs;
   final isLoading = false.obs;
   final photoSet = false.obs;

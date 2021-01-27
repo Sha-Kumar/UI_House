@@ -2,7 +2,6 @@ import 'package:UI_House/constants/constants.dart';
 import 'package:UI_House/controllers/controllers.dart';
 import 'package:UI_House/routes.dart';
 import 'package:UI_House/views/views.dart';
-import 'package:UI_House/widgets/homeButton.dart';
 import 'package:UI_House/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -602,24 +601,31 @@ class HomeView extends GetView<HomeController> {
                                   padding: const EdgeInsets.all(10.0),
                                   child: Column(
                                     children: [
-                                      Container(
-                                        height: screenHeight * (250 / 754.4),
-                                        width: screenWidth * (345 / 1536),
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(25.0),
+                                      InkWell(
+                                        onTap: () {
+                                          controller.curind.value = index.toInt();
+                                          // Get.toNamed(imgroute);
+                                          Get.dialog(PostImage());
+                                        },
+                                        child: Container(
+                                          height: screenHeight * (250 / 754.4),
+                                          width: screenWidth * (345 / 1536),
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(25.0),
+                                            ),
+                                            color: Colors.amber,
                                           ),
-                                          color: Colors.amber,
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
-                                          child: Image.network(
-                                            controller.photos[index].photoUrl
-                                                .toString(),
-                                            fit: BoxFit.fill,
-                                            repeat: ImageRepeat.repeat,
-                                            // scale: ,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                            child: Image.network(
+                                              controller.photos[index].photoUrl
+                                                  .toString(),
+                                              fit: BoxFit.fill,
+                                              repeat: ImageRepeat.repeat,
+                                              // scale: ,
+                                            ),
                                           ),
                                         ),
                                       ),
