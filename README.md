@@ -59,4 +59,4 @@ flutter run
 - If you think UI_House is useful, consider giving it a star.
 - If something is not working, [create an issue](https://github.com/Sha-Kumar/UI_House/issues/new).
 
-### Created & Maintained By [Sha-Kumar](https://github.com/Sha-Kumar) and [nishu123-stack](https://github.com/nishu123-stack)
+### Created & Maintained By [Sha-Kumar](https://github.com/Sha-Kumar)
