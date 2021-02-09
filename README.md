@@ -14,7 +14,7 @@ To get the designs and to upload designs sign-up using a email and get the requi
 It consists of User interface designs and design patterns which are used to reduce the work of a developer in developing the web, Android, IOS or cross-platform applications.
 
 
-## Getting Started
+# Getting Started
 
 ### Dependencies
 
